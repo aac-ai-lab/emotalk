@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quadro de Comunicação Aumentativa e Alternativa</title>
+    <title>EmoTalk - Quadro de Comunicação Aumentativa e Alternativa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,18 +81,18 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .category:hover,
         .word:hover {
             background-color: #d4e6ff;
         }
-        
+
         .category-icon,
         .word-icon {
             font-size: 1.5em;
             margin-bottom: 5px;
         }
-        
+
         .category-name,
         .word-name {
             font-size: 0.8em;
@@ -148,244 +148,9 @@
         <button id="backButton" class="control-button" title="Início">🏠</button>
     </div>
 
-    <script>
-        const categories = [
-            {
-                name: 'bebidas', icon: '🥤', words: [
-                    { name: 'água', icon: '💧' },
-                    { name: 'suco', icon: '🧃' },
-                    { name: 'café', icon: '☕' },
-                    { name: 'refrigerante', icon: '🥤' },
-                    { name: 'leite', icon: '🥛' },
-                    { name: 'chá', icon: '🍵' },
-                    { name: 'cerveja', icon: '🍺' },
-                    { name: 'vinho', icon: '🍷' },
-                    { name: 'coquetel', icon: '🍹' }
-                ]
-            },
-            {
-                name: 'petiscos', icon: '🍿', words: [
-                    { name: 'pipoca', icon: '🍿' },
-                    { name: 'biscoito', icon: '🍪' },
-                    { name: 'batata frita', icon: '🍟' },
-                    { name: 'sorvete', icon: '🍦' },
-                    { name: 'chocolate', icon: '🍫' },
-                    { name: 'nuts', icon: '🥜' },
-                    { name: 'chips', icon: '🥔' },
-                    { name: 'cereal', icon: '🥣' },
-                    { name: 'quibe', icon: '🫛' }
-                ]
-            },
-            {
-                name: 'atividades', icon: '🚲', words: [
-                    { name: 'andar', icon: '🚶' },
-                    { name: 'correr', icon: '🏃' },
-                    { name: 'nadar', icon: '🏊' },
-                    { name: 'pular', icon: '🤸' },
-                    { name: 'jogar', icon: '🏐' },
-                    { name: 'dançar', icon: '💃' },
-                    { name: 'andar de bicicleta', icon: '🚴' },
-                    { name: 'escalar', icon: '🧗' },
-                    { name: 'praticar yoga', icon: '🧘' }
-                ]
-            },
-            {
-                name: 'emoções', icon: '😊', words: [
-                    { name: 'feliz', icon: '😁' },
-                    { name: 'triste', icon: '😢' },
-                    { name: 'animado', icon: '😄' },
-                    { name: 'nervoso', icon: '😠' },
-                    { name: 'cansado', icon: '😩' },
-                    { name: 'surpreso', icon: '😲' },
-                    { name: 'confuso', icon: '😕' },
-                    { name: 'irritado', icon: '😡' },
-                    { name: 'aliviado', icon: '😌' }
-                ]
-            },
-            {
-                name: 'corpo', icon: '🧍', words: [
-                    { name: 'mão', icon: '✋' },
-                    { name: 'cabeça', icon: '👤' },
-                    { name: 'braço', icon: '💪' },
-                    { name: 'perna', icon: '🦵' },
-                    { name: 'pé', icon: '🦶' },
-                    { name: 'olho', icon: '👁️' },
-                    { name: 'orelha', icon: '👂' },
-                    { name: 'boca', icon: '👄' },
-                    { name: 'nariz', icon: '👃' }
-                ]
-            },
-            {
-                name: 'roupas', icon: '👚', words: [
-                    { name: 'camisa', icon: '👕' },
-                    { name: 'calça', icon: '👖' },
-                    { name: 'sapato', icon: '👟' },
-                    { name: 'chapéu', icon: '🎩' },
-                    { name: 'jaqueta', icon: '🧥' },
-                    { name: 'saia', icon: '👗' },
-                    { name: 'casaco', icon: '🧥' },
-                    { name: 'meia', icon: '🧦' },
-                    { name: 'óculos', icon: '🕶️' }
-                ]
-            },
-            {
-                name: 'pessoas', icon: '👥', words: [
-                    { name: 'pai', icon: '👨' },
-                    { name: 'mãe', icon: '👩' },
-                    { name: 'amigo', icon: '🧑‍🤝‍🧑' },
-                    { name: 'irmão', icon: '👦' },
-                    { name: 'irmã', icon: '👧' },
-                    { name: 'avô', icon: '👴' },
-                    { name: 'avó', icon: '👵' },
-                    { name: 'professor', icon: '👨‍🏫' },
-                    { name: 'aluno', icon: '👩‍🎓' }
-                ]
-            },
-            {
-                name: 'descrever', icon: '📊', words: [
-                    { name: 'grande', icon: '📏' },
-                    { name: 'pequeno', icon: '📐' },
-                    { name: 'rápido', icon: '⚡' },
-                    { name: 'lento', icon: '🐢' },
-                    { name: 'quente', icon: '🔥' },
-                    { name: 'frio', icon: '❄️' },
-                    { name: 'alto', icon: '📏' },
-                    { name: 'baixo', icon: '📐' },
-                    { name: 'leve', icon: '⚖️' }
-                ]
-            },
-            {
-                name: 'cozinha', icon: '🍽️', words: [
-                    { name: 'prato', icon: '🍽️' },
-                    { name: 'garfo', icon: '🍴' },
-                    { name: 'cozinha', icon: '🍳' },
-                    { name: 'xícara', icon: '☕' },
-                    { name: 'talher', icon: '🍴' },
-                    { name: 'panela', icon: '🍲' },
-                    { name: 'tampa', icon: '🥄' },
-                    { name: 'espátula', icon: '🥄' },
-                    { name: 'batedeira', icon: '🍰' }
-                ]
-            },
-            {
-                name: 'escola', icon: '🏫', words: [
-                    { name: 'livro', icon: '📚' },
-                    { name: 'professor', icon: '👩‍🏫' },
-                    { name: 'aluno', icon: '👨‍🎓' },
-                    { name: 'lousa', icon: '🧑‍🏫' },
-                    { name: 'caderno', icon: '📓' },
-                    { name: 'lápis', icon: '✏️' },
-                    { name: 'caneta', icon: '🖊️' },
-                    { name: 'mesa', icon: '🪑' },
-                    { name: 'cadeira', icon: '🪑' }
-                ]
-            },
-            {
-                name: 'animais', icon: '🐕', words: [
-                    { name: 'cachorro', icon: '🐕' },
-                    { name: 'gato', icon: '🐈' },
-                    { name: 'pássaro', icon: '🐦' },
-                    { name: 'peixe', icon: '🐟' },
-                    { name: 'coelho', icon: '兔' },
-                    { name: 'cavalo', icon: '🐎' },
-                    { name: 'elefante', icon: '🐘' },
-                    { name: 'tigre', icon: '🐅' },
-                    { name: 'urso', icon: '🐻' }
-                ]
-            },
-            {
-                name: 'tecnologia', icon: '💻', words: [
-                    { name: 'computador', icon: '💻' },
-                    { name: 'telefone', icon: '📱' },
-                    { name: 'internet', icon: '🌐' },
-                    { name: 'televisão', icon: '📺' },
-                    { name: 'câmera', icon: '📷' },
-                    { name: 'tablet', icon: '📲' },
-                    { name: 'impressora', icon: '🖨️' },
-                    { name: 'rádio', icon: '📻' },
-                    { name: 'carregador', icon: '🔌' }
-                ]
-            },
-            {
-                name: 'tempo', icon: '☀️', words: [
-                    { name: 'sol', icon: '☀️' },
-                    { name: 'chuva', icon: '🌧️' },
-                    { name: 'nuvem', icon: '☁️' },
-                    { name: 'neve', icon: '❄️' },
-                    { name: 'vento', icon: '🌬️' },
-                    { name: 'neblina', icon: '🌫️' },
-                    { name: 'trovoada', icon: '🌩️' },
-                    { name: 'arco-íris', icon: '🌈' },
-                    { name: 'calor', icon: '🔥' }
-                ]
-            },
-            {
-                name: 'plantas', icon: '🌳', words: [
-                    { name: 'árvore', icon: '🌳' },
-                    { name: 'flor', icon: '🌸' },
-                    { name: 'folha', icon: '🍃' },
-                    { name: 'cactus', icon: '🌵' },
-                    { name: 'mato', icon: '🌿' },
-                    { name: 'grama', icon: '🌾' },
-                    { name: 'planta', icon: '🌱' },
-                    { name: 'lírio', icon: '🌺' },
-                    { name: 'orquídea', icon: '🌷' }
-                ]
-            },
-            {
-                name: 'esportes', icon: '⚽', words: [
-                    { name: 'futebol', icon: '⚽' },
-                    { name: 'basquete', icon: '🏀' },
-                    { name: 'tênis', icon: '🎾' },
-                    { name: 'natação', icon: '🏊' },
-                    { name: 'ciclismo', icon: '🚴' },
-                    { name: 'golfe', icon: '⛳' },
-                    { name: 'rugby', icon: '🏉' },
-                    { name: 'vôlei', icon: '🏐' },
-                    { name: 'boxe', icon: '🥊' }
-                ]
-            },
-            {
-                name: 'transportes', icon: '🚗', words: [
-                    { name: 'carro', icon: '🚗' },
-                    { name: 'bicicleta', icon: '🚲' },
-                    { name: 'ônibus', icon: '🚌' },
-                    { name: 'avião', icon: '✈️' },
-                    { name: 'trem', icon: '🚆' },
-                    { name: 'moto', icon: '🏍️' },
-                    { name: 'barco', icon: '🚤' },
-                    { name: 'helicóptero', icon: '🚁' },
-                    { name: 'metro', icon: '🚇' }
-                ]
-            },
-            {
-                name: 'lugares', icon: '🏠', words: [
-                    { name: 'casa', icon: '🏠' },
-                    { name: 'escola', icon: '🏫' },
-                    { name: 'hospital', icon: '🏥' },
-                    { name: 'loja', icon: '🏪' },
-                    { name: 'parque', icon: '🌳' },
-                    { name: 'restaurante', icon: '🍴' },
-                    { name: 'praia', icon: '🏖️' },
-                    { name: 'hotel', icon: '🏨' },
-                    { name: 'biblioteca', icon: '📚' }
-                ]
-            },
-            {
-                name: 'alimentos', icon: '🍎', words: [
-                    { name: 'maçã', icon: '🍎' },
-                    { name: 'banana', icon: '🍌' },
-                    { name: 'laranja', icon: '🍊' },
-                    { name: 'uva', icon: '🍇' },
-                    { name: 'melancia', icon: '🍉' },
-                    { name: 'manga', icon: '🥭' },
-                    { name: 'abacaxi', icon: '🍍' },
-                    { name: 'kiwi', icon: '🥝' },
-                    { name: 'pêra', icon: '🍐' }
-                ]
-            }
-        ];
+    <script src="vocabulary.js"></script>
 
+    <script>
         const quickIcons = document.getElementById('quickIcons');
         const categoriesDiv = document.getElementById('categories');
         const wordsDiv = document.getElementById('words');
