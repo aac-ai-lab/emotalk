@@ -2,6 +2,8 @@
 
 **Emotalk** é um aplicativo de comunicação aumentativa e alternativa (CAA) projetado para ajudar na expressão de ideias e sentimentos através de emojis. O aplicativo oferece funcionalidades avançadas como predição inteligente de pictogramas, expansão de frases telegráficas para vocalização completa e operação offline, tornando a comunicação mais acessível e eficiente.
 
+![Tela principal do Emotalk](docs/screen-01.png)
+
 ## Funcionalidades
 
 - **Funcionalidade Offline (PWA):** Acesse o aplicativo a qualquer momento, mesmo sem conexão com a internet.
