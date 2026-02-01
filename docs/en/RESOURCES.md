@@ -159,6 +159,18 @@ This document describes all resources available in Emotalk and the justification
 
 ---
 
+## 18. Semantic Role Labeling (SRL)
+
+**What it is:** **Semantic Role Labeling (SRL)** is a Natural Language Processing (NLP) task: given text (or audio → speech recognition → text), an SRL system **automatically assigns** semantic role labels (Agent, Patient, Theme, Location, etc.) to predicate arguments. Emotalk **does not** implement SRL: the roles on the board are **pre-assigned** in the vocabulary (`vocabulary.js`) and in slots; the user selects words by role, but there is no model or pipeline that takes free text and returns roles.
+
+**Justification:** Documenting SRL clarifies the difference between (1) the use of semantic roles in Emotalk’s design (vocabulary, SVOMPT, Frames) and (2) automatic role labeling in free text. If SRL were implemented in the future (e.g. via a backend API with an SRL model + optional ASR), use cases would be: free phrase (voice/text) → suggestion for filling slots or Frames; pedagogical feedback («You said: Who = …, Action = …, What = …»); validation of the spoken sentence against the bar. The most realistic implementation would be a Python backend that receives text and returns roles; the app would map labels (Agent, Patient, etc.) to Emotalk’s roles (Who, What, Where, etc.).
+
+**Reference:** SRL in NLP; PropBank, FrameNet, CoNLL; BERT/transformer-based models for semantic roles.
+
+**Dedicated document:** [Semantic Role Labeling (SRL)](SEMANTIC_ROLE_LABELING.html).
+
+---
+
 ## Summary
 
 | Resource | Where to configure / use | Main basis or benefit |
@@ -176,9 +188,10 @@ This document describes all resources available in Emotalk and the justification
 | **Frames (Frame Semantics)** | Frames button (🖼️); Settings → Fillmore frames | Fillmore; multi-role frames; full sentences |
 | **Dependency Grammar** | (concept; no dedicated UI) | Tesnière; verb as head; compatible with SVOMPT and Frames |
 | **Case Grammar (Fillmore)** | Roles + Frames (already implemented) | Cases (Agent, Patient, etc.); Frames = case frames |
+| **SRL (Semantic Role Labeling)** | (not implemented; documented) | Automatic role labeling in free text; feasible via backend API |
 | PWA / offline | Install from browser | Use without internet |
 | Splash screen | On app open | Identity and smooth transition |
 | Emoji vocabulary | [Vocabulary](VOCABULARY.html) | Visual, categorised access |
 | Accessibility | Keyboard, ARIA, Larger font | Inclusion and usability |
 
-**Related documents:** [Case Grammar](CASE_GRAMMAR.html), [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Dependency Grammar](DEPENDENCY_GRAMMAR.html), [Vocabulary](VOCABULARY.html), [Index](README.html).
+**Related documents:** [Case Grammar](CASE_GRAMMAR.html), [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Dependency Grammar](DEPENDENCY_GRAMMAR.html), [SRL](SEMANTIC_ROLE_LABELING.html), [Vocabulary](VOCABULARY.html), [Index](README.html).

@@ -17,6 +17,7 @@ Emotalk project (AAC app with emojis) documentation.
 | **[Core icons (MINSPEAK)](MINSPEAK.html)** | Core icons mode (semantic compaction); 6 icons on first screen; 2-tap access. |
 | **[Dependency Grammar](DEPENDENCY_GRAMMAR.html)** | Tesnière; verb as head; how Emotalk (SVOMPT, Frames, roles) aligns with this perspective. |
 | **[Case Grammar (Fillmore)](CASE_GRAMMAR.html)** | Cases (Agent, Patient, etc.); roles and Frames in Emotalk as realisation of Case Grammar. |
+| **[Semantic Role Labeling (SRL)](SEMANTIC_ROLE_LABELING.html)** | SRL in NLP; not implemented; feasible via backend API; use cases and options. |
 
 ## Overview
 
@@ -72,6 +73,7 @@ Contributions are welcome: fork the repo, create a branch, commit your changes, 
 - **[Core icons (MINSPEAK)](MINSPEAK.html)** — core icons mode (semantic compaction); 6 icons on first screen.
 - **[Dependency Grammar](DEPENDENCY_GRAMMAR.html)** — Tesnière; verb as head; how Emotalk aligns with Dependency Grammar.
 - **[Case Grammar (Fillmore)](CASE_GRAMMAR.html)** — Cases (Agent, Patient, etc.); roles and Frames as realisation of Case Grammar.
+- **[Semantic Role Labeling (SRL)](SEMANTIC_ROLE_LABELING.html)** — SRL in NLP; not implemented; feasible via backend API; use cases.
 
 ### License
 

@@ -169,6 +169,18 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ---
 
+## 18. Semantic Role Labeling (SRL)
+
+**O que é:** O **Semantic Role Labeling (SRL)** é uma tarefa de Processamento de Linguagem Natural (PLN): dado um texto (ou áudio → reconhecimento de fala → texto), um sistema de SRL **atribui automaticamente** etiquetas de papéis semânticos (Agent, Patient, Theme, Location, etc.) aos argumentos do predicado. O Emotalk **não tem** SRL implementado: os papéis na prancha são **pré-atribuídos** no vocabulário (`vocabulary.js`) e nos slots; o utilizador escolhe palavras por papel, mas não há modelo nem pipeline que receba frase livre e devolva papéis.
+
+**Justificativa:** Documentar SRL permite esclarecer a diferença entre (1) o uso de papéis semânticos na conceção do Emotalk (vocabulário, SVOMPT, Quadros) e (2) a etiquetagem automática de papéis em texto livre. Se no futuro se implementar SRL (por exemplo via API no backend com um modelo de SRL + opcional ASR), os casos de uso seriam: frase livre (voz/texto) → sugestão de preenchimento de slots ou dos Quadros; feedback pedagógico («Disseste: Quem = …, Ação = …, O quê = …»); validação da frase falada face à barra. A implementação mais realista seria um backend em Python que recebe texto e devolve papéis; o app mapearia as etiquetas (Agent, Patient, etc.) para os papéis do Emotalk (Quem, O quê, Onde, etc.).
+
+**Referência:** SRL em PLN; PropBank, FrameNet, CoNLL; modelos baseados em BERT/transformers para papéis semânticos.
+
+**Documento dedicado:** [Semantic Role Labeling (SRL)](SEMANTIC_ROLE_LABELING.html).
+
+---
+
 ## Resumo
 
 | Recurso | Onde configurar / usar | Base ou benefício principal |
@@ -186,9 +198,10 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 | **Quadros (Frame Semantics)** | Botão Quadros (🖼️); Configurações → Quadros (Fillmore) | Fillmore; quadros com vários papéis; frases completas |
 | **Gramática de Dependências** | (conceito; sem UI dedicada) | Tesnière; verbo como núcleo; compatível com SVOMPT e Quadros |
 | **Case Grammar (Fillmore)** | Papéis + Quadros (já implementado) | Casos (Agent, Patient, etc.); Quadros = case frames |
+| **SRL (Semantic Role Labeling)** | (não implementado; documentado) | Etiquetagem automática de papéis em texto livre; viável via API backend |
 | PWA / offline | Instalação no browser | Uso sem internet |
 | Splash screen | Ao abrir a app | Identidade e transição suave |
 | Vocabulário emojis | [Vocabulário](VOCABULARY.html) | Acesso visual, categorizado |
 | Acessibilidade | Teclado, ARIA, Fonte maior | Inclusão e usabilidade |
 
-**Documentos relacionados:** [Case Grammar](CASE_GRAMMAR.html), [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Gramática de Dependências](DEPENDENCY_GRAMMAR.html), [Vocabulário](VOCABULARY.html), [Índice](README.html).
+**Documentos relacionados:** [Case Grammar](CASE_GRAMMAR.html), [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Gramática de Dependências](DEPENDENCY_GRAMMAR.html), [SRL](SEMANTIC_ROLE_LABELING.html), [Vocabulário](VOCABULARY.html), [Índice](README.html).

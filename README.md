@@ -29,7 +29,7 @@
 
 ## Documentação
 
-Documentação completa (EN e PT-BR): [índice Jekyll](index.md) · [pt-BR](docs/pt-br/README.md) · [English](docs/en/README.md). Inclui [Recursos e justificativas](docs/pt-br/RECURSOS.md), [Vocabulário](docs/pt-br/VOCABULARY.md), [Colourful Semantics](docs/pt-br/COLOURFUL_SEMANTICS.md), [Frame Semantics (Fillmore)](docs/pt-br/FRAME_SEMANTICS.md), [MINSPEAK](docs/pt-br/MINSPEAK.md), [Gramática de Dependências](docs/pt-br/DEPENDENCY_GRAMMAR.md) e [Case Grammar](docs/pt-br/CASE_GRAMMAR.md).
+Documentação completa (EN e PT-BR): [índice Jekyll](index.md) · [pt-BR](docs/pt-br/README.md) · [English](docs/en/README.md). Inclui [Recursos e justificativas](docs/pt-br/RECURSOS.md), [Vocabulário](docs/pt-br/VOCABULARY.md), [Colourful Semantics](docs/pt-br/COLOURFUL_SEMANTICS.md), [Frame Semantics (Fillmore)](docs/pt-br/FRAME_SEMANTICS.md), [MINSPEAK](docs/pt-br/MINSPEAK.md), [Gramática de Dependências](docs/pt-br/DEPENDENCY_GRAMMAR.md), [Case Grammar](docs/pt-br/CASE_GRAMMAR.md) e [Semantic Role Labeling (SRL)](docs/pt-br/SEMANTIC_ROLE_LABELING.md).
 
 ## Instalação e Execução
 
