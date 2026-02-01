@@ -43,9 +43,16 @@ Colourful Semantics in Emotalk provides the following benefits:
 
 In short: in the application, Colourful Semantics helps **organise vocabulary by function in the sentence**, **guide phrase building**, and **keep the interface consistent and accessible**, in line with what is used in AAC and speech therapy.
 
-## Legend
+## Configuration in the app
 
-The **Settings** (🔧) modal includes a legend with all roles and colours. The semantic role of each item is stored with the phrase in localStorage, so colours are restored when the app is reopened.
+In **Settings** (🔧) → **Legend**:
+
+- **Enable Legend (Colourful Semantics):** when on, categories and words show colours by role in the sentence; when off, all items use a neutral style.
+- **Enable Shape Coding (shapes by role):** a complementary option that gives each role a distinct shape (rectangle, hexagon, arrow, etc.). It can be used together with colours.
+
+The legend with roles and colours is shown in the Legend panel. The semantic role of each item is stored with the phrase in localStorage, so colours are restored when the app is reopened.
+
+For the full list of resources and justifications, see **[Resources and justifications](RESOURCES.html)**.
 
 ## References
 

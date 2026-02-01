@@ -82,3 +82,9 @@ This section provides an overview of the vocabulary included in the AAC board, c
 ## How to Use
 
 Each word and icon was chosen to represent concepts and items useful in daily communication. Use the icons to support quick identification and understanding.
+
+## Languages
+
+The vocabulary in the app can be displayed in **Portuguese (Brazil)** or **English**. The choice is made in Settings → General. The categories and words listed above correspond to pt-BR labels; in English, each item is shown with the corresponding translation (e.g. Drinks, water).
+
+**Related documents:** [Resources and justifications](RESOURCES.html), [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Index](README.html).

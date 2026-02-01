@@ -36,7 +36,7 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 ### Tecnologias
 
 - **Progressive Web App (PWA):** manifest.json, service worker (sw.js), cache offline.
-- **JavaScript e HTML/CSS:** Interface e lógica em `assets/js/index.js` e `assets/css/index.css`; vocabulário em `assets/js/vocabulary.js`. localStorage para frase, configurações e histórico de uso.
+- **JavaScript e HTML/CSS:** Interface e lógica em `assets/js/index.js` e `assets/css/index.css`; vocabulário em `assets/js/vocabulary.js`; traduções (interface e vocabulário pt-BR/EN) em `assets/js/translations.js`. localStorage para frase, configurações e histórico de uso.
 - **Speech Synthesis API:** Vocalização das frases e palavras (pt-BR ou inglês conforme o idioma).
 
 ### Instalação e execução
@@ -55,6 +55,12 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 ### Contribuição
 
 Contribuições são bem-vindas: faça um fork do repositório, crie uma branch, faça suas alterações, envie e abra um Pull Request.
+
+### Documentos relacionados
+
+- **[Recursos e justificativas](RECURSOS.html)** — lista de todos os recursos do Emotalk e justificativa de cada um.
+- **[Vocabulário](VOCABULARY.html)** — categorias e palavras (emojis) na prancha.
+- **[Colourful Semantics](COLOURFUL_SEMANTICS.html)** — papéis semânticos e cores na prancha; opções Colourful Semantics e Shape Coding.
 
 ### Licença
 

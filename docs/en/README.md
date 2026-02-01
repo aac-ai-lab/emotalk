@@ -36,7 +36,7 @@ Emotalk project (AAC app with emojis) documentation.
 ### Technologies
 
 - **Progressive Web App (PWA):** manifest.json, service worker (sw.js), offline cache.
-- **JavaScript and HTML/CSS:** Interface and logic in `assets/js/index.js` and `assets/css/index.css`; vocabulary in `assets/js/vocabulary.js`. localStorage for phrase, settings, and usage history.
+- **JavaScript and HTML/CSS:** Interface and logic in `assets/js/index.js` and `assets/css/index.css`; vocabulary in `assets/js/vocabulary.js`; translations (interface and vocabulary pt-BR/EN) in `assets/js/translations.js`. localStorage for phrase, settings, and usage history.
 - **Speech Synthesis API:** Vocalization of phrases and words (pt-BR or English according to language).
 
 ### Installation and run
@@ -55,6 +55,12 @@ Emotalk project (AAC app with emojis) documentation.
 ### Contributing
 
 Contributions are welcome: fork the repo, create a branch, commit your changes, push, and open a Pull Request.
+
+### Related documents
+
+- **[Resources and justifications](RESOURCES.html)** — list of all Emotalk resources and justification for each.
+- **[Vocabulary](VOCABULARY.html)** — categories and words (emojis) on the board.
+- **[Colourful Semantics](COLOURFUL_SEMANTICS.html)** — semantic roles and colours on the board; Colourful Semantics and Shape Coding options.
 
 ### License
 

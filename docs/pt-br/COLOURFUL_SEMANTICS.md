@@ -43,9 +43,16 @@ O Colourful Semantics no Emotalk traz os seguintes benefícios:
 
 Em resumo: na aplicação, o Colourful Semantics ajuda a **organizar o vocabulário por função na frase**, **guiar a montagem da frase** e **manter uma interface consistente e acessível**, em linha com o que se usa em CAA e terapia da fala.
 
-## Legenda
+## Configuração na aplicação
 
-No **Configurações** (🔧) há uma legenda com todos os papéis e cores. O papel de cada item é salvo junto com a frase no localStorage, então as cores são restauradas ao reabrir o app.
+Em **Configurações** (🔧) → **Legenda**:
+
+- **Ativar Legenda (Colourful Semantics):** quando ativado, categorias e palavras mostram as cores por papel na frase; quando desativado, todos os itens usam estilo neutro.
+- **Ativar Shape Coding (formas por papel):** opção complementar que atribui uma forma distinta a cada papel (retângulo, hexágono, seta, etc.). Pode ser usada junto com as cores.
+
+A legenda com os papéis e cores aparece no próprio painel Legenda. O papel de cada item é salvo junto com a frase no localStorage, então as cores são restauradas ao reabrir o app.
+
+Para a lista completa de recursos e justificativas, ver **[Recursos e justificativas](RECURSOS.html)**.
 
 ## Referências
 

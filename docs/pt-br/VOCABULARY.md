@@ -82,3 +82,9 @@ Esta seção fornece uma visão geral do vocabulário incluído na prancha de CA
 ## Como Usar
 
 Cada palavra e ícone foram escolhidos para representar conceitos e itens que podem ser úteis na comunicação diária. Utilize os ícones para ajudar na identificação rápida e facilitar a compreensão.
+
+## Idiomas
+
+O vocabulário na aplicação pode ser exibido em **Português (Brasil)** ou **English**. A escolha é feita em Configurações → Geral. As categorias e palavras listadas acima correspondem aos rótulos em pt-BR; em inglês, cada item é mostrado com a tradução correspondente (ex.: Bebidas → Drinks, Água → water).
+
+**Documentos relacionados:** [Recursos e justificativas](RECURSOS.html), [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Índice](README.html).
