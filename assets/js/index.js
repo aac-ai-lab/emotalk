@@ -125,6 +125,14 @@
         }
         var settingsTitle = document.getElementById('settingsTitle');
         if (settingsTitle) settingsTitle.textContent = getUI('settingsTitle');
+        var settingsIntroEl = document.getElementById('settingsIntro');
+        if (settingsIntroEl) settingsIntroEl.textContent = getUI('settingsIntro');
+        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintHistory'];
+        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintHistory'];
+        hintIds.forEach(function (id, i) {
+            var el = document.getElementById(id);
+            if (el && hintKeys[i]) el.textContent = getUI(hintKeys[i]);
+        });
         var speechRateLabel = document.querySelector('label[for="speechRate"]');
         if (speechRateLabel) speechRateLabel.textContent = getUI('speechRateLabel');
         var fontLargeLabel = document.querySelector('label[for="fontLarge"]');

@@ -13,6 +13,7 @@
             btnHome: 'Início',
             btnHomeAria: 'Voltar às categorias',
             settingsTitle: 'Configurações',
+            settingsIntro: 'Ajuste a interface e as opções de fala conforme a necessidade do utilizador.',
             speechRateLabel: 'Velocidade da fala',
             fontLargeLabel: 'Fonte maior',
             legendTitle: 'Legenda (Colourful Semantics)',
@@ -45,7 +46,17 @@
             slotO: 'Objeto (O quê)',
             slotM: 'Modo (Como)',
             slotP: 'Lugar (Onde)',
-            slotT: 'Tempo (Quando)'
+            slotT: 'Tempo (Quando)',
+            hintLang: 'Escolha o idioma da interface e da síntese de fala. Ajuda a manter consistência para o utilizador.',
+            hintSpeechRate: 'Valores menores = fala mais lenta; valores maiores = mais rápida. Use velocidade menor para melhor compreensão.',
+            hintFontLarge: 'Aumenta o tamanho dos textos e ícones nas categorias e palavras. Recomendado para baixa visão ou uso à distância.',
+            hintSvomptIntro: 'SVOMPT (Sujeito–Verbo–Objeto–Modo–Lugar–Tempo) é uma ordem de frase usada em terapia da fala e CAA. Ative as opções abaixo conforme a necessidade.',
+            hintSvomptSpeakOrder: 'Ao carregar em Falar, a frase é dita na ordem S-V-O-M-P-T, mesmo que os pictogramas estejam noutra ordem na barra.',
+            hintSvomptSlots: 'A barra de frase passa a ter 6 zonas (S, V, O, M, P, T). Cada palavra vai para o slot do seu papel, ajudando a estruturar a frase.',
+            hintSvomptGuided: 'Após adicionar uma palavra, aparece uma sugestão do próximo slot (ex.: «Próximo: Verbo»). Útil para treinar a ordem da frase.',
+            hintSvomptSortBar: 'Cada nova palavra faz a barra ser reordenada automaticamente por S-V-O-M-P-T. Só tem efeito quando «Barra com slots» está desativada.',
+            hintLegend: 'As cores indicam o papel de cada palavra na frase (Quem, O quê faz, O quê, Onde, Quando, Como). Apoia a construção de frases.',
+            hintHistory: 'Mostra as últimas frases faladas. Útil para rever, repetir ou partilhar com o terapeuta ou educador.'
         },
         'en': {
             appTitle: 'Emotalk - Augmentative and Alternative Communication',
@@ -58,6 +69,7 @@
             btnHome: 'Home',
             btnHomeAria: 'Back to categories',
             settingsTitle: 'Settings',
+            settingsIntro: 'Adjust the interface and speech options to suit the user’s needs.',
             speechRateLabel: 'Speech rate',
             fontLargeLabel: 'Larger font',
             legendTitle: 'Legend (Colourful Semantics)',
@@ -90,7 +102,17 @@
             slotO: 'Object (What)',
             slotM: 'Manner (How)',
             slotP: 'Place (Where)',
-            slotT: 'Time (When)'
+            slotT: 'Time (When)',
+            hintLang: 'Choose the language for the interface and speech synthesis. Helps keep the experience consistent for the user.',
+            hintSpeechRate: 'Lower values = slower speech; higher values = faster. Use a lower rate for better comprehension.',
+            hintFontLarge: 'Increases the size of text and icons in categories and words. Recommended for low vision or use at a distance.',
+            hintSvomptIntro: 'SVOMPT (Subject–Verb–Object–Manner–Place–Time) is a sentence order used in speech therapy and AAC. Enable the options below as needed.',
+            hintSvomptSpeakOrder: 'When you tap Speak, the phrase is spoken in S-V-O-M-P-T order, even if the pictograms are in a different order on the bar.',
+            hintSvomptSlots: 'The phrase bar becomes 6 zones (S, V, O, M, P, T). Each word goes into its role slot, helping structure the sentence.',
+            hintSvomptGuided: 'After adding a word, a suggestion for the next slot appears (e.g. «Next: Verb»). Useful for practising sentence order.',
+            hintSvomptSortBar: 'Each new word causes the bar to be reordered automatically by S-V-O-M-P-T. Only applies when «Bar with slots» is off.',
+            hintLegend: 'Colours show each word’s role in the sentence (Who, What doing, What, Where, When, How). Supports sentence building.',
+            hintHistory: 'Shows the last spoken phrases. Useful for reviewing, repeating, or sharing with a therapist or educator.'
         }
     };
 
