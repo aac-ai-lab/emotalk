@@ -23,7 +23,8 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 - **Colourful Semantics:** Categorias e palavras com cores por papel na frase (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever).
 - **Barra de frase:** Adicione pictogramas para montar a frase; falar ou limpar; barra salva no localStorage.
 - **Arrastar e soltar:** Reordene pictogramas na barra (desktop).
-- **Configurações:** Velocidade da fala e fonte maior; legenda das cores semânticas no modal de configurações.
+- **Configurações:** Velocidade da fala e fonte maior; legenda das cores semânticas; histórico de frases (últimas 20) e “Limpar histórico” no modal de configurações.
+- **Histórico de uso:** Cada frase falada é registrada (texto + data); até 200 entradas no localStorage; visualização das últimas 20 em Configurações e opção de limpar.
 - **Acessibilidade:** Navegação por teclado, ARIA, foco; opção de fonte maior.
 - **Splash screen:** Splash minimal ao abrir.
 - **Emojis:** Vocabulário com emojis para interface intuitiva e visual.
@@ -31,7 +32,7 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 ### Tecnologias
 
 - **Progressive Web App (PWA):** manifest.json, service worker (sw.js), cache offline.
-- **JavaScript e HTML/CSS:** Interface e lógica; localStorage para frase e configurações.
+- **JavaScript e HTML/CSS:** Interface e lógica em `assets/js/index.js` e `assets/css/index.css`; vocabulário em `assets/js/vocabulary.js`. localStorage para frase, configurações e histórico de uso.
 - **Speech Synthesis API:** Vocalização das frases e palavras (pt-BR).
 
 ### Instalação e execução

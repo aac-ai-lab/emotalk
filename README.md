@@ -1,26 +1,29 @@
 # Emotalk
 
-**Emotalk** é um aplicativo de comunicação aumentativa e alternativa (CAA) projetado para ajudar na expressão de ideias e sentimentos através de emojis. O aplicativo oferece funcionalidades avançadas como predição inteligente de pictogramas, expansão de frases telegráficas para vocalização completa e operação offline, tornando a comunicação mais acessível e eficiente.
+**Emotalk** é um aplicativo de comunicação aumentativa e alternativa (CAA) que usa emojis para expressar ideias e sentimentos. Inclui **Colourful Semantics** (cores por papel na frase), uso offline (PWA), barra de frase com persistência, reordenar por arrastar e soltar, configurações (velocidade da fala, fonte maior), **histórico das frases faladas** e acessibilidade.
 
 ![Tela principal do Emotalk](docs/screen-01.png)
 
 ## Funcionalidades
 
-- **Funcionalidade Offline (PWA):** Acesse o aplicativo a qualquer momento, mesmo sem conexão com a internet.
-- **Predição Inteligente de Pictogramas:** O aplicativo sugere emojis com base no histórico de comunicação, facilitando a escolha do pictograma adequado.
-- **Expansão de Frases Telegráficas:** Converta frases curtas em expressões completas e vocalizáveis para uma comunicação mais rica.
-- **Uso de Emojis:** Em vez de pictogramas tradicionais, o Emotalk utiliza emojis para tornar a comunicação mais intuitiva e visualmente atraente.
+- **PWA (offline):** Instale e use sem internet; service worker faz cache do app.
+- **Colourful Semantics:** Categorias e palavras com cores por papel na frase (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever).
+- **Barra de frase:** Monte a frase com pictogramas; falar ou limpar; barra salva no navegador.
+- **Arrastar e soltar:** Reordene pictogramas na barra (desktop).
+- **Configurações:** Velocidade da fala, fonte maior, legenda das cores, histórico de frases (últimas 20) e limpar histórico.
+- **Histórico de uso:** Frases faladas são registradas (até 200); visualização e limpeza em Configurações.
+- **Acessibilidade:** Navegação por teclado, ARIA, opção de fonte maior.
+- **Emojis:** Vocabulário com emojis na prancha.
 
-## Tecnologias Utilizadas
+## Tecnologias
 
-- **Progressive Web App (PWA):** Permite o uso offline e a instalação em dispositivos móveis.
-- **JavaScript e HTML/CSS:** Para a construção da interface e lógica do aplicativo.
-- **Machine Learning:** Algoritmos para predição inteligente e expansão de frases.
-- **Speech Synthesis API:** Para vocalização das frases e pictogramas.
+- **PWA:** manifest.json, service worker (sw.js).
+- **Front-end:** HTML, CSS em `assets/css/index.css`, JavaScript em `assets/js/index.js`, vocabulário em `assets/js/vocabulary.js`.
+- **Speech Synthesis API:** Vocalização em pt-BR.
 
-## Vocabulário
+## Documentação
 
-O vocabulário dessa aplicação foi construído utilizando emoji, contem categoria e palavras, você pode verificar [aqui](/docs/vocabulary.md).
+Documentação completa (EN e PT-BR): [índice Jekyll](index.md) · [pt-BR](docs/pt-br/README.md) · [English](docs/en/README.md). Vocabulário e Colourful Semantics estão descritos na documentação.
 
 ## Instalação e Execução
 

@@ -23,7 +23,8 @@ Emotalk project (AAC app with emojis) documentation.
 - **Colourful Semantics:** Categories and words are colour-coded by sentence role (Who, What doing, What, Where, When, Describing).
 - **Phrase bar:** Add pictograms to build a sentence; speak or clear; bar is saved in localStorage.
 - **Drag and drop:** Reorder pictograms in the phrase bar (desktop).
-- **Settings:** Speech rate and larger font; legend of semantic colours in the settings modal.
+- **Settings:** Speech rate and larger font; legend of semantic colours; phrase history (last 20 entries) and “Clear history” in the settings modal.
+- **Usage history:** Each spoken phrase is stored (phrase text + date); up to 200 entries in localStorage; view last 20 in Settings, clear when needed.
 - **Accessibility:** Keyboard navigation, ARIA labels, focus management; optional larger font.
 - **Splash screen:** Minimal splash on open.
 - **Emojis:** Vocabulary uses emojis for an intuitive, visual interface.
@@ -31,7 +32,7 @@ Emotalk project (AAC app with emojis) documentation.
 ### Technologies
 
 - **Progressive Web App (PWA):** manifest.json, service worker (sw.js), offline cache.
-- **JavaScript and HTML/CSS:** Interface and logic; localStorage for phrase and settings.
+- **JavaScript and HTML/CSS:** Interface and logic in `assets/js/index.js` and `assets/css/index.css`; vocabulary in `assets/js/vocabulary.js`. localStorage for phrase, settings, and usage history.
 - **Speech Synthesis API:** Vocalization of phrases and words (pt-BR).
 
 ### Installation and run
