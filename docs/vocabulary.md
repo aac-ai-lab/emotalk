@@ -110,7 +110,7 @@ Cachorro 🐕
 Gato 🐈
 Pássaro 🐦
 Peixe 🐟
-Coelho 兔
+Coelho 🐰
 Cavalo 🐎
 Elefante 🐘
 Tigre 🐅
@@ -185,6 +185,56 @@ Manga 🥭
 Abacaxi 🍍
 Kiwi 🥝
 Pêra 🍐
+19. Saúde 🏥
+Dor 🤕
+Médico 👨‍⚕️
+Remédio 💊
+Hospital 🏥
+Termômetro 🌡️
+Curativo 🩹
+Injeção 💉
+Estetoscópio 🩺
+Enjoo 🤢
+20. Higiene 🧴
+Escovar dentes 🪥
+Banho 🛁
+Sabonete 🧴
+Shampoo 🧴
+Toalha 🧻
+Papel higiênico 🧻
+Pente 🪮
+Espelho 🪞
+Lavar mãos 🤲
+21. Cores 🎨
+Vermelho 🔴
+Laranja 🟠
+Amarelo 🟡
+Verde 🟢
+Azul 🔵
+Roxo 🟣
+Rosa 💗
+Preto ⚫
+Branco ⬜
+22. Casa 🛏️
+Quarto 🛏️
+Banheiro 🚽
+Sala 🛋️
+Cama 🛏️
+Sofá 🛋️
+Chuveiro 🚿
+Luz 💡
+Porta 🚪
+Janela 🪟
+23. Ações ✋
+Querer 🙏
+Precisar 🆘
+Ir ➡️
+Vir ⬅️
+Ajudar 🤝
+Parar 🛑
+Abrir 📂
+Fechar 📁
+Esperar ⏳
 
 ## Como Usar
 

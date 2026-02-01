@@ -1,0 +1,20 @@
+---
+layout: default
+title: Emotalk
+---
+
+# Emotalk
+
+**Emotalk** is an **augmentative and alternative communication (AAC)** app designed to help express ideas and feelings through emojis. It is part of **PhD research experiments**; the documentation supports scientific writing and reproducibility.
+
+![Emotalk main screen](docs/screen-01.png)
+
+**Documentation:** [**pt-BR**](docs/pt-br/README.html) · [**English**](docs/en/README.html)
+
+- [Índice (pt-BR)](docs/pt-br/README.html) — funcionalidades, tecnologias, instalação, vocabulário.
+- [Index (EN)](docs/en/README.html) — features, technologies, installation, vocabulary.
+- [Vocabulário (pt-BR)](docs/pt-br/VOCABULARY.html) · [Vocabulary (EN)](docs/en/VOCABULARY.html)
+
+---
+
+*If you see this page, GitHub Pages is serving the site correctly. For the full README and app, see the repository root.*

@@ -1,0 +1,18 @@
+{
+  "name": "Emotalk",
+  "short_name": "Emotalk",
+  "description": "Comunicação Aumentativa e Alternativa com emojis",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#333",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+title: Emotalk
+description: Augmentative and alternative communication (AAC) app using emojis
+# Para GitHub Pages: baseurl para subpasta do projeto. Preview local: jekyll serve --baseurl ''
+baseurl: "/emotalk"
+
+include: ["docs", "docs/**"]
+exclude: [".git", ".github", "node_modules", "vendor", "index.html", "vocabulary.js", ".gitignore"]
+
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions

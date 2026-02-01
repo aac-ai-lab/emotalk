@@ -4,31 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EmoTalk - Quadro de Comunicação Aumentativa e Alternativa</title>
+    <meta name="theme-color" content="#333">
+    <title>Emotalk - Comunicação Aumentativa e Alternativa</title>
+    <link rel="manifest" href="manifest.json">
     <style>
+        * { box-sizing: border-box; }
         body {
-            font-family: Arial, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
             height: 100vh;
             overflow: hidden;
+            background: #fafafa;
+            color: #333;
         }
 
         .quick-icons {
             display: flex;
-            justify-content: flex-start;
             flex-wrap: wrap;
-            background-color: #f0f0f0;
-            padding: 10px;
-            margin: 0;
-            min-height: 50px;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            min-height: 48px;
             position: fixed;
             top: 0;
             left: 0;
-            right: 60px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            right: 48px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
             z-index: 1;
             overflow-x: auto;
         }
@@ -37,104 +40,228 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 5px;
+            padding: 4px 8px;
             cursor: pointer;
+            border-radius: 4px;
+            background: transparent;
         }
+        .quick-icon:hover { background: #f0f0f0; }
+        .quick-icon.dragging { opacity: 0.5; cursor: grabbing; }
+        .quick-icon.drag-over { outline: 2px dashed #333; outline-offset: 2px; }
 
-        .quick-icon-text {
-            font-size: 0.8em;
-            text-align: center;
-        }
+        .quick-icon-text { font-size: 0.7rem; color: #666; }
 
         .main-content {
+            margin-top: 48px;
+            height: calc(100vh - 48px);
+            margin-right: 48px;
             display: flex;
-            flex-direction: row;
-            margin-top: 70px;
-            height: calc(100vh - 70px);
-            margin-right: 60px;
-            position: relative;
+            justify-content: center;
         }
 
         .categories,
         .words {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            padding: 10px;
-            box-sizing: border-box;
-            flex-grow: 1;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 8px;
+            padding: 12px;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
             overflow-y: auto;
         }
 
         .category,
         .word {
-            background-color: #e6f2ff;
-            border-radius: 5px;
-            padding: 10px;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 12px 8px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            position: relative;
-            z-index: 2;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            transition: background 0.15s;
         }
-
         .category:hover,
-        .word:hover {
-            background-color: #d4e6ff;
-            transform: scale(1.05);
-        }
+        .word:hover { background: #f5f5f5; }
 
         .category-icon,
-        .word-icon {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
-
+        .word-icon { font-size: 1.4rem; margin-bottom: 4px; }
         .category-name,
-        .word-name {
-            font-size: 0.8em;
-        }
+        .word-name { font-size: 0.75rem; color: #555; }
 
         .sidebar {
             position: fixed;
             top: 0;
             right: 0;
             height: 100%;
-            width: 60px;
-            background-color: #f8f9fa;
+            width: 48px;
+            background: #fff;
+            border-left: 1px solid #eee;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-            z-index: 3;
+            gap: 4px;
+            z-index: 2;
         }
 
         .control-button {
-            background-color: transparent;
+            background: none;
             border: none;
-            font-size: 2em;
+            font-size: 1.4rem;
             cursor: pointer;
-            margin: 20px 0;
+            padding: 8px;
+            opacity: 0.8;
+        }
+        .control-button:hover { opacity: 1; }
+
+        #backButton { display: none; }
+
+        @media (min-width: 768px) {
+            .quick-icons {
+                right: 56px;
+                padding: 10px 24px;
+                min-height: 56px;
+            }
+            .main-content {
+                margin-top: 56px;
+                margin-right: 56px;
+                height: calc(100vh - 56px);
+            }
+            .sidebar { width: 56px; }
+            .categories,
+            .words {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 12px;
+                padding: 20px;
+                max-width: 1100px;
+            }
+            .category,
+            .word { padding: 16px 12px; }
+            .category-icon,
+            .word-icon { font-size: 1.6rem; margin-bottom: 6px; }
+            .category-name,
+            .word-name { font-size: 0.8rem; }
         }
 
-        .control-button:hover {
-            color: #007BFF;
+        @media (min-width: 1200px) {
+            .quick-icons {
+                right: 64px;
+                padding: 12px 32px;
+                min-height: 60px;
+            }
+            .main-content {
+                margin-right: 64px;
+                margin-top: 60px;
+                height: calc(100vh - 60px);
+            }
+            .sidebar { width: 64px; }
+            .control-button { font-size: 1.5rem; padding: 10px; }
+            .categories,
+            .words {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 16px;
+                padding: 24px;
+                max-width: 1200px;
+            }
+            .category,
+            .word { padding: 20px 16px; border-radius: 6px; }
+            .category-icon,
+            .word-icon { font-size: 1.8rem; margin-bottom: 8px; }
+            .category-name,
+            .word-name { font-size: 0.85rem; }
         }
 
-        #backButton {
+        .splash-screen {
+            position: fixed;
+            inset: 0;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.4s ease-out;
+            cursor: pointer;
+        }
+        .splash-screen.hidden { opacity: 0; pointer-events: none; }
+        .splash-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+            letter-spacing: 0.04em;
+        }
+
+        body.font-large .category-name,
+        body.font-large .word-name,
+        body.font-large .quick-icon-text { font-size: 0.9rem; }
+        body.font-large .category-icon,
+        body.font-large .word-icon { font-size: 1.75rem; }
+
+        .settings-overlay {
             display: none;
-            font-size: 2em;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .settings-overlay.open { display: flex; }
+        .settings-modal {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            max-width: 320px;
+            width: 90%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .settings-modal h2 { margin: 0 0 16px; font-size: 1.1rem; color: #333; }
+        .settings-row { margin-bottom: 16px; }
+        .settings-row label { display: block; font-size: 0.85rem; color: #555; margin-bottom: 4px; }
+        .settings-row input[type="range"] { width: 100%; }
+        .settings-row output { font-size: 0.85rem; color: #666; margin-left: 8px; }
+        .settings-actions { margin-top: 20px; display: flex; justify-content: flex-end; gap: 8px; }
+        .settings-actions button {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .settings-actions button.primary { background: #333; color: #fff; border-color: #333; }
+
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            z-index: 200;
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
 
 <body>
+    <div class="splash-screen" id="splashScreen" role="dialog" aria-label="Carregando Emotalk">
+        <h1 class="splash-title">Emotalk</h1>
+    </div>
+
     <div class="quick-icons" id="quickIcons"></div>
 
     <div class="main-content">
@@ -143,30 +270,192 @@
     </div>
 
     <div class="sidebar">
-        <button id="playButton" class="control-button" title="Falar">🔊</button>
-        <button id="clearButton" class="control-button" title="Limpar">🗑️</button>
-        <button id="settingsButton" class="control-button" title="Configurações">🔧</button>
-        <button id="backButton" class="control-button" title="Início">🏠</button>
+        <button id="playButton" class="control-button" title="Falar" aria-label="Falar frase">🔊</button>
+        <button id="clearButton" class="control-button" title="Limpar" aria-label="Limpar barra">🗑️</button>
+        <button id="settingsButton" class="control-button" title="Configurações" aria-label="Configurações">🔧</button>
+        <button id="backButton" class="control-button" title="Início" aria-label="Voltar às categorias">🏠</button>
     </div>
 
+    <div class="settings-overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <div class="settings-modal">
+            <h2 id="settingsTitle">Configurações</h2>
+            <div class="settings-row">
+                <label for="speechRate">Velocidade da fala</label>
+                <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1">
+                <output id="speechRateValue">1</output>
+            </div>
+            <div class="settings-row">
+                <label><input type="checkbox" id="fontLarge"> Fonte maior</label>
+            </div>
+            <div class="settings-actions">
+                <button type="button" id="settingsClose">Fechar</button>
+                <button type="button" id="settingsSave" class="primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="vocabulary.js"></script>
     <script>
-        const categories = [ { name: "bebidas", icon: "🥤", words: [ { name: "água", icon: "💧" }, { name: "suco", icon: "🧃" }, { name: "café", icon: "☕" }, { name: "refrigerante", icon: "🥤" }, { name: "leite", icon: "🥛" }, { name: "chá", icon: "🍵" }, { name: "cerveja", icon: "🍺" }, { name: "vinho", icon: "🍷" }, { name: "coquetel", icon: "🍹" }, ], }, { name: "petiscos", icon: "🍿", words: [ { name: "pipoca", icon: "🍿" }, { name: "biscoito", icon: "🍪" }, { name: "batata frita", icon: "🍟" }, { name: "sorvete", icon: "🍦" }, { name: "chocolate", icon: "🍫" }, { name: "nuts", icon: "🥜" }, { name: "chips", icon: "🥔" }, { name: "cereal", icon: "🥣" }, { name: "quibe", icon: "🫛" }, ], }, { name: "atividades", icon: "🚲", words: [ { name: "andar", icon: "🚶" }, { name: "correr", icon: "🏃" }, { name: "nadar", icon: "🏊" }, { name: "pular", icon: "🤸" }, { name: "jogar", icon: "🏐" }, { name: "dançar", icon: "💃" }, { name: "andar de bicicleta", icon: "🚴" }, { name: "escalar", icon: "🧗" }, { name: "praticar yoga", icon: "🧘" }, ], }, { name: "emoções", icon: "😊", words: [ { name: "feliz", icon: "😁" }, { name: "triste", icon: "😢" }, { name: "animado", icon: "😄" }, { name: "nervoso", icon: "😠" }, { name: "cansado", icon: "😩" }, { name: "surpreso", icon: "😲" }, { name: "confuso", icon: "😕" }, { name: "irritado", icon: "😡" }, { name: "aliviado", icon: "😌" }, ], }, { name: "corpo", icon: "🧍", words: [ { name: "mão", icon: "✋" }, { name: "cabeça", icon: "👤" }, { name: "braço", icon: "💪" }, { name: "perna", icon: "🦵" }, { name: "pé", icon: "🦶" }, { name: "olho", icon: "👁️" }, { name: "orelha", icon: "👂" }, { name: "boca", icon: "👄" }, { name: "nariz", icon: "👃" }, ], }, { name: "roupas", icon: "👚", words: [ { name: "camisa", icon: "👕" }, { name: "calça", icon: "👖" }, { name: "sapato", icon: "👟" }, { name: "chapéu", icon: "🎩" }, { name: "jaqueta", icon: "🧥" }, { name: "saia", icon: "👗" }, { name: "casaco", icon: "🧥" }, { name: "meia", icon: "🧦" }, { name: "óculos", icon: "🕶️" }, ], }, { name: "pessoas", icon: "👥", words: [ { name: "pai", icon: "👨" }, { name: "mãe", icon: "👩" }, { name: "amigo", icon: "🧑‍🤝‍🧑" }, { name: "irmão", icon: "👦" }, { name: "irmã", icon: "👧" }, { name: "avô", icon: "👴" }, { name: "avó", icon: "👵" }, { name: "professor", icon: "👨‍🏫" }, { name: "aluno", icon: "👩‍🎓" }, ], }, { name: "descrever", icon: "📊", words: [ { name: "grande", icon: "📏" }, { name: "pequeno", icon: "📐" }, { name: "rápido", icon: "⚡" }, { name: "lento", icon: "🐢" }, { name: "quente", icon: "🔥" }, { name: "frio", icon: "❄️" }, { name: "alto", icon: "📏" }, { name: "baixo", icon: "📐" }, { name: "leve", icon: "⚖️" }, ], }, { name: "cozinha", icon: "🍽️", words: [ { name: "prato", icon: "🍽️" }, { name: "garfo", icon: "🍴" }, { name: "cozinha", icon: "🍳" }, { name: "xícara", icon: "☕" }, { name: "talher", icon: "🍴" }, { name: "panela", icon: "🍲" }, { name: "tampa", icon: "🥄" }, { name: "espátula", icon: "🥄" }, { name: "batedeira", icon: "🍰" }, ], }, { name: "escola", icon: "🏫", words: [ { name: "livro", icon: "📚" }, { name: "professor", icon: "👩‍🏫" }, { name: "aluno", icon: "👨‍🎓" }, { name: "lousa", icon: "🧑‍🏫" }, { name: "caderno", icon: "📓" }, { name: "lápis", icon: "✏️" }, { name: "caneta", icon: "🖊️" }, { name: "mesa", icon: "🪑" }, { name: "cadeira", icon: "🪑" }, ], }, { name: "animais", icon: "🐕", words: [ { name: "cachorro", icon: "🐕" }, { name: "gato", icon: "🐈" }, { name: "pássaro", icon: "🐦" }, { name: "peixe", icon: "🐟" }, { name: "coelho", icon: "兔" }, { name: "cavalo", icon: "🐎" }, { name: "elefante", icon: "🐘" }, { name: "tigre", icon: "🐅" }, { name: "urso", icon: "🐻" }, ], }, { name: "tecnologia", icon: "💻", words: [ { name: "computador", icon: "💻" }, { name: "telefone", icon: "📱" }, { name: "internet", icon: "🌐" }, { name: "televisão", icon: "📺" }, { name: "câmera", icon: "📷" }, { name: "tablet", icon: "📲" }, { name: "impressora", icon: "🖨️" }, { name: "rádio", icon: "📻" }, { name: "carregador", icon: "🔌" }, ], }, { name: "tempo", icon: "☀️", words: [ { name: "sol", icon: "☀️" }, { name: "chuva", icon: "🌧️" }, { name: "nuvem", icon: "☁️" }, { name: "neve", icon: "❄️" }, { name: "vento", icon: "🌬️" }, { name: "neblina", icon: "🌫️" }, { name: "trovoada", icon: "🌩️" }, { name: "arco-íris", icon: "🌈" }, { name: "calor", icon: "🔥" }, ], }, { name: "plantas", icon: "🌳", words: [ { name: "árvore", icon: "🌳" }, { name: "flor", icon: "🌸" }, { name: "folha", icon: "🍃" }, { name: "cactus", icon: "🌵" }, { name: "mato", icon: "🌿" }, { name: "grama", icon: "🌾" }, { name: "planta", icon: "🌱" }, { name: "lírio", icon: "🌺" }, { name: "orquídea", icon: "🌷" }, ], }, { name: "esportes", icon: "⚽", words: [ { name: "futebol", icon: "⚽" }, { name: "basquete", icon: "🏀" }, { name: "tênis", icon: "🎾" }, { name: "natação", icon: "🏊" }, { name: "ciclismo", icon: "🚴" }, { name: "golfe", icon: "⛳" }, { name: "rugby", icon: "🏉" }, { name: "vôlei", icon: "🏐" }, { name: "boxe", icon: "🥊" }, ], }, { name: "transportes", icon: "🚗", words: [ { name: "carro", icon: "🚗" }, { name: "bicicleta", icon: "🚲" }, { name: "ônibus", icon: "🚌" }, { name: "avião", icon: "✈️" }, { name: "trem", icon: "🚆" }, { name: "moto", icon: "🏍️" }, { name: "barco", icon: "🚤" }, { name: "helicóptero", icon: "🚁" }, { name: "metro", icon: "🚇" }, ], }, { name: "lugares", icon: "🏠", words: [ { name: "casa", icon: "🏠" }, { name: "escola", icon: "🏫" }, { name: "hospital", icon: "🏥" }, { name: "loja", icon: "🏪" }, { name: "parque", icon: "🌳" }, { name: "restaurante", icon: "🍴" }, { name: "praia", icon: "🏖️" }, { name: "hotel", icon: "🏨" }, { name: "biblioteca", icon: "📚" }, ], }, { name: "alimentos", icon: "🍎", words: [ { name: "maçã", icon: "🍎" }, { name: "banana", icon: "🍌" }, { name: "laranja", icon: "🍊" }, { name: "uva", icon: "🍇" }, { name: "melancia", icon: "🍉" }, { name: "manga", icon: "🥭" }, { name: "abacaxi", icon: "🍍" }, { name: "kiwi", icon: "🥝" }, { name: "pêra", icon: "🍐" }, ], }, ];
-        
+        const categories = window.categories || [];
+        const STORAGE_QUICK = 'emotalk_quick';
+        const STORAGE_SETTINGS = 'emotalk_settings';
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(function () {});
+        }
+
+        (function initSplash() {
+            const splash = document.getElementById('splashScreen');
+            const hideSplash = function () {
+                splash.classList.add('hidden');
+                setTimeout(function () { splash.remove(); }, 500);
+            };
+            splash.addEventListener('click', hideSplash, { once: true });
+            splash.addEventListener('touchstart', hideSplash, { once: true, passive: true });
+            setTimeout(hideSplash, 2500);
+        })();
+
         const quickIcons = document.getElementById('quickIcons');
         const categoriesDiv = document.getElementById('categories');
         const wordsDiv = document.getElementById('words');
         const backButton = document.getElementById('backButton');
         const playButton = document.getElementById('playButton');
         const clearButton = document.getElementById('clearButton');
+        const settingsOverlay = document.getElementById('settingsOverlay');
+        const settingsButton = document.getElementById('settingsButton');
+        const speechRateInput = document.getElementById('speechRate');
+        const speechRateValue = document.getElementById('speechRateValue');
+        const fontLargeCheck = document.getElementById('fontLarge');
+        const settingsClose = document.getElementById('settingsClose');
+        const settingsSave = document.getElementById('settingsSave');
+        const toastEl = document.getElementById('toast');
+
+        function getSettings() {
+            try {
+                const s = JSON.parse(localStorage.getItem(STORAGE_SETTINGS) || '{}');
+                return {
+                    speechRate: typeof s.speechRate === 'number' ? s.speechRate : 1,
+                    fontLarge: !!s.fontLarge
+                };
+            } catch (e) { return { speechRate: 1, fontLarge: false }; }
+        }
+
+        function applySettings() {
+            const s = getSettings();
+            document.body.classList.toggle('font-large', s.fontLarge);
+        }
+
+        function showToast(msg) {
+            toastEl.textContent = msg;
+            toastEl.classList.add('show');
+            setTimeout(function () { toastEl.classList.remove('show'); }, 2500);
+        }
+
+        function saveQuickBar() {
+            const items = Array.from(quickIcons.querySelectorAll('.quick-icon')).map(function (el) {
+                const nameEl = el.querySelector('.quick-icon-text');
+                const iconEl = el.querySelector('.word-icon');
+                const name = nameEl ? nameEl.textContent.trim() : '';
+                const iconChar = iconEl ? (iconEl.textContent || '').trim() : '';
+                for (var i = 0; i < categories.length; i++) {
+                    for (var j = 0; j < categories[i].words.length; j++) {
+                        if (categories[i].words[j].name === name)
+                            return { name: categories[i].words[j].name, icon: categories[i].words[j].icon };
+                    }
+                }
+                return name ? { name: name, icon: iconChar || '•' } : null;
+            }).filter(Boolean);
+            try { localStorage.setItem(STORAGE_QUICK, JSON.stringify(items)); } catch (e) {}
+        }
+
+        function restoreQuickBar() {
+            try {
+                const raw = localStorage.getItem(STORAGE_QUICK);
+                if (!raw) return;
+                const items = JSON.parse(raw);
+                items.forEach(function (item) {
+                    appendQuickIcon(item);
+                });
+            } catch (e) {}
+        }
+
+        var quickIconDragging = false;
+
+        function appendQuickIcon(word) {
+            const quickIconDiv = document.createElement('div');
+            quickIconDiv.classList.add('quick-icon');
+            quickIconDiv.setAttribute('role', 'button');
+            quickIconDiv.setAttribute('tabindex', '0');
+            quickIconDiv.setAttribute('aria-label', word.name + '. Arrastar para reordenar, clique para remover.');
+            quickIconDiv.setAttribute('draggable', 'true');
+            quickIconDiv.innerHTML = '<span class="word-icon" aria-hidden="true">' + (word.icon || '•') + '</span><span class="quick-icon-text">' + word.name + '</span>';
+
+            quickIconDiv.addEventListener('click', function () {
+                if (quickIconDragging) return;
+                quickIconDiv.remove();
+                saveQuickBar();
+            });
+
+            quickIconDiv.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); quickIconDiv.click(); }
+            });
+
+            quickIconDiv.addEventListener('dragstart', function (e) {
+                quickIconDragging = true;
+                e.dataTransfer.setData('text/plain', String(Array.prototype.indexOf.call(quickIcons.children, quickIconDiv)));
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setDragImage(quickIconDiv, 0, 0);
+                quickIconDiv.classList.add('dragging');
+            });
+
+            quickIconDiv.addEventListener('dragend', function () {
+                quickIconDiv.classList.remove('dragging');
+                quickIcons.querySelectorAll('.quick-icon').forEach(function (el) { el.classList.remove('drag-over'); });
+                setTimeout(function () { quickIconDragging = false; }, 0);
+            });
+
+            quickIconDiv.addEventListener('dragover', function (e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                if (e.currentTarget.classList.contains('dragging')) return;
+                e.currentTarget.classList.add('drag-over');
+            });
+
+            quickIconDiv.addEventListener('dragleave', function (e) {
+                e.currentTarget.classList.remove('drag-over');
+            });
+
+            quickIconDiv.addEventListener('drop', function (e) {
+                e.preventDefault();
+                e.currentTarget.classList.remove('drag-over');
+                var fromIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
+                var items = Array.from(quickIcons.querySelectorAll('.quick-icon'));
+                var toIndex = items.indexOf(e.currentTarget);
+                if (fromIndex === toIndex || fromIndex < 0) return;
+                var dragged = items[fromIndex];
+                quickIcons.insertBefore(dragged, e.currentTarget);
+                saveQuickBar();
+            });
+
+            quickIcons.appendChild(quickIconDiv);
+        }
 
         function showCategories() {
-            categories.forEach(category => {
+            categories.forEach(function (category) {
                 const categoryDiv = document.createElement('div');
                 categoryDiv.classList.add('category');
-                categoryDiv.innerHTML = `<div class="category-icon">${category.icon}</div><div class="category-name">${category.name}</div>`;
-                categoryDiv.addEventListener('click', () => {
+                categoryDiv.setAttribute('role', 'button');
+                categoryDiv.setAttribute('tabindex', '0');
+                categoryDiv.setAttribute('aria-label', 'Categoria ' + category.name);
+                categoryDiv.innerHTML = '<div class="category-icon" aria-hidden="true">' + category.icon + '</div><div class="category-name">' + category.name + '</div>';
+                categoryDiv.addEventListener('click', function () {
                     speakCategory(category.name);
                     showWords(category.words);
+                });
+                categoryDiv.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); categoryDiv.click(); }
                 });
                 categoriesDiv.appendChild(categoryDiv);
             });
@@ -177,53 +466,65 @@
             wordsDiv.style.display = 'grid';
             wordsDiv.innerHTML = '';
             backButton.style.display = 'inline-block';
-            words.forEach(word => {
+            words.forEach(function (word) {
                 const wordDiv = document.createElement('div');
                 wordDiv.classList.add('word');
-                wordDiv.innerHTML = `<div class="word-icon">${word.icon}</div><div class="word-name">${word.name}</div>`;
-                wordDiv.addEventListener('click', () => addToQuickIcons(word));
+                wordDiv.setAttribute('role', 'button');
+                wordDiv.setAttribute('tabindex', '0');
+                wordDiv.setAttribute('aria-label', 'Palavra ' + word.name);
+                wordDiv.innerHTML = '<div class="word-icon" aria-hidden="true">' + word.icon + '</div><div class="word-name">' + word.name + '</div>';
+                wordDiv.addEventListener('click', function () { addToQuickIcons(word); });
+                wordDiv.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); wordDiv.click(); }
+                });
                 wordsDiv.appendChild(wordDiv);
             });
         }
 
         function addToQuickIcons(word) {
             speakWord(word.name);
-            const quickIconDiv = document.createElement('div');
-            quickIconDiv.classList.add('quick-icon');
-            quickIconDiv.innerHTML = `<div class="quick-icon">${word.icon}</div><div class="quick-icon-text">${word.name}</div>`;
-            quickIconDiv.addEventListener('click', () => quickIcons.removeChild(quickIconDiv));
-            quickIcons.appendChild(quickIconDiv);
+            appendQuickIcon(word);
+            saveQuickBar();
         }
 
         function clearQuickIcons() {
             quickIcons.innerHTML = '';
+            saveQuickBar();
         }
 
         function playIcons() {
-            const message = Array.from(quickIcons.children).map(icon => icon.querySelector('.quick-icon-text').textContent).join(' ');
+            const children = quickIcons.querySelectorAll('.quick-icon-text');
+            if (!children.length) {
+                showToast('Adicione palavras na barra acima.');
+                return;
+            }
+            const message = Array.from(children).map(function (el) { return el.textContent; }).join(' ');
             const utterance = new SpeechSynthesisUtterance(message);
             utterance.voice = getVoice('pt-BR');
+            utterance.rate = getSettings().speechRate;
             speechSynthesis.speak(utterance);
         }
 
         function speakWord(word) {
             const utterance = new SpeechSynthesisUtterance(word);
             utterance.voice = getVoice('pt-BR');
+            utterance.rate = getSettings().speechRate;
             speechSynthesis.speak(utterance);
         }
 
         function speakCategory(category) {
             const utterance = new SpeechSynthesisUtterance(category);
             utterance.voice = getVoice('pt-BR');
+            utterance.rate = getSettings().speechRate;
             speechSynthesis.speak(utterance);
         }
 
         function getVoice(lang) {
             const voices = speechSynthesis.getVoices();
-            return voices.find(voice => voice.lang.startsWith(lang)) || null;
+            return voices.find(function (v) { return v.lang.startsWith(lang); }) || null;
         }
 
-        backButton.addEventListener('click', () => {
+        backButton.addEventListener('click', function () {
             categoriesDiv.style.display = 'grid';
             wordsDiv.style.display = 'none';
             backButton.style.display = 'none';
@@ -232,7 +533,37 @@
         playButton.addEventListener('click', playIcons);
         clearButton.addEventListener('click', clearQuickIcons);
 
+        settingsButton.addEventListener('click', function () {
+            var s = getSettings();
+            speechRateInput.value = s.speechRate;
+            speechRateValue.textContent = s.speechRate;
+            fontLargeCheck.checked = s.fontLarge;
+            settingsOverlay.classList.add('open');
+            speechRateInput.focus();
+        });
+
+        speechRateInput.addEventListener('input', function () {
+            speechRateValue.textContent = speechRateInput.value;
+        });
+
+        settingsClose.addEventListener('click', function () { settingsOverlay.classList.remove('open'); });
+        settingsSave.addEventListener('click', function () {
+            var s = {
+                speechRate: parseFloat(speechRateInput.value) || 1,
+                fontLarge: fontLargeCheck.checked
+            };
+            try { localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(s)); } catch (e) {}
+            applySettings();
+            settingsOverlay.classList.remove('open');
+        });
+
+        settingsOverlay.addEventListener('click', function (e) {
+            if (e.target === settingsOverlay) settingsOverlay.classList.remove('open');
+        });
+
+        applySettings();
         showCategories();
+        restoreQuickBar();
     </script>
 </body>
 
