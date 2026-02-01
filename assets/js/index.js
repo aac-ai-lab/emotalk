@@ -69,6 +69,7 @@
     var svomptSortBarCheck = document.getElementById('svomptSortBar');
     var svomptTitleEl = document.getElementById('svomptTitle');
     var colourfulSemanticsCheck = document.getElementById('colourfulSemanticsCheck');
+    var shapeCodingCheck = document.getElementById('shapeCodingCheck');
 
     function getSettings() {
         try {
@@ -82,10 +83,11 @@
                 svomptSlots: !!s.svomptSlots,
                 svomptGuided: !!s.svomptGuided,
                 svomptSortBar: !!s.svomptSortBar,
-                colourfulSemantics: s.colourfulSemantics !== false
+                colourfulSemantics: s.colourfulSemantics !== false,
+                shapeCoding: !!s.shapeCoding
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false };
         }
     }
 
@@ -129,8 +131,8 @@
         if (settingsTitle) settingsTitle.textContent = getUI('settingsTitle');
         var settingsIntroEl = document.getElementById('settingsIntro');
         if (settingsIntroEl) settingsIntroEl.textContent = getUI('settingsIntro');
-        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintHistory'];
-        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'hintHistory'];
+        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintShapeCoding', 'hintHistory'];
+        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'shapeCodingHint', 'hintHistory'];
         hintIds.forEach(function (id, i) {
             var el = document.getElementById(id);
             if (el && hintKeys[i]) el.textContent = getUI(hintKeys[i]);
@@ -163,6 +165,10 @@
             var csLabel = colourfulSemanticsCheck.closest('label');
             if (csLabel && csLabel.childNodes[1]) csLabel.childNodes[1].textContent = ' ' + getUI('colourfulSemanticsLabel');
         }
+        if (shapeCodingCheck) {
+            var scLabel = shapeCodingCheck.closest('label');
+            if (scLabel && scLabel.childNodes[1]) scLabel.childNodes[1].textContent = ' ' + getUI('shapeCodingLabel');
+        }
         if (historyList) historyList.setAttribute('aria-label', getUI('historyAria'));
         if (clearHistoryBtn) clearHistoryBtn.textContent = getUI('clearHistory');
         if (settingsCloseBtn) settingsCloseBtn.textContent = getUI('close');
@@ -189,6 +195,7 @@
         var s = getSettings();
         document.body.classList.toggle('font-large', s.fontLarge);
         document.body.classList.toggle('colourful-semantics-off', !s.colourfulSemantics);
+        document.body.classList.toggle('shape-coding-on', !!s.shapeCoding);
         applyLanguage();
     }
 
@@ -620,6 +627,7 @@
         if (svomptGuidedCheck) svomptGuidedCheck.checked = s.svomptGuided;
         if (svomptSortBarCheck) svomptSortBarCheck.checked = s.svomptSortBar;
         if (colourfulSemanticsCheck) colourfulSemanticsCheck.checked = s.colourfulSemantics;
+        if (shapeCodingCheck) shapeCodingCheck.checked = s.shapeCoding;
         renderHistory();
         showSettingsPanel('general');
         settingsOverlay.classList.add('open');
@@ -651,7 +659,8 @@
             svomptSlots: !!(svomptSlotsCheck && svomptSlotsCheck.checked),
             svomptGuided: !!(svomptGuidedCheck && svomptGuidedCheck.checked),
             svomptSortBar: !!(svomptSortBarCheck && svomptSortBarCheck.checked),
-            colourfulSemantics: !!(colourfulSemanticsCheck && colourfulSemanticsCheck.checked)
+            colourfulSemantics: !!(colourfulSemanticsCheck && colourfulSemanticsCheck.checked),
+            shapeCoding: !!(shapeCodingCheck && shapeCodingCheck.checked)
         };
         try {
             localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(s));

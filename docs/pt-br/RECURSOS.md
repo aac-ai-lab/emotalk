@@ -1,0 +1,137 @@
+---
+layout: default
+title: "Recursos e justificativas (pt-BR)"
+---
+# Recursos do Emotalk e justificativas
+
+**Idioma / Language:** [Português (Brasil)](README.html) | [English](../en/RESOURCES.html)
+
+Este documento descreve todos os recursos disponíveis no Emotalk e a justificativa (base em evidências ou benefício) de cada um, para uso em contexto de CAA e terapia da fala.
+
+---
+
+## 1. Idiomas (pt-BR e English)
+
+**O que é:** A interface e a síntese de fala podem ser usadas em Português (Brasil) ou em Inglês. O utilizador escolhe o idioma em Configurações → Geral.
+
+**Justificativa:** Permite o uso em contextos bilíngues, em famílias ou escolas que usam inglês, e em investigação ou divulgação internacional. A consistência entre o idioma da interface e o da fala reduz confusão e apoia a compreensão.
+
+---
+
+## 2. Colourful Semantics (legenda e cores por papel)
+
+**O que é:** Categorias e palavras são codificadas por cor conforme o papel na frase: Quem (laranja), O quê faz (amarelo), O quê (verde), Onde (azul), Quando (marrom), Como/Descrever (roxo). Pode ser ativado ou desativado em Configurações → Legenda.
+
+**Justificativa:** O Colourful Semantics é uma abordagem de terapia da fala e linguagem com base em evidências, usada em CAA para ensinar estrutura de frase. As cores ajudam o utilizador a perceber o *tipo* de palavra (sujeito, ação, objeto, etc.) e a ordenar a frase. A opção de desativar permite adaptar a pessoas que preferem interface neutra ou que já internalizaram os papéis.
+
+**Referência:** Colourful Semantics (Alison Bryan; desenvolvimento de linguagem e estrutura de frase em contexto clínico e educacional).
+
+---
+
+## 3. Shape Coding (formas por papel gramatical)
+
+**O que é:** Cada papel gramatical pode ter uma forma distinta: Quem = retângulo, O quê faz = hexágono, O quê = seta, Onde = cantos arredondados, Quando = elipse, Como = losango. Ativa-se em Configurações → Legenda. Pode ser usado em conjunto com as cores.
+
+**Justificativa:** O Shape Coding (Susan Ebbels) usa formas para representar papéis gramaticais, reforçando a estrutura da frase de forma visual e complementar à cor. Útil para utilizadores que beneficiam de pistas visuais múltiplas (cor + forma) ou para quem a forma é mais discriminável que a cor. A combinação com Colourful Semantics segue práticas usadas em intervenção em linguagem.
+
+**Referência:** Shape Coding (Ebbels); uso em terapia da gramática e em CAA.
+
+---
+
+## 4. SVOMPT (ordem da frase: Sujeito–Verbo–Objeto–Modo–Lugar–Tempo)
+
+**O que é:** Conjunto de opções em Configurações → SVOMPT para apoiar a ordem canónica da frase. Todas são opcionais e independentes.
+
+| Recurso | Descrição | Justificativa |
+|--------|------------|----------------|
+| **Ordenar frase ao falar (S-V-O-M-P-T)** | Ao carregar em Falar, a frase é dita na ordem S-V-O-M-P-T, mesmo que os pictogramas estejam noutra ordem na barra. | Garante que a vocalização segue uma ordem gramatical consistente, sem obrigar a reordenar manualmente. Ajuda na compreensão por parte do interlocutor e no reforço do modelo de frase. |
+| **Barra com slots S-V-O-M-P-T** | A barra de frase passa a ter seis zonas (S, V, O, M, P, T); cada palavra é colocada no slot do seu papel. | Reforça visualmente a estrutura da frase e guia a colocação de cada elemento no lugar certo. Usado em terapia para treino explícito da ordem SVOMPT. |
+| **Modo guiado (sugerir próximo slot)** | Após adicionar uma palavra, aparece uma sugestão do próximo slot (ex.: «Próximo: Verbo»). | Apoia o utilizador a completar a frase por etapas e a seguir a ordem S-V-O-M-P-T. Reduz carga cognitiva e facilita a aprendizagem da estrutura. |
+| **Ordenar barra por SVOMPT** | Cada nova palavra faz a barra ser reordenada automaticamente por S-V-O-M-P-T (quando a barra não está em modo slots). | Mantém a ordem visual alinhada com a ordem da fala e com o modelo gramatical, sem exigir arrastar manualmente. |
+
+**Justificativa geral:** A ordem SVOMPT é usada em terapia da fala e em CAA para ensinar e estabilizar a estrutura da frase. Oferecer várias opções (só falar ordenado, slots, guiado, ordenar barra) permite adaptar ao nível e às necessidades de cada utilizador.
+
+---
+
+## 5. Barra de frase (montagem e persistência)
+
+**O que é:** O utilizador escolhe palavras nas categorias e elas são adicionadas a uma barra no topo. Pode falar a frase, limpar a barra ou reordenar pictogramas por arrastar e soltar (desktop). A frase é guardada no navegador (localStorage) e restaurada ao reabrir a aplicação.
+
+**Justificativa:** A barra de frase é o núcleo da construção da mensagem em CAA: permite montar uma frase antes de a vocalizar, rever e corrigir. A persistência evita perda acidental ao fechar o browser e apoia uso em sessões prolongadas. O arrastar e soltar facilita o ajuste da ordem sem apagar e voltar a adicionar.
+
+---
+
+## 6. Síntese de fala (Speech Synthesis API)
+
+**O que é:** Ao carregar em Falar, a frase da barra é vocalizada pela síntese de fala do sistema (pt-BR ou inglês, conforme o idioma escolhido). A velocidade da fala é configurável em Configurações → Geral.
+
+**Justificativa:** A vocalização torna a mensagem acessível a interlocutores que não estão a ver o ecrã e apoia a comunicação em tempo real. A velocidade ajustável permite adaptar a utilizadores com necessidades de processamento mais lento ou a contextos de escuta mais difícil.
+
+---
+
+## 7. Configurações (modal e menu vertical)
+
+**O que é:** Um modal de configurações com menu vertical (Geral, SVOMPT, Legenda, Histórico) agrupa todas as opções: idioma, velocidade da fala, fonte maior, opções SVOMPT, ativar/desativar Colourful Semantics, ativar/desativar Shape Coding, e histórico de frases. Cada secção inclui descrições e sugestões de uso.
+
+**Justificativa:** Centralizar as opções num único sítio reduz a complexidade aparente da interface principal. O menu vertical e as descrições tornam as configurações mais fáceis de encontrar e de entender por terapeutas, educadores ou famílias, e permitem personalizar o Emotalk sem alterar código.
+
+---
+
+## 8. Histórico de frases
+
+**O que é:** Cada frase falada é registada (texto e data/hora). As últimas 20 são visíveis em Configurações → Histórico; pode limpar-se o histórico. O armazenamento guarda até 200 entradas no navegador.
+
+**Justificativa:** O histórico permite rever e repetir frases, útil em contexto terapêutico ou escolar para registo de progresso e para o utilizador recordar o que disse. A opção de limpar respeita a privacidade quando o dispositivo é partilhado.
+
+---
+
+## 9. PWA e uso offline
+
+**O que é:** O Emotalk pode ser instalado como aplicação (PWA) a partir do navegador e usado offline. Um service worker faz cache dos ficheiros necessários.
+
+**Justificativa:** Em contextos clínicos, escolares ou domésticos, a conectividade pode ser instável ou inexistente. O uso offline garante que a prancha está sempre disponível quando o utilizador precisa, aumentando a confiança na ferramenta e a adesão ao uso.
+
+---
+
+## 10. Splash screen
+
+**O que é:** Ao abrir a aplicação, é mostrada brevemente uma tela de splash com o nome “Emotalk”; desaparece ao fim de alguns segundos ou com um toque.
+
+**Justificativa:** Dá identidade à aplicação e um momento de transição antes do conteúdo principal, evitando que a interface apareça de forma abrupta. O desaparecimento rápido ou por toque não atrasa o acesso à prancha.
+
+---
+
+## 11. Vocabulário com emojis (categorias e palavras)
+
+**O que é:** A prancha inclui múltiplas categorias (bebidas, pessoas, atividades, emoções, lugares, etc.) com palavras representadas por emojis. O vocabulário está descrito em [Vocabulário](VOCABULARY.html).
+
+**Justificativa:** Os emojis são reconhecíveis e reduzem a dependência da leitura, adequando-se a utilizadores com baixa literacia ou com dificuldades de linguagem. A organização por categorias facilita a localização de palavras e está alinhada com pranchas de CAA e com modelos de vocabulário nuclear e alargado.
+
+---
+
+## 12. Acessibilidade (teclado, ARIA, fonte maior)
+
+**O que é:** Navegação por teclado (Enter e Espaço para ativar botões e itens), atributos ARIA para leitores de ecrã, e opção “Fonte maior” em Configurações → Geral para aumentar o tamanho dos textos e ícones.
+
+**Justificativa:** A acessibilidade permite que utilizadores com limitações motoras ou visuais, ou que dependem de tecnologias de apoio, possam usar o Emotalk. A fonte maior beneficia utilizadores com baixa visão ou uso à distância (por exemplo, em quadros interativos).
+
+---
+
+## Resumo
+
+| Recurso | Onde configurar / usar | Base ou benefício principal |
+|---------|------------------------|-----------------------------|
+| Idiomas (pt-BR / EN) | Configurações → Geral | Bilinguismo, consistência interface–fala |
+| Colourful Semantics | Configurações → Legenda | Evidência em terapia da fala e CAA |
+| Shape Coding | Configurações → Legenda | Evidência (Ebbels); reforço visual por forma |
+| SVOMPT (4 opções) | Configurações → SVOMPT | Ordem canónica da frase; intervenção em gramática |
+| Barra de frase | Interface principal | Construção e vocalização da mensagem |
+| Síntese de fala | Botão Falar; velocidade em Geral | Comunicação auditiva; velocidade ajustável |
+| Configurações (modal) | Botão Configurações | Personalização sem alterar código |
+| Histórico de frases | Configurações → Histórico | Revisão, repetição, registo |
+| PWA / offline | Instalação no browser | Uso sem internet |
+| Splash screen | Ao abrir a app | Identidade e transição suave |
+| Vocabulário emojis | [Vocabulário](VOCABULARY.html) | Acesso visual, categorizado |
+| Acessibilidade | Teclado, ARIA, Fonte maior | Inclusão e usabilidade |
+
+**Documentos relacionados:** [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Vocabulário](VOCABULARY.html), [Índice](README.html).

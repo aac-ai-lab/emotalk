@@ -10,21 +10,25 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 
 | Documento | Conteúdo |
 |-----------|----------|
+| **[Recursos e justificativas](RECURSOS.html)** | Lista de todos os recursos do Emotalk e justificativa (base em evidências ou benefício) de cada um. |
 | **[Vocabulário](VOCABULARY.html)** | Categorias e palavras (emojis) incluídas na prancha de comunicação. |
 | **[Colourful Semantics](COLOURFUL_SEMANTICS.html)** | Papéis semânticos (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever) e cores aplicadas na prancha. |
 
 ## Visão geral
 
-**Emotalk** é um aplicativo de comunicação aumentativa e alternativa (CAA) projetado para ajudar na expressão de ideias e sentimentos através de emojis. Aplica **Colourful Semantics** (papéis na frase codificados por cor), uso offline, persistência da frase e reordenar por arrastar e soltar.
+**Emotalk** é um aplicativo de comunicação aumentativa e alternativa (CAA) projetado para ajudar na expressão de ideias e sentimentos através de emojis. Aplica **Colourful Semantics** (papéis na frase codificados por cor), **Shape Coding** (formas por papel gramatical), **SVOMPT** (ordem da frase Sujeito–Verbo–Objeto–Modo–Lugar–Tempo), uso offline, persistência da frase e reordenar por arrastar e soltar. Para a descrição e justificativa de cada recurso, ver **[Recursos e justificativas](RECURSOS.html)**.
 
 ### Funcionalidades
 
+- **Idiomas (pt-BR e EN):** Interface e fala em Português (Brasil) ou English; escolha em Configurações → Geral.
 - **PWA (offline):** Instale e use sem internet; service worker faz cache do app.
-- **Colourful Semantics:** Categorias e palavras com cores por papel na frase (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever).
+- **Colourful Semantics:** Categorias e palavras com cores por papel na frase (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever); ativar/desativar em Configurações → Legenda.
+- **Shape Coding:** Formas distintas por papel (retângulo, hexágono, seta, etc.); ativar em Configurações → Legenda.
+- **SVOMPT:** Ordenar frase ao falar, barra com slots S-V-O-M-P-T, modo guiado, ordenar barra; opções em Configurações → SVOMPT.
 - **Barra de frase:** Adicione pictogramas para montar a frase; falar ou limpar; barra salva no localStorage.
 - **Arrastar e soltar:** Reordene pictogramas na barra (desktop).
-- **Configurações:** Velocidade da fala e fonte maior; legenda das cores semânticas; histórico de frases (últimas 20) e “Limpar histórico” no modal de configurações.
-- **Histórico de uso:** Cada frase falada é registrada (texto + data); até 200 entradas no localStorage; visualização das últimas 20 em Configurações e opção de limpar.
+- **Configurações:** Modal com menu vertical (Geral, SVOMPT, Legenda, Histórico); idioma, velocidade da fala, fonte maior, opções SVOMPT, Colourful Semantics, Shape Coding, histórico de frases.
+- **Histórico de uso:** Cada frase falada é registrada (texto + data); até 200 entradas; últimas 20 visíveis em Configurações → Histórico; opção de limpar.
 - **Acessibilidade:** Navegação por teclado, ARIA, foco; opção de fonte maior.
 - **Splash screen:** Splash minimal ao abrir.
 - **Emojis:** Vocabulário com emojis para interface intuitiva e visual.
@@ -33,7 +37,7 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 
 - **Progressive Web App (PWA):** manifest.json, service worker (sw.js), cache offline.
 - **JavaScript e HTML/CSS:** Interface e lógica em `assets/js/index.js` e `assets/css/index.css`; vocabulário em `assets/js/vocabulary.js`. localStorage para frase, configurações e histórico de uso.
-- **Speech Synthesis API:** Vocalização das frases e palavras (pt-BR).
+- **Speech Synthesis API:** Vocalização das frases e palavras (pt-BR ou inglês conforme o idioma).
 
 ### Instalação e execução
 

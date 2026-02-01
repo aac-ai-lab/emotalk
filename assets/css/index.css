@@ -165,6 +165,50 @@ body.colourful-semantics-off .quick-slot[data-slot="T"] {
     background: #fafafa;
 }
 
+/* Shape Coding - formas por papel gramatical (Ebbels-style) */
+body.shape-coding-on .category.semantic-who,
+body.shape-coding-on .word.semantic-who,
+body.shape-coding-on .quick-icon.semantic-who {
+    border-radius: 4px;
+    clip-path: none;
+}
+body.shape-coding-on .category.semantic-what-doing,
+body.shape-coding-on .word.semantic-what-doing,
+body.shape-coding-on .quick-icon.semantic-what-doing {
+    border-radius: 0;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+body.shape-coding-on .category.semantic-what,
+body.shape-coding-on .word.semantic-what,
+body.shape-coding-on .quick-icon.semantic-what {
+    border-radius: 0;
+    clip-path: polygon(0% 22%, 40% 22%, 40% 0%, 100% 50%, 40% 100%, 40% 78%, 0% 78%);
+}
+body.shape-coding-on .category.semantic-where,
+body.shape-coding-on .word.semantic-where,
+body.shape-coding-on .quick-icon.semantic-where {
+    border-radius: 16px;
+    clip-path: none;
+}
+body.shape-coding-on .category.semantic-when,
+body.shape-coding-on .word.semantic-when,
+body.shape-coding-on .quick-icon.semantic-when {
+    border-radius: 50%;
+    clip-path: none;
+}
+body.shape-coding-on .category.semantic-describing,
+body.shape-coding-on .word.semantic-describing,
+body.shape-coding-on .quick-icon.semantic-describing {
+    border-radius: 0;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+body.shape-coding-on .quick-slot[data-slot="S"] { border-radius: 4px; clip-path: none; }
+body.shape-coding-on .quick-slot[data-slot="V"] { border-radius: 0; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+body.shape-coding-on .quick-slot[data-slot="O"] { border-radius: 0; clip-path: polygon(0% 22%, 40% 22%, 40% 0%, 100% 50%, 40% 100%, 40% 78%, 0% 78%); }
+body.shape-coding-on .quick-slot[data-slot="M"] { border-radius: 0; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+body.shape-coding-on .quick-slot[data-slot="P"] { border-radius: 16px; clip-path: none; }
+body.shape-coding-on .quick-slot[data-slot="T"] { border-radius: 50%; clip-path: none; }
+
 .sidebar {
     position: fixed;
     top: 0;
