@@ -13,6 +13,8 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 | **[Recursos e justificativas](RECURSOS.html)** | Lista de todos os recursos do Emotalk e justificativa (base em evidências ou benefício) de cada um. |
 | **[Vocabulário](VOCABULARY.html)** | Categorias e palavras (emojis) incluídas na prancha de comunicação. |
 | **[Colourful Semantics](COLOURFUL_SEMANTICS.html)** | Papéis semânticos (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever) e cores aplicadas na prancha. |
+| **[Quadros (Frame Semantics / Fillmore)](FRAME_SEMANTICS.html)** | Quadros semânticos com vários papéis (Dar, Comer, Ir, Querer, etc.); ativação e uso no Emotalk. |
+| **[Ícones centrais (MINSPEAK)](MINSPEAK.html)** | Modo ícones centrais (compação semântica); 6 ícones no primeiro ecrã; acesso em 2 toques. |
 
 ## Visão geral
 
@@ -36,7 +38,7 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 ### Tecnologias
 
 - **Progressive Web App (PWA):** manifest.json, service worker (sw.js), cache offline.
-- **JavaScript e HTML/CSS:** Interface e lógica em `assets/js/index.js` e `assets/css/index.css`; vocabulário em `assets/js/vocabulary.js`; traduções (interface e vocabulário pt-BR/EN) em `assets/js/translations.js`. localStorage para frase, configurações e histórico de uso.
+- **JavaScript e HTML/CSS:** Interface e lógica em `assets/js/index.js` e `assets/css/index.css`; vocabulário em `assets/js/vocabulary.js`; moldes de frase em `assets/js/sentenceFrames.js`; quadros Fillmore em `assets/js/frameSemantics.js`; ícones centrais em `assets/js/minspeak.js`; traduções em `assets/js/translations.js`. localStorage para frase, configurações e histórico de uso.
 - **Speech Synthesis API:** Vocalização das frases e palavras (pt-BR ou inglês conforme o idioma).
 
 ### Instalação e execução
@@ -61,6 +63,8 @@ Contribuições são bem-vindas: faça um fork do repositório, crie uma branch,
 - **[Recursos e justificativas](RECURSOS.html)** — lista de todos os recursos do Emotalk e justificativa de cada um.
 - **[Vocabulário](VOCABULARY.html)** — categorias e palavras (emojis) na prancha.
 - **[Colourful Semantics](COLOURFUL_SEMANTICS.html)** — papéis semânticos e cores na prancha; opções Colourful Semantics e Shape Coding.
+- **[Quadros (Frame Semantics / Fillmore)](FRAME_SEMANTICS.html)** — quadros semânticos com vários papéis; ativação e uso.
+- **[Ícones centrais (MINSPEAK)](MINSPEAK.html)** — modo ícones centrais (compação semântica); 6 ícones no primeiro ecrã.
 
 ### Licença
 
