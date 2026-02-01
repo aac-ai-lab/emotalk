@@ -118,6 +118,8 @@
             hintSvomptGuided: 'After adding a word, a suggestion for the next slot appears (e.g. «Next: Verb»). Useful for practising sentence order.',
             hintSvomptSortBar: 'Each new word causes the bar to be reordered automatically by S-V-O-M-P-T. Only applies when «Bar with slots» is off.',
             hintLegend: 'Colours show each word’s role in the sentence (Who, What doing, What, Where, When, How). Supports sentence building.',
+            colourfulSemanticsLabel: 'Enable Legend (Colourful Semantics)',
+            colourfulSemanticsHint: 'When on, categories and words show colours by role in the sentence (Who, What doing, etc.). When off, all items use a neutral style.',
             hintHistory: 'Shows the last spoken phrases. Useful for reviewing, repeating, or sharing with a therapist or educator.',
             menuGeneral: 'General',
             menuSvompt: 'SVOMPT',

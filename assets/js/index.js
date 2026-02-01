@@ -68,6 +68,7 @@
     var svomptGuidedCheck = document.getElementById('svomptGuided');
     var svomptSortBarCheck = document.getElementById('svomptSortBar');
     var svomptTitleEl = document.getElementById('svomptTitle');
+    var colourfulSemanticsCheck = document.getElementById('colourfulSemanticsCheck');
 
     function getSettings() {
         try {
@@ -80,10 +81,11 @@
                 svomptSpeakOrder: !!s.svomptSpeakOrder,
                 svomptSlots: !!s.svomptSlots,
                 svomptGuided: !!s.svomptGuided,
-                svomptSortBar: !!s.svomptSortBar
+                svomptSortBar: !!s.svomptSortBar,
+                colourfulSemantics: s.colourfulSemantics !== false
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true };
         }
     }
 
@@ -127,8 +129,8 @@
         if (settingsTitle) settingsTitle.textContent = getUI('settingsTitle');
         var settingsIntroEl = document.getElementById('settingsIntro');
         if (settingsIntroEl) settingsIntroEl.textContent = getUI('settingsIntro');
-        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintHistory'];
-        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintHistory'];
+        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintHistory'];
+        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'hintHistory'];
         hintIds.forEach(function (id, i) {
             var el = document.getElementById(id);
             if (el && hintKeys[i]) el.textContent = getUI(hintKeys[i]);
@@ -157,6 +159,10 @@
             var el = document.getElementById(id);
             if (el && navKeys[i]) el.textContent = getUI(navKeys[i]);
         });
+        if (colourfulSemanticsCheck) {
+            var csLabel = colourfulSemanticsCheck.closest('label');
+            if (csLabel && csLabel.childNodes[1]) csLabel.childNodes[1].textContent = ' ' + getUI('colourfulSemanticsLabel');
+        }
         if (historyList) historyList.setAttribute('aria-label', getUI('historyAria'));
         if (clearHistoryBtn) clearHistoryBtn.textContent = getUI('clearHistory');
         if (settingsCloseBtn) settingsCloseBtn.textContent = getUI('close');
@@ -182,6 +188,7 @@
     function applySettings() {
         var s = getSettings();
         document.body.classList.toggle('font-large', s.fontLarge);
+        document.body.classList.toggle('colourful-semantics-off', !s.colourfulSemantics);
         applyLanguage();
     }
 
@@ -612,6 +619,7 @@
         if (svomptSlotsCheck) svomptSlotsCheck.checked = s.svomptSlots;
         if (svomptGuidedCheck) svomptGuidedCheck.checked = s.svomptGuided;
         if (svomptSortBarCheck) svomptSortBarCheck.checked = s.svomptSortBar;
+        if (colourfulSemanticsCheck) colourfulSemanticsCheck.checked = s.colourfulSemantics;
         renderHistory();
         showSettingsPanel('general');
         settingsOverlay.classList.add('open');
@@ -642,7 +650,8 @@
             svomptSpeakOrder: !!(svomptSpeakOrderCheck && svomptSpeakOrderCheck.checked),
             svomptSlots: !!(svomptSlotsCheck && svomptSlotsCheck.checked),
             svomptGuided: !!(svomptGuidedCheck && svomptGuidedCheck.checked),
-            svomptSortBar: !!(svomptSortBarCheck && svomptSortBarCheck.checked)
+            svomptSortBar: !!(svomptSortBarCheck && svomptSortBarCheck.checked),
+            colourfulSemantics: !!(colourfulSemanticsCheck && colourfulSemanticsCheck.checked)
         };
         try {
             localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(s));

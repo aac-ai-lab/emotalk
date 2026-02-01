@@ -130,6 +130,41 @@ body {
 .quick-icon.semantic-when { border-left: 4px solid #8b6914; background: #f5f0e6; }
 .quick-icon.semantic-describing { border-left: 4px solid #9b59b6; background: #f8f0fc; }
 
+/* Legenda desativada: estilo neutro para todos os itens */
+body.colourful-semantics-off .category.semantic-who,
+body.colourful-semantics-off .category.semantic-what-doing,
+body.colourful-semantics-off .category.semantic-what,
+body.colourful-semantics-off .category.semantic-where,
+body.colourful-semantics-off .category.semantic-when,
+body.colourful-semantics-off .category.semantic-describing,
+body.colourful-semantics-off .word.semantic-who,
+body.colourful-semantics-off .word.semantic-what-doing,
+body.colourful-semantics-off .word.semantic-what,
+body.colourful-semantics-off .word.semantic-where,
+body.colourful-semantics-off .word.semantic-when,
+body.colourful-semantics-off .word.semantic-describing {
+    border-left-color: #ddd;
+    background: #fff;
+}
+body.colourful-semantics-off .quick-icon.semantic-who,
+body.colourful-semantics-off .quick-icon.semantic-what-doing,
+body.colourful-semantics-off .quick-icon.semantic-what,
+body.colourful-semantics-off .quick-icon.semantic-where,
+body.colourful-semantics-off .quick-icon.semantic-when,
+body.colourful-semantics-off .quick-icon.semantic-describing {
+    border-left-color: #ddd;
+    background: #fff;
+}
+body.colourful-semantics-off .quick-slot[data-slot="S"],
+body.colourful-semantics-off .quick-slot[data-slot="V"],
+body.colourful-semantics-off .quick-slot[data-slot="O"],
+body.colourful-semantics-off .quick-slot[data-slot="M"],
+body.colourful-semantics-off .quick-slot[data-slot="P"],
+body.colourful-semantics-off .quick-slot[data-slot="T"] {
+    border-color: #ddd;
+    background: #fafafa;
+}
+
 .sidebar {
     position: fixed;
     top: 0;
