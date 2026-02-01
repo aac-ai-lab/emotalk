@@ -135,6 +135,18 @@ This document describes all resources available in Emotalk and the justification
 
 ---
 
+## 16. Dependency Grammar
+
+**What it is:** Emotalk does not have a dedicated Dependency Grammar (Tesnière) interface, but its features are **conceptually and pedagogically compatible** with this view: the sentence is seen as a network of dependencies where the **verb** is the head (root) and other elements (subject, object, manner, place, time) are dependents. In Emotalk, the **What doing** (V) slot in SVOMPT and **Frames** (verbs: Giving, Eating, Going, etc.) put the verb at the centre; the roles Who, What, Where, When, How (with colour and shape) correspond to dependents. The bar with S-V-O-M-P-T slots and “order phrase when speaking” reinforce the order in which the verb is surrounded by its dependents.
+
+**Justification:** Dependency Grammar (Lucien Tesnière) describes sentence structure in terms of head–dependent relations. In AAC and speech therapy, the notion of “verb at the centre” can be used to explain sentence building. Emotalk does not draw dependency trees in the interface, but the way it organises the sentence (verb + roles, SVOMPT, Frames) is aligned with this perspective and can be referred to in educational or therapeutic contexts.
+
+**Reference:** Tesnière, L. — *Éléments de syntaxe structurale*; Dependency Grammar; verb as head of the sentence.
+
+**Dedicated document:** [Dependency Grammar](DEPENDENCY_GRAMMAR.html).
+
+---
+
 ## Summary
 
 | Resource | Where to configure / use | Main basis or benefit |
@@ -155,4 +167,4 @@ This document describes all resources available in Emotalk and the justification
 | Emoji vocabulary | [Vocabulary](VOCABULARY.html) | Visual, categorised access |
 | Accessibility | Keyboard, ARIA, Larger font | Inclusion and usability |
 
-**Related documents:** [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Vocabulary](VOCABULARY.html), [Index](README.html).
+**Related documents:** [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Dependency Grammar](DEPENDENCY_GRAMMAR.html), [Vocabulary](VOCABULARY.html), [Index](README.html).

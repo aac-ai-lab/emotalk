@@ -15,6 +15,7 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 | **[Colourful Semantics](COLOURFUL_SEMANTICS.html)** | Papéis semânticos (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever) e cores aplicadas na prancha. |
 | **[Quadros (Frame Semantics / Fillmore)](FRAME_SEMANTICS.html)** | Quadros semânticos com vários papéis (Dar, Comer, Ir, Querer, etc.); ativação e uso no Emotalk. |
 | **[Ícones centrais (MINSPEAK)](MINSPEAK.html)** | Modo ícones centrais (compação semântica); 6 ícones no primeiro ecrã; acesso em 2 toques. |
+| **[Gramática de Dependências](DEPENDENCY_GRAMMAR.html)** | Tesnière; verbo como núcleo; compatibilidade do Emotalk (SVOMPT, Quadros, papéis) com esta perspetiva. |
 
 ## Visão geral
 
@@ -65,6 +66,7 @@ Contribuições são bem-vindas: faça um fork do repositório, crie uma branch,
 - **[Colourful Semantics](COLOURFUL_SEMANTICS.html)** — papéis semânticos e cores na prancha; opções Colourful Semantics e Shape Coding.
 - **[Quadros (Frame Semantics / Fillmore)](FRAME_SEMANTICS.html)** — quadros semânticos com vários papéis; ativação e uso.
 - **[Ícones centrais (MINSPEAK)](MINSPEAK.html)** — modo ícones centrais (compação semântica); 6 ícones no primeiro ecrã.
+- **[Gramática de Dependências](DEPENDENCY_GRAMMAR.html)** — Tesnière; verbo como núcleo; compatibilidade do Emotalk com Dependency Grammar.
 
 ### Licença
 

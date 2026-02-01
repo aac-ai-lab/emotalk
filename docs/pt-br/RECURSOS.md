@@ -145,6 +145,18 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ---
 
+## 16. Gramática de Dependências (Dependency Grammar)
+
+**O que é:** O Emotalk não tem uma interface específica de Gramática de Dependências (Tesnière), mas as suas funcionalidades são **conceptual e pedagogicamente compatíveis** com esta perspetiva: a frase é vista como uma rede de dependências em que o **verbo** é o núcleo (raiz) e os outros elementos (sujeito, objeto, modo, lugar, tempo) são dependentes. No Emotalk, o slot **O quê faz** (V) em SVOMPT e os **Quadros** (verbos: Dar, Comer, Ir, etc.) colocam o verbo no centro; os papéis Quem, O quê, Onde, Quando, Como (com cores e formas) correspondem aos dependentes. A barra com slots S-V-O-M-P-T e o «ordenar frase ao falar» reforçam a ordem em que o verbo está rodeado pelos seus dependentes.
+
+**Justificativa:** A Gramática de Dependências (Lucien Tesnière) descreve a estrutura da frase em termos de relações núcleo–dependente. Em CAA e terapia da fala, a noção de «verbo no centro» pode ser usada para explicar a construção da frase. O Emotalk não desenha árvores de dependências na interface, mas a forma como organiza a frase (verbo + papéis, SVOMPT, Quadros) está alinhada com esta perspetiva e pode ser referida em contexto educativo ou terapêutico.
+
+**Referência:** Tesnière, L. — *Éléments de syntaxe structurale*; Dependency Grammar; verbo como núcleo da frase.
+
+**Documento dedicado:** [Gramática de Dependências](DEPENDENCY_GRAMMAR.html).
+
+---
+
 ## Resumo
 
 | Recurso | Onde configurar / usar | Base ou benefício principal |
@@ -160,9 +172,10 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 | **Moldes de frase** | Botão Moldes (📝); Configurações → Moldes | Frases com slot; reduz carga e treina estruturas |
 | **Ícones centrais (MINSPEAK)** | Configurações → Ícones centrais | Compação semântica; 2 toques; menos ícones no ecrã |
 | **Quadros (Frame Semantics)** | Botão Quadros (🖼️); Configurações → Quadros (Fillmore) | Fillmore; quadros com vários papéis; frases completas |
+| **Gramática de Dependências** | (conceito; sem UI dedicada) | Tesnière; verbo como núcleo; compatível com SVOMPT e Quadros |
 | PWA / offline | Instalação no browser | Uso sem internet |
 | Splash screen | Ao abrir a app | Identidade e transição suave |
 | Vocabulário emojis | [Vocabulário](VOCABULARY.html) | Acesso visual, categorizado |
 | Acessibilidade | Teclado, ARIA, Fonte maior | Inclusão e usabilidade |
 
-**Documentos relacionados:** [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Vocabulário](VOCABULARY.html), [Índice](README.html).
+**Documentos relacionados:** [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Gramática de Dependências](DEPENDENCY_GRAMMAR.html), [Vocabulário](VOCABULARY.html), [Índice](README.html).
