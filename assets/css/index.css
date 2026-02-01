@@ -241,6 +241,20 @@ body.font-large .word-icon { font-size: 1.75rem; }
 .settings-modal h2 { margin: 0 0 16px; font-size: 1.1rem; color: #333; }
 .settings-row { margin-bottom: 16px; }
 .settings-row label { display: block; font-size: 0.85rem; color: #555; margin-bottom: 4px; }
+.settings-row select {
+    display: block;
+    width: 100%;
+    max-width: 240px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+    margin-top: 4px;
+    cursor: pointer;
+}
+.settings-row select:focus { outline: 2px solid #333; outline-offset: 1px; }
 .settings-row input[type="range"] { width: 100%; }
 .settings-row output { font-size: 0.85rem; color: #666; margin-left: 8px; }
 .settings-actions { margin-top: 20px; display: flex; justify-content: flex-end; gap: 8px; }

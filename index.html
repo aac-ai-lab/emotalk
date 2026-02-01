@@ -33,6 +33,13 @@
         <div class="settings-modal">
             <h2 id="settingsTitle">Configurações</h2>
             <div class="settings-row">
+                <label for="langSelect" id="langLabel">Idioma</label>
+                <select id="langSelect" aria-label="Idioma">
+                    <option value="pt-BR">Português (Brasil)</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <div class="settings-row">
                 <label for="speechRate">Velocidade da fala</label>
                 <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1">
                 <output id="speechRateValue">1</output>
@@ -64,6 +71,7 @@
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="assets/js/vocabulary.js"></script>
+    <script src="assets/js/translations.js"></script>
     <script src="assets/js/index.js"></script>
 </body>
 

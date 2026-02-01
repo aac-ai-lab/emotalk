@@ -6,6 +6,8 @@
     var STORAGE_SETTINGS = 'emotalk_settings';
     var STORAGE_HISTORY = 'emotalk_history';
     var MAX_HISTORY = 200;
+    var currentCategory = null;
+    var Translations = window.Translations || {};
 
     var SEMANTIC_MAP = {
         pessoas: { key: 'who', label: 'Quem' },
@@ -40,22 +42,105 @@
     var historyList = document.getElementById('historyList');
     var clearHistoryBtn = document.getElementById('clearHistoryBtn');
     var toastEl = document.getElementById('toast');
+    var langSelect = document.getElementById('langSelect');
+    var langLabel = document.getElementById('langLabel');
 
     function getSettings() {
         try {
             var s = JSON.parse(localStorage.getItem(STORAGE_SETTINGS) || '{}');
+            var lang = s.lang === 'en' ? 'en' : 'pt-BR';
             return {
                 speechRate: typeof s.speechRate === 'number' ? s.speechRate : 1,
-                fontLarge: !!s.fontLarge
+                fontLarge: !!s.fontLarge,
+                lang: lang
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR' };
         }
+    }
+
+    function getUI(key) {
+        return Translations.getUI ? Translations.getUI(getSettings().lang, key) : key;
+    }
+
+    function getCategoryLabel(categoryNamePtBr) {
+        return Translations.getCategoryLabel ? Translations.getCategoryLabel(getSettings().lang, categoryNamePtBr) : categoryNamePtBr;
+    }
+
+    function getWordLabel(wordNamePtBr, categoryNamePtBr) {
+        return Translations.getWordLabel ? Translations.getWordLabel(getSettings().lang, wordNamePtBr, categoryNamePtBr) : wordNamePtBr;
+    }
+
+    function applyLanguage() {
+        var lang = getSettings().lang;
+        document.documentElement.lang = lang;
+        if (document.title !== undefined) {
+            document.title = getUI('appTitle');
+        }
+        var splash = document.getElementById('splashScreen');
+        if (splash) splash.setAttribute('aria-label', getUI('splashAria'));
+        if (playButton) {
+            playButton.setAttribute('title', getUI('btnSpeak'));
+            playButton.setAttribute('aria-label', getUI('btnSpeakAria'));
+        }
+        if (clearButton) {
+            clearButton.setAttribute('title', getUI('btnClear'));
+            clearButton.setAttribute('aria-label', getUI('btnClearAria'));
+        }
+        if (settingsButton) {
+            settingsButton.setAttribute('title', getUI('btnSettings'));
+            settingsButton.setAttribute('aria-label', getUI('btnSettings'));
+        }
+        if (backButton) {
+            backButton.setAttribute('title', getUI('btnHome'));
+            backButton.setAttribute('aria-label', getUI('btnHomeAria'));
+        }
+        var settingsTitle = document.getElementById('settingsTitle');
+        if (settingsTitle) settingsTitle.textContent = getUI('settingsTitle');
+        var speechRateLabel = document.querySelector('label[for="speechRate"]');
+        if (speechRateLabel) speechRateLabel.textContent = getUI('speechRateLabel');
+        var fontLargeLabel = document.querySelector('label[for="fontLarge"]');
+        if (fontLargeLabel) fontLargeLabel.textContent = getUI('fontLargeLabel');
+        if (langLabel) langLabel.textContent = getUI('langLabel');
+        var legendTitle = settingsOverlay ? settingsOverlay.querySelector('.settings-legend strong') : null;
+        if (legendTitle) legendTitle.textContent = getUI('legendTitle');
+        var legendSpans = settingsOverlay ? settingsOverlay.querySelectorAll('.settings-legend span') : [];
+        if (legendSpans.length >= 6) {
+            legendSpans[0].nextSibling.textContent = ' ' + getUI('who');
+            legendSpans[1].nextSibling.textContent = ' ' + getUI('whatDoing');
+            legendSpans[2].nextSibling.textContent = ' ' + getUI('what');
+            legendSpans[3].nextSibling.textContent = ' ' + getUI('where');
+            legendSpans[4].nextSibling.textContent = ' ' + getUI('when');
+            legendSpans[5].nextSibling.textContent = ' ' + getUI('howDescribe');
+        }
+        var historyTitleEl = settingsOverlay ? settingsOverlay.querySelector('.settings-history strong') : null;
+        if (historyTitleEl) historyTitleEl.textContent = getUI('historyTitle');
+        if (historyList) historyList.setAttribute('aria-label', getUI('historyAria'));
+        if (clearHistoryBtn) clearHistoryBtn.textContent = getUI('clearHistory');
+        if (settingsCloseBtn) settingsCloseBtn.textContent = getUI('close');
+        if (settingsSave) settingsSave.textContent = getUI('save');
+
+        categoriesDiv.innerHTML = '';
+        showCategories();
+        if (currentCategory) {
+            wordsDiv.innerHTML = '';
+            showWords(currentCategory);
+        }
+        quickIcons.querySelectorAll('.quick-icon').forEach(function (el) {
+            var orig = el.getAttribute('data-original-name');
+            var cat = el.getAttribute('data-category') || '';
+            var textEl = el.querySelector('.quick-icon-text');
+            if (textEl && orig != null) {
+                textEl.textContent = getWordLabel(orig, cat);
+                el.setAttribute('aria-label', textEl.textContent + getUI('quickIconAria'));
+            }
+        });
     }
 
     function applySettings() {
         var s = getSettings();
         document.body.classList.toggle('font-large', s.fontLarge);
+        applyLanguage();
     }
 
     function showToast(msg) {
@@ -97,13 +182,14 @@
         historyList.innerHTML = '';
         var show = list.slice(-20).reverse();
         if (show.length === 0) {
-            historyList.innerHTML = '<li class="history-empty">Nenhuma frase ainda.</li>';
+            historyList.innerHTML = '<li class="history-empty">' + getUI('historyEmpty') + '</li>';
             return;
         }
+        var locale = getSettings().lang === 'en' ? 'en-GB' : 'pt-BR';
         show.forEach(function (entry) {
             var li = document.createElement('li');
             var d = new Date(entry.date);
-            var dateStr = d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+            var dateStr = d.toLocaleDateString(locale, { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
             li.innerHTML = '<span class="history-phrase">' + escapeHtml(entry.phrase) + '</span> <span class="history-date">' + dateStr + '</span>';
             historyList.appendChild(li);
         });
@@ -117,22 +203,25 @@
 
     function saveQuickBar() {
         var items = Array.from(quickIcons.querySelectorAll('.quick-icon')).map(function (el) {
-            var nameEl = el.querySelector('.quick-icon-text');
+            var namePtBr = el.getAttribute('data-original-name');
+            if (namePtBr == null) {
+                var nameEl = el.querySelector('.quick-icon-text');
+                namePtBr = nameEl ? nameEl.textContent.trim() : '';
+            }
             var iconEl = el.querySelector('.word-icon');
-            var name = nameEl ? nameEl.textContent.trim() : '';
             var iconChar = iconEl ? (iconEl.textContent || '').trim() : '';
             var category = el.getAttribute('data-category') || '';
-            if (!category) {
+            if (!category && namePtBr) {
                 for (var i = 0; i < categories.length; i++) {
                     for (var j = 0; j < categories[i].words.length; j++) {
-                        if (categories[i].words[j].name === name) {
+                        if (categories[i].words[j].name === namePtBr) {
                             category = categories[i].name;
                             break;
                         }
                     }
                 }
             }
-            return name ? { name: name, icon: iconChar || '•', category: category } : null;
+            return namePtBr ? { name: namePtBr, icon: iconChar || '•', category: category } : null;
         }).filter(Boolean);
         try {
             localStorage.setItem(STORAGE_QUICK, JSON.stringify(items));
@@ -143,15 +232,18 @@
 
     function appendQuickIcon(word) {
         var categoryName = word.category || '';
+        var namePtBr = word.name || '';
+        var displayName = getWordLabel(namePtBr, categoryName);
         var semanticClass = getSemanticClass(categoryName);
         var quickIconDiv = document.createElement('div');
         quickIconDiv.classList.add('quick-icon', semanticClass);
         quickIconDiv.setAttribute('role', 'button');
         quickIconDiv.setAttribute('tabindex', '0');
         quickIconDiv.setAttribute('data-category', categoryName);
-        quickIconDiv.setAttribute('aria-label', word.name + '. Arrastar para reordenar, clique para remover.');
+        quickIconDiv.setAttribute('data-original-name', namePtBr);
+        quickIconDiv.setAttribute('aria-label', displayName + getUI('quickIconAria'));
         quickIconDiv.setAttribute('draggable', 'true');
-        quickIconDiv.innerHTML = '<span class="word-icon" aria-hidden="true">' + (word.icon || '•') + '</span><span class="quick-icon-text">' + word.name + '</span>';
+        quickIconDiv.innerHTML = '<span class="word-icon" aria-hidden="true">' + (word.icon || '•') + '</span><span class="quick-icon-text">' + displayName + '</span>';
 
         quickIconDiv.addEventListener('click', function () {
             if (quickIconDragging) return;
@@ -223,12 +315,13 @@
 
     function showCategories() {
         categories.forEach(function (category) {
+            var label = getCategoryLabel(category.name);
             var categoryDiv = document.createElement('div');
             categoryDiv.classList.add('category', getSemanticClass(category.name));
             categoryDiv.setAttribute('role', 'button');
             categoryDiv.setAttribute('tabindex', '0');
-            categoryDiv.setAttribute('aria-label', 'Categoria ' + category.name);
-            categoryDiv.innerHTML = '<div class="category-icon" aria-hidden="true">' + category.icon + '</div><div class="category-name">' + category.name + '</div>';
+            categoryDiv.setAttribute('aria-label', getUI('categoryAria') + ' ' + label);
+            categoryDiv.innerHTML = '<div class="category-icon" aria-hidden="true">' + category.icon + '</div><div class="category-name">' + label + '</div>';
             categoryDiv.addEventListener('click', function () {
                 speakCategory(category.name);
                 showWords(category);
@@ -244,6 +337,7 @@
     }
 
     function showWords(category) {
+        currentCategory = category;
         categoriesDiv.style.display = 'none';
         wordsDiv.style.display = 'grid';
         wordsDiv.innerHTML = '';
@@ -251,12 +345,13 @@
         var words = category.words;
         var semanticClass = getSemanticClass(category.name);
         words.forEach(function (word) {
+            var label = getWordLabel(word.name, category.name);
             var wordDiv = document.createElement('div');
             wordDiv.classList.add('word', semanticClass);
             wordDiv.setAttribute('role', 'button');
             wordDiv.setAttribute('tabindex', '0');
-            wordDiv.setAttribute('aria-label', 'Palavra ' + word.name);
-            wordDiv.innerHTML = '<div class="word-icon" aria-hidden="true">' + word.icon + '</div><div class="word-name">' + word.name + '</div>';
+            wordDiv.setAttribute('aria-label', getUI('wordAria') + ' ' + label);
+            wordDiv.innerHTML = '<div class="word-icon" aria-hidden="true">' + word.icon + '</div><div class="word-name">' + label + '</div>';
             wordDiv.addEventListener('click', function () {
                 addToQuickIcons(word, category.name);
             });
@@ -271,7 +366,7 @@
     }
 
     function addToQuickIcons(word, categoryName) {
-        speakWord(word.name);
+        speakWord(word.name, categoryName);
         appendQuickIcon({ name: word.name, icon: word.icon, category: categoryName });
         saveQuickBar();
     }
@@ -284,37 +379,46 @@
     function playIcons() {
         var children = quickIcons.querySelectorAll('.quick-icon-text');
         if (!children.length) {
-            showToast('Adicione palavras na barra acima.');
+            showToast(getUI('toastAddWords'));
             return;
         }
         var message = Array.from(children).map(function (el) {
             return el.textContent;
         }).join(' ');
         saveToHistory(message);
+        var lang = getSettings().lang;
         var utterance = new SpeechSynthesisUtterance(message);
-        utterance.voice = getVoice('pt-BR');
+        utterance.voice = getVoice(lang);
+        utterance.lang = lang === 'en' ? 'en' : 'pt-BR';
         utterance.rate = getSettings().speechRate;
         speechSynthesis.speak(utterance);
     }
 
-    function speakWord(word) {
-        var utterance = new SpeechSynthesisUtterance(word);
-        utterance.voice = getVoice('pt-BR');
+    function speakWord(wordNamePtBr, categoryNamePtBr) {
+        var text = getWordLabel(wordNamePtBr, categoryNamePtBr || '');
+        var lang = getSettings().lang;
+        var utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = getVoice(lang);
+        utterance.lang = lang === 'en' ? 'en' : 'pt-BR';
         utterance.rate = getSettings().speechRate;
         speechSynthesis.speak(utterance);
     }
 
-    function speakCategory(category) {
-        var utterance = new SpeechSynthesisUtterance(category);
-        utterance.voice = getVoice('pt-BR');
+    function speakCategory(categoryNamePtBr) {
+        var text = getCategoryLabel(categoryNamePtBr);
+        var lang = getSettings().lang;
+        var utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = getVoice(lang);
+        utterance.lang = lang === 'en' ? 'en' : 'pt-BR';
         utterance.rate = getSettings().speechRate;
         speechSynthesis.speak(utterance);
     }
 
     function getVoice(lang) {
         var voices = speechSynthesis.getVoices();
+        var code = lang === 'en' ? 'en' : 'pt-BR';
         return voices.find(function (v) {
-            return v.lang.startsWith(lang);
+            return v.lang.startsWith(code);
         }) || null;
     }
 
@@ -338,7 +442,6 @@
         }
         initSplash();
         applySettings();
-        showCategories();
         restoreQuickBar();
     }
 
@@ -356,6 +459,7 @@
         speechRateInput.value = s.speechRate;
         speechRateValue.textContent = s.speechRate;
         fontLargeCheck.checked = s.fontLarge;
+        if (langSelect) langSelect.value = s.lang;
         renderHistory();
         settingsOverlay.classList.add('open');
         speechRateInput.focus();
@@ -365,7 +469,7 @@
         clearHistoryBtn.addEventListener('click', function () {
             clearHistory();
             renderHistory();
-            showToast('Histórico limpo.');
+            showToast(getUI('toastHistoryCleared'));
         });
     }
 
@@ -377,9 +481,11 @@
         settingsOverlay.classList.remove('open');
     });
     settingsSave.addEventListener('click', function () {
+        var lang = (langSelect && langSelect.value === 'en') ? 'en' : 'pt-BR';
         var s = {
             speechRate: parseFloat(speechRateInput.value) || 1,
-            fontLarge: fontLargeCheck.checked
+            fontLarge: fontLargeCheck.checked,
+            lang: lang
         };
         try {
             localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(s));
