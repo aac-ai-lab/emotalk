@@ -21,9 +21,28 @@
         cores: { key: 'describing', label: 'Como/Descrever' }
     };
 
+    var SVOMPT_ORDER = ['who', 'what-doing', 'what', 'describing', 'where', 'when'];
+    var SVOMPT_LETTERS = ['S', 'V', 'O', 'M', 'P', 'T'];
+
     function getSemanticClass(categoryName) {
         var m = SEMANTIC_MAP[categoryName];
         return m ? 'semantic-' + m.key : 'semantic-what';
+    }
+
+    function getSemanticKey(categoryName) {
+        var m = SEMANTIC_MAP[categoryName];
+        return m ? m.key : 'what';
+    }
+
+    function getSvomptOrderIndex(categoryName) {
+        var key = getSemanticKey(categoryName);
+        var i = SVOMPT_ORDER.indexOf(key);
+        return i >= 0 ? i : 2;
+    }
+
+    function getSlotLetter(categoryName) {
+        var i = getSvomptOrderIndex(categoryName);
+        return SVOMPT_LETTERS[i] || 'O';
     }
 
     var quickIcons = document.getElementById('quickIcons');
@@ -44,6 +63,11 @@
     var toastEl = document.getElementById('toast');
     var langSelect = document.getElementById('langSelect');
     var langLabel = document.getElementById('langLabel');
+    var svomptSpeakOrderCheck = document.getElementById('svomptSpeakOrder');
+    var svomptSlotsCheck = document.getElementById('svomptSlots');
+    var svomptGuidedCheck = document.getElementById('svomptGuided');
+    var svomptSortBarCheck = document.getElementById('svomptSortBar');
+    var svomptTitleEl = document.getElementById('svomptTitle');
 
     function getSettings() {
         try {
@@ -52,10 +76,14 @@
             return {
                 speechRate: typeof s.speechRate === 'number' ? s.speechRate : 1,
                 fontLarge: !!s.fontLarge,
-                lang: lang
+                lang: lang,
+                svomptSpeakOrder: !!s.svomptSpeakOrder,
+                svomptSlots: !!s.svomptSlots,
+                svomptGuided: !!s.svomptGuided,
+                svomptSortBar: !!s.svomptSortBar
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false, lang: 'pt-BR' };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false };
         }
     }
 
@@ -119,6 +147,14 @@
         if (clearHistoryBtn) clearHistoryBtn.textContent = getUI('clearHistory');
         if (settingsCloseBtn) settingsCloseBtn.textContent = getUI('close');
         if (settingsSave) settingsSave.textContent = getUI('save');
+        if (svomptTitleEl) svomptTitleEl.textContent = getUI('svomptTitle');
+        var svomptLabels = settingsOverlay ? settingsOverlay.querySelectorAll('.settings-svompt label') : [];
+        if (svomptLabels.length >= 4) {
+            svomptLabels[0].childNodes[1].textContent = ' ' + getUI('svomptSpeakOrder');
+            svomptLabels[1].childNodes[1].textContent = ' ' + getUI('svomptSlots');
+            svomptLabels[2].childNodes[1].textContent = ' ' + getUI('svomptGuided');
+            svomptLabels[3].childNodes[1].textContent = ' ' + getUI('svomptSortBar');
+        }
 
         categoriesDiv.innerHTML = '';
         showCategories();
@@ -126,21 +162,59 @@
             wordsDiv.innerHTML = '';
             showWords(currentCategory);
         }
-        quickIcons.querySelectorAll('.quick-icon').forEach(function (el) {
-            var orig = el.getAttribute('data-original-name');
-            var cat = el.getAttribute('data-category') || '';
-            var textEl = el.querySelector('.quick-icon-text');
-            if (textEl && orig != null) {
-                textEl.textContent = getWordLabel(orig, cat);
-                el.setAttribute('aria-label', textEl.textContent + getUI('quickIconAria'));
-            }
-        });
+        ensureBarStructure();
     }
 
     function applySettings() {
         var s = getSettings();
         document.body.classList.toggle('font-large', s.fontLarge);
         applyLanguage();
+    }
+
+    function getQuickBarItemsFromDOM() {
+        var nodes = quickIcons.querySelectorAll('.quick-icon');
+        return Array.from(nodes).map(function (el) {
+            var name = el.getAttribute('data-original-name') || '';
+            var cat = el.getAttribute('data-category') || '';
+            var iconEl = el.querySelector('.word-icon');
+            var icon = iconEl ? (iconEl.textContent || '').trim() : '•';
+            return { name: name, icon: icon, category: cat };
+        }).filter(function (item) { return item.name; });
+    }
+
+    function getSlotContainer(letter) {
+        var sel = quickIcons.querySelector('.quick-slot[data-slot="' + letter + '"]');
+        return sel || null;
+    }
+
+    function createSlotsIfNeeded() {
+        if (!getSettings().svomptSlots) return;
+        if (quickIcons.querySelector('.quick-slot')) return;
+        SVOMPT_LETTERS.forEach(function (letter) {
+            var slot = document.createElement('div');
+            slot.className = 'quick-slot';
+            slot.setAttribute('data-slot', letter);
+            slot.setAttribute('aria-label', getUI('slot' + letter));
+            quickIcons.appendChild(slot);
+        });
+    }
+
+    function ensureBarStructure(items) {
+        if (items == null) items = getQuickBarItemsFromDOM();
+        var useSlots = getSettings().svomptSlots;
+        quickIcons.innerHTML = '';
+        if (useSlots) {
+            SVOMPT_LETTERS.forEach(function (letter) {
+                var slot = document.createElement('div');
+                slot.className = 'quick-slot';
+                slot.setAttribute('data-slot', letter);
+                slot.setAttribute('aria-label', getUI('slot' + letter));
+                quickIcons.appendChild(slot);
+            });
+        }
+        items.forEach(function (item) {
+            appendQuickIcon(item);
+        });
     }
 
     function showToast(msg) {
@@ -202,35 +276,80 @@
     }
 
     function saveQuickBar() {
-        var items = Array.from(quickIcons.querySelectorAll('.quick-icon')).map(function (el) {
-            var namePtBr = el.getAttribute('data-original-name');
-            if (namePtBr == null) {
-                var nameEl = el.querySelector('.quick-icon-text');
-                namePtBr = nameEl ? nameEl.textContent.trim() : '';
-            }
-            var iconEl = el.querySelector('.word-icon');
-            var iconChar = iconEl ? (iconEl.textContent || '').trim() : '';
-            var category = el.getAttribute('data-category') || '';
-            if (!category && namePtBr) {
-                for (var i = 0; i < categories.length; i++) {
-                    for (var j = 0; j < categories[i].words.length; j++) {
-                        if (categories[i].words[j].name === namePtBr) {
-                            category = categories[i].name;
-                            break;
+        var list = [];
+        if (getSettings().svomptSlots && quickIcons.querySelector('.quick-slot')) {
+            SVOMPT_LETTERS.forEach(function (letter) {
+                var slot = getSlotContainer(letter);
+                if (!slot) return;
+                slot.querySelectorAll('.quick-icon').forEach(function (el) {
+                    var namePtBr = el.getAttribute('data-original-name');
+                    if (namePtBr == null) {
+                        var nameEl = el.querySelector('.quick-icon-text');
+                        namePtBr = nameEl ? nameEl.textContent.trim() : '';
+                    }
+                    var iconEl = el.querySelector('.word-icon');
+                    var iconChar = iconEl ? (iconEl.textContent || '').trim() : '';
+                    var category = el.getAttribute('data-category') || '';
+                    if (namePtBr) list.push({ name: namePtBr, icon: iconChar || '•', category: category });
+                });
+            });
+        } else {
+            list = Array.from(quickIcons.querySelectorAll('.quick-icon')).map(function (el) {
+                var namePtBr = el.getAttribute('data-original-name');
+                if (namePtBr == null) {
+                    var nameEl = el.querySelector('.quick-icon-text');
+                    namePtBr = nameEl ? nameEl.textContent.trim() : '';
+                }
+                var iconEl = el.querySelector('.word-icon');
+                var iconChar = iconEl ? (iconEl.textContent || '').trim() : '';
+                var category = el.getAttribute('data-category') || '';
+                if (!category && namePtBr) {
+                    for (var i = 0; i < categories.length; i++) {
+                        for (var j = 0; j < categories[i].words.length; j++) {
+                            if (categories[i].words[j].name === namePtBr) {
+                                category = categories[i].name;
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            return namePtBr ? { name: namePtBr, icon: iconChar || '•', category: category } : null;
-        }).filter(Boolean);
+                return namePtBr ? { name: namePtBr, icon: iconChar || '•', category: category } : null;
+            }).filter(Boolean);
+            if (getSettings().svomptSortBar) list.sort(function (a, b) { return getSvomptOrderIndex(a.category) - getSvomptOrderIndex(b.category); });
+        }
         try {
-            localStorage.setItem(STORAGE_QUICK, JSON.stringify(items));
+            localStorage.setItem(STORAGE_QUICK, JSON.stringify(list));
         } catch (e) {}
+    }
+
+    function sortQuickBarBySvopt() {
+        if (getSettings().svomptSlots) return;
+        var items = Array.from(quickIcons.querySelectorAll('.quick-icon'));
+        if (items.length < 2) return;
+        items.sort(function (a, b) {
+            return getSvomptOrderIndex(a.getAttribute('data-category')) - getSvomptOrderIndex(b.getAttribute('data-category'));
+        });
+        items.forEach(function (el) { quickIcons.appendChild(el); });
+        saveQuickBar();
+    }
+
+    function getNextSvoptSlot() {
+        var filled = {};
+        quickIcons.querySelectorAll('.quick-icon').forEach(function (el) {
+            var cat = el.getAttribute('data-category') || '';
+            var letter = getSlotLetter(cat);
+            filled[letter] = true;
+        });
+        for (var i = 0; i < SVOMPT_LETTERS.length; i++) {
+            if (!filled[SVOMPT_LETTERS[i]]) return SVOMPT_LETTERS[i];
+        }
+        return null;
     }
 
     var quickIconDragging = false;
 
     function appendQuickIcon(word) {
+        if (getSettings().svomptSlots) createSlotsIfNeeded();
         var categoryName = word.category || '';
         var namePtBr = word.name || '';
         var displayName = getWordLabel(namePtBr, categoryName);
@@ -260,7 +379,8 @@
 
         quickIconDiv.addEventListener('dragstart', function (e) {
             quickIconDragging = true;
-            e.dataTransfer.setData('text/plain', String(Array.prototype.indexOf.call(quickIcons.children, quickIconDiv)));
+            var items = Array.from(quickIcons.querySelectorAll('.quick-icon'));
+            e.dataTransfer.setData('text/plain', String(items.indexOf(quickIconDiv)));
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setDragImage(quickIconDiv, 0, 0);
             quickIconDiv.classList.add('dragging');
@@ -295,11 +415,14 @@
             var toIndex = items.indexOf(e.currentTarget);
             if (fromIndex === toIndex || fromIndex < 0) return;
             var dragged = items[fromIndex];
-            quickIcons.insertBefore(dragged, e.currentTarget);
+            var parent = e.currentTarget.parentNode;
+            parent.insertBefore(dragged, e.currentTarget);
             saveQuickBar();
         });
 
-        quickIcons.appendChild(quickIconDiv);
+        var container = getSettings().svomptSlots ? getSlotContainer(getSlotLetter(word.category || '')) : quickIcons;
+        if (container) container.appendChild(quickIconDiv);
+        else quickIcons.appendChild(quickIconDiv);
     }
 
     function restoreQuickBar() {
@@ -307,9 +430,7 @@
             var raw = localStorage.getItem(STORAGE_QUICK);
             if (!raw) return;
             var items = JSON.parse(raw);
-            items.forEach(function (item) {
-                appendQuickIcon(item);
-            });
+            if (items.length) ensureBarStructure(items);
         } catch (e) {}
     }
 
@@ -369,22 +490,35 @@
         speakWord(word.name, categoryName);
         appendQuickIcon({ name: word.name, icon: word.icon, category: categoryName });
         saveQuickBar();
+        if (getSettings().svomptSortBar && !getSettings().svomptSlots) sortQuickBarBySvopt();
+        if (getSettings().svomptGuided) {
+            var next = getNextSvoptSlot();
+            if (next) showToast(getUI('svomptNextSlot') + getUI('slot' + next));
+        }
     }
 
     function clearQuickIcons() {
-        quickIcons.innerHTML = '';
+        if (getSettings().svomptSlots && quickIcons.querySelector('.quick-slot')) {
+            quickIcons.querySelectorAll('.quick-slot').forEach(function (slot) { slot.innerHTML = ''; });
+        } else {
+            quickIcons.innerHTML = '';
+        }
         saveQuickBar();
     }
 
     function playIcons() {
-        var children = quickIcons.querySelectorAll('.quick-icon-text');
-        if (!children.length) {
+        var icons = quickIcons.querySelectorAll('.quick-icon');
+        if (!icons.length) {
             showToast(getUI('toastAddWords'));
             return;
         }
-        var message = Array.from(children).map(function (el) {
-            return el.textContent;
-        }).join(' ');
+        var list = Array.from(icons).map(function (el) {
+            var textEl = el.querySelector('.quick-icon-text');
+            var cat = el.getAttribute('data-category') || '';
+            return { text: textEl ? textEl.textContent : '', category: cat };
+        });
+        if (getSettings().svomptSpeakOrder) list.sort(function (a, b) { return getSvomptOrderIndex(a.category) - getSvomptOrderIndex(b.category); });
+        var message = list.map(function (x) { return x.text; }).join(' ');
         saveToHistory(message);
         var lang = getSettings().lang;
         var utterance = new SpeechSynthesisUtterance(message);
@@ -460,6 +594,10 @@
         speechRateValue.textContent = s.speechRate;
         fontLargeCheck.checked = s.fontLarge;
         if (langSelect) langSelect.value = s.lang;
+        if (svomptSpeakOrderCheck) svomptSpeakOrderCheck.checked = s.svomptSpeakOrder;
+        if (svomptSlotsCheck) svomptSlotsCheck.checked = s.svomptSlots;
+        if (svomptGuidedCheck) svomptGuidedCheck.checked = s.svomptGuided;
+        if (svomptSortBarCheck) svomptSortBarCheck.checked = s.svomptSortBar;
         renderHistory();
         settingsOverlay.classList.add('open');
         speechRateInput.focus();
@@ -485,7 +623,11 @@
         var s = {
             speechRate: parseFloat(speechRateInput.value) || 1,
             fontLarge: fontLargeCheck.checked,
-            lang: lang
+            lang: lang,
+            svomptSpeakOrder: !!(svomptSpeakOrderCheck && svomptSpeakOrderCheck.checked),
+            svomptSlots: !!(svomptSlotsCheck && svomptSlotsCheck.checked),
+            svomptGuided: !!(svomptGuidedCheck && svomptGuidedCheck.checked),
+            svomptSortBar: !!(svomptSortBarCheck && svomptSortBarCheck.checked)
         };
         try {
             localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(s));

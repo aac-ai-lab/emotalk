@@ -33,7 +33,19 @@
             categoryAria: 'Categoria',
             wordAria: 'Palavra',
             quickIconAria: '. Arrastar para reordenar, clique para remover.',
-            langLabel: 'Idioma'
+            langLabel: 'Idioma',
+            svomptTitle: 'SVOMPT (ordem da frase)',
+            svomptSpeakOrder: 'Ordenar frase ao falar (S-V-O-M-P-T)',
+            svomptSlots: 'Barra com slots S-V-O-M-P-T',
+            svomptGuided: 'Modo guiado (sugerir próximo slot)',
+            svomptSortBar: 'Ordenar barra por SVOMPT',
+            svomptNextSlot: 'Próximo: ',
+            slotS: 'Sujeito (Quem)',
+            slotV: 'Verbo (O quê faz)',
+            slotO: 'Objeto (O quê)',
+            slotM: 'Modo (Como)',
+            slotP: 'Lugar (Onde)',
+            slotT: 'Tempo (Quando)'
         },
         'en': {
             appTitle: 'Emotalk - Augmentative and Alternative Communication',
@@ -66,7 +78,19 @@
             categoryAria: 'Category',
             wordAria: 'Word',
             quickIconAria: '. Drag to reorder, click to remove.',
-            langLabel: 'Language'
+            langLabel: 'Language',
+            svomptTitle: 'SVOMPT (sentence order)',
+            svomptSpeakOrder: 'Order phrase when speaking (S-V-O-M-P-T)',
+            svomptSlots: 'Bar with S-V-O-M-P-T slots',
+            svomptGuided: 'Guided mode (suggest next slot)',
+            svomptSortBar: 'Sort bar by SVOMPT',
+            svomptNextSlot: 'Next: ',
+            slotS: 'Subject (Who)',
+            slotV: 'Verb (What doing)',
+            slotO: 'Object (What)',
+            slotM: 'Manner (How)',
+            slotP: 'Place (Where)',
+            slotT: 'Time (When)'
         }
     };
 
