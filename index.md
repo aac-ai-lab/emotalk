@@ -11,9 +11,10 @@ title: Emotalk
 
 **Documentation:** [**pt-BR**](docs/pt-br/README.html) · [**English**](docs/en/README.html)
 
-- [Índice (pt-BR)](docs/pt-br/README.html) — funcionalidades, tecnologias, instalação, vocabulário.
-- [Index (EN)](docs/en/README.html) — features, technologies, installation, vocabulary.
+- [Índice (pt-BR)](docs/pt-br/README.html) — funcionalidades, tecnologias, instalação, vocabulário, Colourful Semantics.
+- [Index (EN)](docs/en/README.html) — features, technologies, installation, vocabulary, Colourful Semantics.
 - [Vocabulário (pt-BR)](docs/pt-br/VOCABULARY.html) · [Vocabulary (EN)](docs/en/VOCABULARY.html)
+- [Colourful Semantics (pt-BR)](docs/pt-br/COLOURFUL_SEMANTICS.html) · [Colourful Semantics (EN)](docs/en/COLOURFUL_SEMANTICS.html)
 
 ---
 

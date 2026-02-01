@@ -11,24 +11,28 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 | Documento | Conteúdo |
 |-----------|----------|
 | **[Vocabulário](VOCABULARY.html)** | Categorias e palavras (emojis) incluídas na prancha de comunicação. |
+| **[Colourful Semantics](COLOURFUL_SEMANTICS.html)** | Papéis semânticos (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever) e cores aplicadas na prancha. |
 
 ## Visão geral
 
-**Emotalk** é um aplicativo de comunicação aumentativa e alternativa (CAA) projetado para ajudar na expressão de ideias e sentimentos através de emojis. Oferece funcionalidades como predição inteligente de pictogramas, expansão de frases telegráficas para vocalização completa e operação offline.
+**Emotalk** é um aplicativo de comunicação aumentativa e alternativa (CAA) projetado para ajudar na expressão de ideias e sentimentos através de emojis. Aplica **Colourful Semantics** (papéis na frase codificados por cor), uso offline, persistência da frase e reordenar por arrastar e soltar.
 
 ### Funcionalidades
 
-- **Offline (PWA):** Acesse o aplicativo a qualquer momento, mesmo sem conexão com a internet.
-- **Predição inteligente de pictogramas:** Sugere emojis com base no histórico de comunicação.
-- **Expansão de frases telegráficas:** Converte frases curtas em expressões completas e vocalizáveis.
-- **Emojis:** Utiliza emojis em vez de pictogramas tradicionais para uma interface intuitiva e visual.
+- **PWA (offline):** Instale e use sem internet; service worker faz cache do app.
+- **Colourful Semantics:** Categorias e palavras com cores por papel na frase (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever).
+- **Barra de frase:** Adicione pictogramas para montar a frase; falar ou limpar; barra salva no localStorage.
+- **Arrastar e soltar:** Reordene pictogramas na barra (desktop).
+- **Configurações:** Velocidade da fala e fonte maior; legenda das cores semânticas no modal de configurações.
+- **Acessibilidade:** Navegação por teclado, ARIA, foco; opção de fonte maior.
+- **Splash screen:** Splash minimal ao abrir.
+- **Emojis:** Vocabulário com emojis para interface intuitiva e visual.
 
 ### Tecnologias
 
-- **Progressive Web App (PWA):** Uso offline e instalação em dispositivos móveis.
-- **JavaScript e HTML/CSS:** Interface e lógica do aplicativo.
-- **Machine Learning:** Algoritmos para predição e expansão de frases.
-- **Speech Synthesis API:** Vocalização das frases e pictogramas.
+- **Progressive Web App (PWA):** manifest.json, service worker (sw.js), cache offline.
+- **JavaScript e HTML/CSS:** Interface e lógica; localStorage para frase e configurações.
+- **Speech Synthesis API:** Vocalização das frases e palavras (pt-BR).
 
 ### Instalação e execução
 

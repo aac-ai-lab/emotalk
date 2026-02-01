@@ -93,6 +93,26 @@
         .category-name,
         .word-name { font-size: 0.75rem; color: #555; }
 
+        /* Colourful Semantics - cores por papel na frase */
+        .semantic-who { border-left: 4px solid #e67e22; }
+        .semantic-what-doing { border-left: 4px solid #f1c40f; }
+        .semantic-what { border-left: 4px solid #27ae60; }
+        .semantic-where { border-left: 4px solid #3498db; }
+        .semantic-when { border-left: 4px solid #8b6914; }
+        .semantic-describing { border-left: 4px solid #9b59b6; }
+        .category.semantic-who, .word.semantic-who { background: #fef5ee; }
+        .category.semantic-what-doing, .word.semantic-what-doing { background: #fefce8; }
+        .category.semantic-what, .word.semantic-what { background: #f0f9f4; }
+        .category.semantic-where, .word.semantic-where { background: #eef6fc; }
+        .category.semantic-when, .word.semantic-when { background: #f5f0e6; }
+        .category.semantic-describing, .word.semantic-describing { background: #f8f0fc; }
+        .quick-icon.semantic-who { border-left: 4px solid #e67e22; background: #fef5ee; }
+        .quick-icon.semantic-what-doing { border-left: 4px solid #f1c40f; background: #fefce8; }
+        .quick-icon.semantic-what { border-left: 4px solid #27ae60; background: #f0f9f4; }
+        .quick-icon.semantic-where { border-left: 4px solid #3498db; background: #eef6fc; }
+        .quick-icon.semantic-when { border-left: 4px solid #8b6914; background: #f5f0e6; }
+        .quick-icon.semantic-describing { border-left: 4px solid #9b59b6; background: #f8f0fc; }
+
         .sidebar {
             position: fixed;
             top: 0;
@@ -287,6 +307,15 @@
             <div class="settings-row">
                 <label><input type="checkbox" id="fontLarge"> Fonte maior</label>
             </div>
+            <div class="settings-row" style="font-size:0.8rem;color:#666;margin-top:12px;padding-top:12px;border-top:1px solid #eee;">
+                <strong>Legenda (Colourful Semantics)</strong><br>
+                <span style="display:inline-block;width:8px;height:8px;background:#e67e22;vertical-align:middle;"></span> Quem &nbsp;
+                <span style="display:inline-block;width:8px;height:8px;background:#f1c40f;vertical-align:middle;"></span> O quê faz &nbsp;
+                <span style="display:inline-block;width:8px;height:8px;background:#27ae60;vertical-align:middle;"></span> O quê &nbsp;
+                <span style="display:inline-block;width:8px;height:8px;background:#3498db;vertical-align:middle;"></span> Onde &nbsp;
+                <span style="display:inline-block;width:8px;height:8px;background:#8b6914;vertical-align:middle;"></span> Quando &nbsp;
+                <span style="display:inline-block;width:8px;height:8px;background:#9b59b6;vertical-align:middle;"></span> Como/Descrever
+            </div>
             <div class="settings-actions">
                 <button type="button" id="settingsClose">Fechar</button>
                 <button type="button" id="settingsSave" class="primary">Salvar</button>
@@ -301,6 +330,23 @@
         const categories = window.categories || [];
         const STORAGE_QUICK = 'emotalk_quick';
         const STORAGE_SETTINGS = 'emotalk_settings';
+
+        /* Colourful Semantics: mapeamento categoria -> papel na frase */
+        var SEMANTIC_MAP = {
+            pessoas: { key: 'who', label: 'Quem' },
+            atividades: { key: 'what-doing', label: 'O quê faz' },
+            ações: { key: 'what-doing', label: 'O quê faz' },
+            lugares: { key: 'where', label: 'Onde' },
+            casa: { key: 'where', label: 'Onde' },
+            tempo: { key: 'when', label: 'Quando' },
+            descrever: { key: 'describing', label: 'Como/Descrever' },
+            emoções: { key: 'describing', label: 'Como/Descrever' },
+            cores: { key: 'describing', label: 'Como/Descrever' }
+        };
+        function getSemanticClass(categoryName) {
+            var m = SEMANTIC_MAP[categoryName];
+            return m ? 'semantic-' + m.key : 'semantic-what';
+        }
 
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').catch(function () {});
@@ -359,13 +405,18 @@
                 const iconEl = el.querySelector('.word-icon');
                 const name = nameEl ? nameEl.textContent.trim() : '';
                 const iconChar = iconEl ? (iconEl.textContent || '').trim() : '';
-                for (var i = 0; i < categories.length; i++) {
-                    for (var j = 0; j < categories[i].words.length; j++) {
-                        if (categories[i].words[j].name === name)
-                            return { name: categories[i].words[j].name, icon: categories[i].words[j].icon };
+                var category = el.getAttribute('data-category') || '';
+                if (!category) {
+                    for (var i = 0; i < categories.length; i++) {
+                        for (var j = 0; j < categories[i].words.length; j++) {
+                            if (categories[i].words[j].name === name) {
+                                category = categories[i].name;
+                                break;
+                            }
+                        }
                     }
                 }
-                return name ? { name: name, icon: iconChar || '•' } : null;
+                return name ? { name: name, icon: iconChar || '•', category: category } : null;
             }).filter(Boolean);
             try { localStorage.setItem(STORAGE_QUICK, JSON.stringify(items)); } catch (e) {}
         }
@@ -384,10 +435,13 @@
         var quickIconDragging = false;
 
         function appendQuickIcon(word) {
+            var categoryName = word.category || '';
+            var semanticClass = getSemanticClass(categoryName);
             const quickIconDiv = document.createElement('div');
-            quickIconDiv.classList.add('quick-icon');
+            quickIconDiv.classList.add('quick-icon', semanticClass);
             quickIconDiv.setAttribute('role', 'button');
             quickIconDiv.setAttribute('tabindex', '0');
+            quickIconDiv.setAttribute('data-category', categoryName);
             quickIconDiv.setAttribute('aria-label', word.name + '. Arrastar para reordenar, clique para remover.');
             quickIconDiv.setAttribute('draggable', 'true');
             quickIconDiv.innerHTML = '<span class="word-icon" aria-hidden="true">' + (word.icon || '•') + '</span><span class="quick-icon-text">' + word.name + '</span>';
@@ -445,14 +499,14 @@
         function showCategories() {
             categories.forEach(function (category) {
                 const categoryDiv = document.createElement('div');
-                categoryDiv.classList.add('category');
+                categoryDiv.classList.add('category', getSemanticClass(category.name));
                 categoryDiv.setAttribute('role', 'button');
                 categoryDiv.setAttribute('tabindex', '0');
                 categoryDiv.setAttribute('aria-label', 'Categoria ' + category.name);
                 categoryDiv.innerHTML = '<div class="category-icon" aria-hidden="true">' + category.icon + '</div><div class="category-name">' + category.name + '</div>';
                 categoryDiv.addEventListener('click', function () {
                     speakCategory(category.name);
-                    showWords(category.words);
+                    showWords(category);
                 });
                 categoryDiv.addEventListener('keydown', function (e) {
                     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); categoryDiv.click(); }
@@ -461,19 +515,21 @@
             });
         }
 
-        function showWords(words) {
+        function showWords(category) {
             categoriesDiv.style.display = 'none';
             wordsDiv.style.display = 'grid';
             wordsDiv.innerHTML = '';
             backButton.style.display = 'inline-block';
+            var words = category.words;
+            var semanticClass = getSemanticClass(category.name);
             words.forEach(function (word) {
                 const wordDiv = document.createElement('div');
-                wordDiv.classList.add('word');
+                wordDiv.classList.add('word', semanticClass);
                 wordDiv.setAttribute('role', 'button');
                 wordDiv.setAttribute('tabindex', '0');
                 wordDiv.setAttribute('aria-label', 'Palavra ' + word.name);
                 wordDiv.innerHTML = '<div class="word-icon" aria-hidden="true">' + word.icon + '</div><div class="word-name">' + word.name + '</div>';
-                wordDiv.addEventListener('click', function () { addToQuickIcons(word); });
+                wordDiv.addEventListener('click', function () { addToQuickIcons(word, category.name); });
                 wordDiv.addEventListener('keydown', function (e) {
                     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); wordDiv.click(); }
                 });
@@ -481,9 +537,9 @@
             });
         }
 
-        function addToQuickIcons(word) {
+        function addToQuickIcons(word, categoryName) {
             speakWord(word.name);
-            appendQuickIcon(word);
+            appendQuickIcon({ name: word.name, icon: word.icon, category: categoryName });
             saveQuickBar();
         }
 

@@ -9,5 +9,6 @@ title: "Documentation / Documentação"
 A documentação principal está em **português do Brasil (pt-BR)**.  
 The main documentation is in **Brazilian Portuguese (pt-BR)**.
 
-- **[Índice (pt-BR)](pt-br/README.html)** — funcionalidades, tecnologias, instalação, vocabulário, contribuição.
+- **[Índice (pt-BR)](pt-br/README.html)** — funcionalidades, tecnologias, instalação, vocabulário, Colourful Semantics, contribuição.
 - **[Index (EN)](en/README.html)** — documentation index in English.
+- **[Colourful Semantics (pt-BR)](pt-br/COLOURFUL_SEMANTICS.html)** · **[Colourful Semantics (EN)](en/COLOURFUL_SEMANTICS.html)** — papéis semânticos e cores na prancha.

@@ -11,24 +11,28 @@ Emotalk project (AAC app with emojis) documentation.
 | Document | Content |
 |----------|---------|
 | **[Vocabulary](VOCABULARY.html)** | Categories and words (emojis) included in the communication board. |
+| **[Colourful Semantics](COLOURFUL_SEMANTICS.html)** | Semantic roles (Who, What doing, What, Where, When, Describing) and colour coding applied to the board. |
 
 ## Overview
 
-**Emotalk** is an augmentative and alternative communication (AAC) app designed to help express ideas and feelings through emojis. It offers features such as intelligent pictogram prediction, expansion of telegraphic phrases for full vocalization, and offline operation.
+**Emotalk** is an augmentative and alternative communication (AAC) app designed to help express ideas and feelings through emojis. It applies **Colourful Semantics** (colour-coded sentence roles) and supports offline use, phrase persistence, and drag-and-drop reordering.
 
 ### Features
 
-- **Offline (PWA):** Use the app anytime, even without internet.
-- **Intelligent pictogram prediction:** Suggests emojis based on communication history.
-- **Telegraphic phrase expansion:** Converts short phrases into full, vocalizable expressions.
-- **Emojis:** Uses emojis instead of traditional pictograms for an intuitive, visual interface.
+- **PWA (offline):** Install and use without internet; service worker caches the app.
+- **Colourful Semantics:** Categories and words are colour-coded by sentence role (Who, What doing, What, Where, When, Describing).
+- **Phrase bar:** Add pictograms to build a sentence; speak or clear; bar is saved in localStorage.
+- **Drag and drop:** Reorder pictograms in the phrase bar (desktop).
+- **Settings:** Speech rate and larger font; legend of semantic colours in the settings modal.
+- **Accessibility:** Keyboard navigation, ARIA labels, focus management; optional larger font.
+- **Splash screen:** Minimal splash on open.
+- **Emojis:** Vocabulary uses emojis for an intuitive, visual interface.
 
 ### Technologies
 
-- **Progressive Web App (PWA):** Offline use and installation on mobile devices.
-- **JavaScript and HTML/CSS:** Interface and application logic.
-- **Machine Learning:** Algorithms for prediction and phrase expansion.
-- **Speech Synthesis API:** Vocalization of phrases and pictograms.
+- **Progressive Web App (PWA):** manifest.json, service worker (sw.js), offline cache.
+- **JavaScript and HTML/CSS:** Interface and logic; localStorage for phrase and settings.
+- **Speech Synthesis API:** Vocalization of phrases and words (pt-BR).
 
 ### Installation and run
 
