@@ -82,7 +82,19 @@
             minspeakWhatIs: 'Em modo «ícones centrais», o primeiro ecrã mostra poucos ícones (Pessoas, Ações, Comida e bebida, Coisas, Lugares, Descrever/Sentir). Cada ícone agrupa várias categorias. Ao tocar num ícone, aparecem as palavras desse grupo — acesso em 2 toques em vez de procurar em muitas categorias. Inspirado no MINSPEAK (Bruce Baker) e na compação semântica: menos ícones no ecrã, mais palavras acessíveis por sequência.',
             minspeakLabel: 'Usar ícones centrais (MINSPEAK / Compação semântica)',
             minspeakHint: 'Quando ativado, o ecrã principal mostra 6 ícones centrais em vez de todas as categorias. Toque num ícone para ver as palavras desse grupo. Quando desativado, mantém-se o modo por categorias (lista completa de categorias).',
-            btnHomeAriaMinspeak: 'Voltar aos ícones centrais'
+            btnHomeAriaMinspeak: 'Voltar aos ícones centrais',
+            menuFillmore: 'Quadros (Fillmore)',
+            btnFillmore: 'Quadros',
+            btnFillmoreAria: 'Abrir quadros Frame Semantics (Fillmore)',
+            fillmoreTitle: 'Quadros (Frame Semantics)',
+            fillmoreWhatIs: 'Frame Semantics (Fillmore) descreve o significado das palavras através de quadros semânticos: situações com participantes e papéis (frame elements). Ex.: o quadro «Dar» tem Quem dá, O quê (é dado), A quem. O utilizador escolhe um quadro e preenche cada papel com uma palavra; a aplicação fala a frase completa. Inspirado em Charles J. Fillmore e FrameNet.',
+            fillmoreIntro: 'Escolha um quadro abaixo e preencha cada papel com uma palavra. Depois carregue em «Falar frase».',
+            fillmoreSlotLabel: 'Escolha uma palavra para este papel:',
+            fillmoreSpeak: 'Falar frase',
+            fillmoreChooseFrame: 'Escolha um quadro',
+            hintFillmore: 'Ative para mostrar o botão Quadros na barra lateral. Quadros têm vários papéis (ex.: Dar = quem dá, o quê, a quem).',
+            fillmoreLabel: 'Ativar Quadros (Frame Semantics / Fillmore)',
+            fillmoreHint: 'Quando ativado, o botão Quadros abre quadros com vários elementos (Dar, Comer, Ir, Querer, etc.). Preencha cada papel e fale a frase completa.'
         },
         'en': {
             appTitle: 'Emotalk - Augmentative and Alternative Communication',
@@ -164,7 +176,19 @@
             minspeakWhatIs: 'In «core icons» mode, the first screen shows a small set of icons (People, Actions, Food & drink, Things, Places, Describe/Feel). Each icon groups several categories. Tapping an icon shows the words in that group — 2-tap access instead of browsing many categories. Inspired by MINSPEAK (Bruce Baker) and semantic compaction: fewer icons on screen, more words accessible by sequence.',
             minspeakLabel: 'Use core icons (MINSPEAK / Semantic compaction)',
             minspeakHint: 'When on, the main screen shows 6 core icons instead of all categories. Tap an icon to see words in that group. When off, category mode is used (full category list).',
-            btnHomeAriaMinspeak: 'Back to core icons'
+            btnHomeAriaMinspeak: 'Back to core icons',
+            menuFillmore: 'Fillmore frames',
+            btnFillmore: 'Frames',
+            btnFillmoreAria: 'Open Frame Semantics (Fillmore) frames',
+            fillmoreTitle: 'Frames (Frame Semantics)',
+            fillmoreWhatIs: 'Frame Semantics (Fillmore) describes word meaning in terms of semantic frames: situations with participants and roles (frame elements). E.g. the Giving frame has Donor, Thing given, Recipient. The user chooses a frame and fills each role with a word; the app speaks the full sentence. Inspired by Charles J. Fillmore and FrameNet.',
+            fillmoreIntro: 'Choose a frame below and fill each role with a word. Then tap «Speak sentence».',
+            fillmoreSlotLabel: 'Choose a word for this role:',
+            fillmoreSpeak: 'Speak sentence',
+            fillmoreChooseFrame: 'Choose a frame',
+            hintFillmore: 'Enable to show the Frames button in the sidebar. Frames have multiple roles (e.g. Giving = donor, thing, recipient).',
+            fillmoreLabel: 'Enable Frames (Frame Semantics / Fillmore)',
+            fillmoreHint: 'When on, the Frames button opens multi-slot frames (Giving, Eating, Going, Wanting, etc.). Fill each role and speak the full sentence.'
         }
     };
 

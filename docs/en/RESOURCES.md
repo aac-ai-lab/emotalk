@@ -71,7 +71,7 @@ This document describes all resources available in Emotalk and the justification
 
 ## 7. Settings (modal and vertical menu)
 
-**What it is:** A settings modal with a vertical menu (General, SVOMPT, Legend, History, Frames, Core icons) groups all options: language, speech rate, larger font, SVOMPT options, enable/disable Colourful Semantics, enable/disable Shape Coding, and phrase history. Each section includes descriptions and usage suggestions.
+**What it is:** A settings modal with a vertical menu (General, SVOMPT, Legend, History, Frames, Core icons, Fillmore frames) groups all options: language, speech rate, larger font, SVOMPT options, enable/disable Colourful Semantics, enable/disable Shape Coding, and phrase history. Each section includes descriptions and usage suggestions.
 
 **Justification:** Centralising options in one place reduces the apparent complexity of the main interface. The vertical menu and descriptions make settings easier to find and understand for therapists, educators, or families, and allow customising Emotalk without changing code.
 
@@ -125,6 +125,16 @@ This document describes all resources available in Emotalk and the justification
 
 ---
 
+## 15. Frames (Frame Semantics / Fillmore)
+
+**What it is:** In Settings → Fillmore frames you can enable the «Frames» (Frame Semantics) feature. The **Frames** button (🖼️) in the sidebar opens a window with semantic frames inspired by Charles J. Fillmore: each frame represents a situation with several roles (frame elements), e.g. «Giving» (donor, thing given, recipient), «Eating» (eater, food), «Going» (agent, goal), «Wanting», «Being», «Seeing». The user chooses a frame and fills each role with a word from the vocabulary (filtered by semantic role); the app speaks the full sentence. Unlike Sentence frames (one slot), Frames have 2 or 3 elements per frame.
+
+**Justification:** Frame Semantics (Fillmore) describes lexical meaning in terms of semantic frames — situations with participants and roles. FrameNet and work in AAC/speech therapy use this approach to structure vocabulary and sentence production. Offering frames with multiple elements supports practice of longer, explicit sentences (e.g. «Mum gives apple to John») and aligns the interface with thematic roles and frame elements.
+
+**Reference:** Frame Semantics (Charles J. Fillmore); FrameNet; thematic roles and frame elements in linguistics and AAC.
+
+---
+
 ## Summary
 
 | Resource | Where to configure / use | Main basis or benefit |
@@ -139,6 +149,7 @@ This document describes all resources available in Emotalk and the justification
 | Phrase history | Settings → History | Review, repetition, recording |
 | **Sentence frames** | Frames button (📝); Settings → Frames | Phrases with slot; reduces load and practises structures |
 | **Core icons (MINSPEAK)** | Settings → Core icons | Semantic compaction; 2-tap access; fewer icons on screen |
+| **Frames (Frame Semantics)** | Frames button (🖼️); Settings → Fillmore frames | Fillmore; multi-role frames; full sentences |
 | PWA / offline | Install from browser | Use without internet |
 | Splash screen | On app open | Identity and smooth transition |
 | Emoji vocabulary | [Vocabulary](VOCABULARY.html) | Visual, categorised access |

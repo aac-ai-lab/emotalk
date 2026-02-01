@@ -82,6 +82,16 @@
     var framesIntro = document.getElementById('framesIntro');
     var framesSlotLabel = document.getElementById('framesSlotLabel');
     var minspeakCheck = document.getElementById('minspeakCheck');
+    var fillmoreCheck = document.getElementById('fillmoreCheck');
+    var fillmoreButton = document.getElementById('fillmoreButton');
+    var fillmoreOverlay = document.getElementById('fillmoreOverlay');
+    var fillmoreList = document.getElementById('fillmoreList');
+    var fillmoreWords = document.getElementById('fillmoreWords');
+    var fillmorePreview = document.getElementById('fillmorePreview');
+    var fillmoreSpeakBtn = document.getElementById('fillmoreSpeakBtn');
+    var fillmoreCloseBtn = document.getElementById('fillmoreCloseBtn');
+    var fillmoreIntro = document.getElementById('fillmoreIntro');
+    var fillmoreSlotLabel = document.getElementById('fillmoreSlotLabel');
 
     function getSettings() {
         try {
@@ -98,10 +108,11 @@
                 colourfulSemantics: s.colourfulSemantics !== false,
                 shapeCoding: !!s.shapeCoding,
                 sentenceFrames: s.sentenceFrames !== false,
-                minspeakMode: !!s.minspeakMode
+                minspeakMode: !!s.minspeakMode,
+                fillmoreEnabled: !!s.fillmoreEnabled
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: true, minspeakMode: false };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: true, minspeakMode: false, fillmoreEnabled: false };
         }
     }
 
@@ -150,8 +161,8 @@
         if (settingsTitle) settingsTitle.textContent = getUI('settingsTitle');
         var settingsIntroEl = document.getElementById('settingsIntro');
         if (settingsIntroEl) settingsIntroEl.textContent = getUI('settingsIntro');
-        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintShapeCoding', 'hintHistory', 'hintFrames', 'hintSentenceFrames', 'hintMinspeak', 'hintMinspeakCheck'];
-        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'shapeCodingHint', 'hintHistory', 'hintFrames', 'sentenceFramesHint', 'minspeakHint', 'minspeakHint'];
+        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintShapeCoding', 'hintHistory', 'hintFrames', 'hintSentenceFrames', 'hintMinspeak', 'hintMinspeakCheck', 'hintFillmore', 'hintFillmoreCheck'];
+        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'shapeCodingHint', 'hintHistory', 'hintFrames', 'sentenceFramesHint', 'minspeakHint', 'minspeakHint', 'hintFillmore', 'fillmoreHint'];
         hintIds.forEach(function (id, i) {
             var el = document.getElementById(id);
             if (el && hintKeys[i]) el.textContent = getUI(hintKeys[i]);
@@ -174,8 +185,8 @@
         }
         var historyTitleEl = document.getElementById('settingsPanelHistory') ? document.querySelector('#settingsPanelHistory strong') : null;
         if (historyTitleEl) historyTitleEl.textContent = getUI('historyTitle');
-        var navIds = ['settingsNavGeneral', 'settingsNavSvompt', 'settingsNavLegend', 'settingsNavHistory', 'settingsNavFrames', 'settingsNavMinspeak'];
-        var navKeys = ['menuGeneral', 'menuSvompt', 'menuLegend', 'menuHistory', 'menuFrames', 'menuMinspeak'];
+        var navIds = ['settingsNavGeneral', 'settingsNavSvompt', 'settingsNavLegend', 'settingsNavHistory', 'settingsNavFrames', 'settingsNavMinspeak', 'settingsNavFillmore'];
+        var navKeys = ['menuGeneral', 'menuSvompt', 'menuLegend', 'menuHistory', 'menuFrames', 'menuMinspeak', 'menuFillmore'];
         navIds.forEach(function (id, i) {
             var el = document.getElementById(id);
             if (el && navKeys[i]) el.textContent = getUI(navKeys[i]);
@@ -222,6 +233,22 @@
         if (minspeakWhatIsEl) minspeakWhatIsEl.textContent = getUI('minspeakWhatIs');
         var minspeakLabelEl = document.getElementById('minspeakLabel');
         if (minspeakLabelEl) minspeakLabelEl.textContent = getUI('minspeakLabel');
+        var fillmoreSettingsTitle = document.getElementById('fillmoreSettingsTitle');
+        if (fillmoreSettingsTitle) fillmoreSettingsTitle.textContent = getUI('fillmoreTitle');
+        var fillmoreWhatIsEl = document.getElementById('fillmoreWhatIs');
+        if (fillmoreWhatIsEl) fillmoreWhatIsEl.textContent = getUI('fillmoreWhatIs');
+        var fillmoreLabelEl = document.getElementById('fillmoreLabel');
+        if (fillmoreLabelEl) fillmoreLabelEl.textContent = getUI('fillmoreLabel');
+        if (fillmoreButton) {
+            fillmoreButton.setAttribute('title', getUI('btnFillmore'));
+            fillmoreButton.setAttribute('aria-label', getUI('btnFillmoreAria'));
+        }
+        var fillmoreModalTitle = document.getElementById('fillmoreModalTitle');
+        if (fillmoreModalTitle) fillmoreModalTitle.textContent = getUI('fillmoreTitle');
+        if (fillmoreIntro) fillmoreIntro.textContent = getUI('fillmoreIntro');
+        if (fillmoreSlotLabel) fillmoreSlotLabel.textContent = getUI('fillmoreSlotLabel');
+        if (fillmoreSpeakBtn) fillmoreSpeakBtn.textContent = getUI('fillmoreSpeak');
+        if (fillmoreCloseBtn) fillmoreCloseBtn.setAttribute('aria-label', getUI('close'));
 
         categoriesDiv.innerHTML = '';
         showCategories();
@@ -241,6 +268,7 @@
         document.body.classList.toggle('colourful-semantics-off', !s.colourfulSemantics);
         document.body.classList.toggle('shape-coding-on', !!s.shapeCoding);
         if (framesButton) framesButton.style.display = s.sentenceFrames ? 'inline-block' : 'none';
+        if (fillmoreButton) fillmoreButton.style.display = s.fillmoreEnabled ? 'inline-block' : 'none';
         applyLanguage();
     }
 
@@ -800,6 +828,139 @@
         closeFramesModal();
     }
 
+    var selectedFillmoreFrame = null;
+    var filledFillmoreSlots = [];
+    var currentFillmoreSlotIndex = 0;
+
+    function getFillmoreFrameTemplate(frame) {
+        if (!frame) return '';
+        var lang = getSettings().lang;
+        return lang === 'en' ? (frame.templateEn || frame.templatePt) : (frame.templatePt || frame.templateEn);
+    }
+
+    function getFillmoreFrameName(frame) {
+        if (!frame) return '';
+        var lang = getSettings().lang;
+        return lang === 'en' ? (frame.nameEn || frame.namePt) : (frame.namePt || frame.nameEn);
+    }
+
+    function getFillmoreElementLabel(el) {
+        if (!el) return '';
+        var lang = getSettings().lang;
+        return lang === 'en' ? (el.labelEn || el.labelPt) : (el.labelPt || el.labelEn);
+    }
+
+    function renderFillmoreList() {
+        if (!fillmoreList) return;
+        var list = window.FILLMORE_FRAMES || [];
+        fillmoreList.innerHTML = '';
+        list.forEach(function (frame) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = getFillmoreFrameName(frame);
+            btn.classList.add('frame-item');
+            if (selectedFillmoreFrame && selectedFillmoreFrame.id === frame.id) btn.classList.add('selected');
+            btn.addEventListener('click', function () {
+                selectedFillmoreFrame = frame;
+                filledFillmoreSlots = [];
+                currentFillmoreSlotIndex = 0;
+                fillmoreList.querySelectorAll('button').forEach(function (b) { b.classList.remove('selected'); });
+                btn.classList.add('selected');
+                if (fillmoreSlotLabel) {
+                    fillmoreSlotLabel.style.display = 'block';
+                    fillmoreSlotLabel.textContent = getUI('fillmoreSlotLabel') + ' ' + (frame.elements && frame.elements[0] ? getFillmoreElementLabel(frame.elements[0]) : '');
+                }
+                renderFillmoreWords(frame.elements && frame.elements[0] ? frame.elements[0].roleKey : 'what');
+                updateFillmorePreview();
+                if (fillmoreSpeakBtn) fillmoreSpeakBtn.disabled = true;
+            });
+            fillmoreList.appendChild(btn);
+        });
+    }
+
+    function renderFillmoreWords(roleKey) {
+        if (!fillmoreWords) return;
+        fillmoreWords.innerHTML = '';
+        var cats = getCategoriesBySlotRole(roleKey);
+        cats.forEach(function (cat) {
+            (cat.words || []).forEach(function (word) {
+                var label = getWordLabel(word.name, cat.name);
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'frame-word';
+                btn.setAttribute('aria-label', label);
+                btn.innerHTML = '<span class="word-icon" aria-hidden="true">' + (word.icon || '•') + '</span><span class="word-name">' + escapeHtml(label) + '</span>';
+                btn.addEventListener('click', function () {
+                    filledFillmoreSlots[currentFillmoreSlotIndex] = { name: word.name, category: cat.name, icon: word.icon };
+                    currentFillmoreSlotIndex++;
+                    if (selectedFillmoreFrame && selectedFillmoreFrame.elements && currentFillmoreSlotIndex < selectedFillmoreFrame.elements.length) {
+                        var el = selectedFillmoreFrame.elements[currentFillmoreSlotIndex];
+                        if (fillmoreSlotLabel) fillmoreSlotLabel.textContent = getUI('fillmoreSlotLabel') + ' ' + getFillmoreElementLabel(el);
+                        renderFillmoreWords(el.roleKey);
+                    } else {
+                        if (fillmoreSpeakBtn) fillmoreSpeakBtn.disabled = false;
+                        fillmoreWords.innerHTML = '';
+                    }
+                    updateFillmorePreview();
+                });
+                fillmoreWords.appendChild(btn);
+            });
+        });
+    }
+
+    function updateFillmorePreview() {
+        if (!fillmorePreview) return;
+        if (!selectedFillmoreFrame) {
+            fillmorePreview.textContent = '';
+            return;
+        }
+        var template = getFillmoreFrameTemplate(selectedFillmoreFrame);
+        for (var i = 1; i <= (selectedFillmoreFrame.elements ? selectedFillmoreFrame.elements.length : 0); i++) {
+            var slot = filledFillmoreSlots[i - 1];
+            var label = slot ? getWordLabel(slot.name, slot.category) : '…';
+            template = template.replace('___' + i + '___', label);
+        }
+        fillmorePreview.textContent = template;
+    }
+
+    function openFillmoreModal() {
+        selectedFillmoreFrame = null;
+        filledFillmoreSlots = [];
+        currentFillmoreSlotIndex = 0;
+        if (fillmoreSlotLabel) fillmoreSlotLabel.style.display = 'none';
+        if (fillmoreWords) fillmoreWords.innerHTML = '';
+        if (fillmorePreview) fillmorePreview.textContent = '';
+        if (fillmoreSpeakBtn) fillmoreSpeakBtn.disabled = true;
+        renderFillmoreList();
+        if (fillmoreOverlay) fillmoreOverlay.classList.add('open');
+    }
+
+    function closeFillmoreModal() {
+        if (fillmoreOverlay) fillmoreOverlay.classList.remove('open');
+    }
+
+    function speakFillmoreAndClose() {
+        if (!selectedFillmoreFrame || !selectedFillmoreFrame.elements) return;
+        var n = selectedFillmoreFrame.elements.length;
+        for (var i = 0; i < n; i++) {
+            if (!filledFillmoreSlots[i]) return;
+        }
+        var template = getFillmoreFrameTemplate(selectedFillmoreFrame);
+        for (var j = 1; j <= n; j++) {
+            var slot = filledFillmoreSlots[j - 1];
+            var label = getWordLabel(slot.name, slot.category);
+            template = template.replace('___' + j + '___', label);
+        }
+        saveToHistory(template);
+        var lang = getSettings().lang;
+        var utterance = new SpeechSynthesisUtterance(template);
+        utterance.voice = getVoice(lang);
+        utterance.lang = lang === 'en' ? 'en' : 'pt-BR';
+        utterance.rate = getSettings().speechRate;
+        speechSynthesis.speak(utterance);
+        closeFillmoreModal();
+    }
+
     function initSplash() {
         var splash = document.getElementById('splashScreen');
         if (!splash) return;
@@ -856,6 +1017,20 @@
             if (e.target === framesOverlay) closeFramesModal();
         });
     }
+    if (fillmoreButton) {
+        fillmoreButton.addEventListener('click', openFillmoreModal);
+    }
+    if (fillmoreCloseBtn) {
+        fillmoreCloseBtn.addEventListener('click', closeFillmoreModal);
+    }
+    if (fillmoreSpeakBtn) {
+        fillmoreSpeakBtn.addEventListener('click', speakFillmoreAndClose);
+    }
+    if (fillmoreOverlay) {
+        fillmoreOverlay.addEventListener('click', function (e) {
+            if (e.target === fillmoreOverlay) closeFillmoreModal();
+        });
+    }
 
     settingsButton.addEventListener('click', function () {
         var s = getSettings();
@@ -871,6 +1046,7 @@
         if (shapeCodingCheck) shapeCodingCheck.checked = s.shapeCoding;
         if (sentenceFramesCheck) sentenceFramesCheck.checked = s.sentenceFrames;
         if (minspeakCheck) minspeakCheck.checked = s.minspeakMode;
+        if (fillmoreCheck) fillmoreCheck.checked = s.fillmoreEnabled;
         renderHistory();
         showSettingsPanel('general');
         settingsOverlay.classList.add('open');
@@ -905,7 +1081,8 @@
             colourfulSemantics: !!(colourfulSemanticsCheck && colourfulSemanticsCheck.checked),
             shapeCoding: !!(shapeCodingCheck && shapeCodingCheck.checked),
             sentenceFrames: !!(sentenceFramesCheck && sentenceFramesCheck.checked),
-            minspeakMode: !!(minspeakCheck && minspeakCheck.checked)
+            minspeakMode: !!(minspeakCheck && minspeakCheck.checked),
+            fillmoreEnabled: !!(fillmoreCheck && fillmoreCheck.checked)
         };
         try {
             localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(s));
@@ -921,7 +1098,7 @@
     });
 
     function showSettingsPanel(panelKey) {
-        var panels = ['general', 'svompt', 'legend', 'history', 'frames', 'minspeak'];
+        var panels = ['general', 'svompt', 'legend', 'history', 'frames', 'minspeak', 'fillmore'];
         panels.forEach(function (key) {
             var nav = document.getElementById('settingsNav' + key.charAt(0).toUpperCase() + key.slice(1));
             var panel = document.getElementById('settingsPanel' + key.charAt(0).toUpperCase() + key.slice(1));

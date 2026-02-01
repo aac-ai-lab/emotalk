@@ -71,7 +71,7 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ## 7. Configurações (modal e menu vertical)
 
-**O que é:** Um modal de configurações com menu vertical (Geral, SVOMPT, Legenda, Histórico, Moldes, Ícones centrais) agrupa todas as opções: idioma, velocidade da fala, fonte maior, opções SVOMPT, ativar/desativar Colourful Semantics, ativar/desativar Shape Coding, e histórico de frases. Cada secção inclui descrições e sugestões de uso.
+**O que é:** Um modal de configurações com menu vertical (Geral, SVOMPT, Legenda, Histórico, Moldes, Ícones centrais, Quadros) agrupa todas as opções: idioma, velocidade da fala, fonte maior, opções SVOMPT, ativar/desativar Colourful Semantics, ativar/desativar Shape Coding, e histórico de frases. Cada secção inclui descrições e sugestões de uso.
 
 **Justificativa:** Centralizar as opções num único sítio reduz a complexidade aparente da interface principal. O menu vertical e as descrições tornam as configurações mais fáceis de encontrar e de entender por terapeutas, educadores ou famílias, e permitem personalizar o Emotalk sem alterar código.
 
@@ -135,6 +135,16 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ---
 
+## 15. Quadros (Frame Semantics / Fillmore)
+
+**O que é:** Em Configurações → Quadros (Fillmore) pode ativar o recurso «Quadros» (Frame Semantics). O botão **Quadros** (🖼️) na barra lateral abre uma janela com quadros semânticos inspirados em Charles J. Fillmore: cada quadro representa uma situação com vários papéis (frame elements), por exemplo «Dar» (quem dá, o quê é dado, a quem), «Comer» (quem come, comida), «Ir» (quem vai, para onde), «Querer», «Estar», «Ver». O utilizador escolhe um quadro e preenche cada papel com uma palavra do vocabulário (filtrada por papel semântico); a aplicação fala a frase completa. Diferente dos Moldes de frase (um só espaço), os Quadros têm 2 ou 3 elementos por quadro.
+
+**Justificativa:** Frame Semantics (Fillmore) descreve o significado lexical em termos de quadros semânticos — situações com participantes e papéis. O FrameNet e trabalhos em CAA/terapia da fala usam esta abordagem para estruturar o vocabulário e a produção de frases. Oferecer quadros com vários elementos permite treinar frases mais longas e explícitas (ex.: «Mãe dá maçã a João») e alinha a interface com noções de papéis temáticos e frame elements.
+
+**Referência:** Frame Semantics (Charles J. Fillmore); FrameNet; papéis temáticos e frame elements em linguística e CAA.
+
+---
+
 ## Resumo
 
 | Recurso | Onde configurar / usar | Base ou benefício principal |
@@ -149,6 +159,7 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 | Histórico de frases | Configurações → Histórico | Revisão, repetição, registo |
 | **Moldes de frase** | Botão Moldes (📝); Configurações → Moldes | Frases com slot; reduz carga e treina estruturas |
 | **Ícones centrais (MINSPEAK)** | Configurações → Ícones centrais | Compação semântica; 2 toques; menos ícones no ecrã |
+| **Quadros (Frame Semantics)** | Botão Quadros (🖼️); Configurações → Quadros (Fillmore) | Fillmore; quadros com vários papéis; frases completas |
 | PWA / offline | Instalação no browser | Uso sem internet |
 | Splash screen | Ao abrir a app | Identidade e transição suave |
 | Vocabulário emojis | [Vocabulário](VOCABULARY.html) | Acesso visual, categorizado |
