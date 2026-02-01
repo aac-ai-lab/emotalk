@@ -64,7 +64,18 @@
             menuGeneral: 'Geral',
             menuSvompt: 'SVOMPT',
             menuLegend: 'Legenda',
-            menuHistory: 'Histórico'
+            menuHistory: 'Histórico',
+            menuFrames: 'Moldes',
+            btnFrames: 'Moldes',
+            btnFramesAria: 'Abrir moldes de frase',
+            framesTitle: 'Moldes de frase',
+            framesIntro: 'Escolha um molde e depois uma palavra para completar a frase.',
+            framesSlotLabel: 'Escolha uma palavra para o espaço:',
+            framesSpeak: 'Falar frase',
+            framesChooseWord: 'Escolha uma palavra',
+            hintFrames: 'Moldes de frase (Sentence Frames) ajudam a construir frases com uma estrutura fixa e um espaço a preencher (ex.: «Eu quero ___»). Ative para mostrar o botão Moldes na barra lateral.',
+            sentenceFramesLabel: 'Ativar Moldes de frase',
+            sentenceFramesHint: 'Quando ativado, o botão Moldes permite escolher um molde (ex.: «Eu quero ___»), depois uma palavra compatível com o espaço, e falar a frase completa.'
         },
         'en': {
             appTitle: 'Emotalk - Augmentative and Alternative Communication',
@@ -128,7 +139,18 @@
             menuGeneral: 'General',
             menuSvompt: 'SVOMPT',
             menuLegend: 'Legend',
-            menuHistory: 'History'
+            menuHistory: 'History',
+            menuFrames: 'Frames',
+            btnFrames: 'Frames',
+            btnFramesAria: 'Open sentence frames',
+            framesTitle: 'Sentence frames',
+            framesIntro: 'Choose a frame, then a word to complete the sentence.',
+            framesSlotLabel: 'Choose a word for the slot:',
+            framesSpeak: 'Speak sentence',
+            framesChooseWord: 'Choose a word',
+            hintFrames: 'Sentence frames help build sentences with a fixed structure and one slot to fill (e.g. «I want ___»). Enable to show the Frames button in the sidebar.',
+            sentenceFramesLabel: 'Enable Sentence frames',
+            sentenceFramesHint: 'When on, the Frames button lets you choose a frame (e.g. «I want ___»), then a word that fits the slot, and speak the full sentence.'
         }
     };
 

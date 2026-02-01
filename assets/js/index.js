@@ -70,6 +70,16 @@
     var svomptTitleEl = document.getElementById('svomptTitle');
     var colourfulSemanticsCheck = document.getElementById('colourfulSemanticsCheck');
     var shapeCodingCheck = document.getElementById('shapeCodingCheck');
+    var sentenceFramesCheck = document.getElementById('sentenceFramesCheck');
+    var framesButton = document.getElementById('framesButton');
+    var framesOverlay = document.getElementById('framesOverlay');
+    var framesList = document.getElementById('framesList');
+    var framesWords = document.getElementById('framesWords');
+    var framesPreview = document.getElementById('framesPreview');
+    var framesSpeakBtn = document.getElementById('framesSpeakBtn');
+    var framesCloseBtn = document.getElementById('framesCloseBtn');
+    var framesIntro = document.getElementById('framesIntro');
+    var framesSlotLabel = document.getElementById('framesSlotLabel');
 
     function getSettings() {
         try {
@@ -84,10 +94,11 @@
                 svomptGuided: !!s.svomptGuided,
                 svomptSortBar: !!s.svomptSortBar,
                 colourfulSemantics: s.colourfulSemantics !== false,
-                shapeCoding: !!s.shapeCoding
+                shapeCoding: !!s.shapeCoding,
+                sentenceFrames: !!s.sentenceFrames
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: false };
         }
     }
 
@@ -155,8 +166,8 @@
         }
         var historyTitleEl = document.getElementById('settingsPanelHistory') ? document.querySelector('#settingsPanelHistory strong') : null;
         if (historyTitleEl) historyTitleEl.textContent = getUI('historyTitle');
-        var navIds = ['settingsNavGeneral', 'settingsNavSvompt', 'settingsNavLegend', 'settingsNavHistory'];
-        var navKeys = ['menuGeneral', 'menuSvompt', 'menuLegend', 'menuHistory'];
+        var navIds = ['settingsNavGeneral', 'settingsNavSvompt', 'settingsNavLegend', 'settingsNavHistory', 'settingsNavFrames'];
+        var navKeys = ['menuGeneral', 'menuSvompt', 'menuLegend', 'menuHistory', 'menuFrames'];
         navIds.forEach(function (id, i) {
             var el = document.getElementById(id);
             if (el && navKeys[i]) el.textContent = getUI(navKeys[i]);
@@ -181,6 +192,20 @@
             svomptLabels[2].childNodes[1].textContent = ' ' + getUI('svomptGuided');
             svomptLabels[3].childNodes[1].textContent = ' ' + getUI('svomptSortBar');
         }
+        if (framesButton) {
+            framesButton.setAttribute('title', getUI('btnFrames'));
+            framesButton.setAttribute('aria-label', getUI('btnFramesAria'));
+        }
+        var framesModalTitle = document.getElementById('framesModalTitle');
+        if (framesModalTitle) framesModalTitle.textContent = getUI('framesTitle');
+        if (framesIntro) framesIntro.textContent = getUI('framesIntro');
+        if (framesSlotLabel) framesSlotLabel.textContent = getUI('framesSlotLabel');
+        if (framesSpeakBtn) framesSpeakBtn.textContent = getUI('framesSpeak');
+        var framesSettingsTitle = document.getElementById('framesSettingsTitle');
+        if (framesSettingsTitle) framesSettingsTitle.textContent = getUI('framesTitle');
+        var sentenceFramesLabelEl = document.getElementById('sentenceFramesLabel');
+        if (sentenceFramesLabelEl) sentenceFramesLabelEl.textContent = getUI('sentenceFramesLabel');
+        if (framesCloseBtn) framesCloseBtn.setAttribute('aria-label', getUI('close'));
 
         categoriesDiv.innerHTML = '';
         showCategories();
@@ -196,6 +221,7 @@
         document.body.classList.toggle('font-large', s.fontLarge);
         document.body.classList.toggle('colourful-semantics-off', !s.colourfulSemantics);
         document.body.classList.toggle('shape-coding-on', !!s.shapeCoding);
+        if (framesButton) framesButton.style.display = s.sentenceFrames ? 'inline-block' : 'none';
         applyLanguage();
     }
 
@@ -584,6 +610,114 @@
         }) || null;
     }
 
+    var selectedFrame = null;
+    var selectedWord = null;
+
+    function getFrameTemplate(frame) {
+        if (!frame) return '';
+        var lang = getSettings().lang;
+        return lang === 'en' ? (frame.templateEn || frame.templatePt) : (frame.templatePt || frame.templateEn);
+    }
+
+    function getCategoriesBySlotRole(slotRole) {
+        return categories.filter(function (cat) {
+            return getSemanticKey(cat.name) === slotRole;
+        });
+    }
+
+    function renderFramesList() {
+        if (!framesList) return;
+        var list = window.SENTENCE_FRAMES || [];
+        framesList.innerHTML = '';
+        list.forEach(function (frame) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = getFrameTemplate(frame).replace('___', '…');
+            btn.classList.add('frame-item');
+            if (selectedFrame && selectedFrame.id === frame.id) btn.classList.add('selected');
+            btn.addEventListener('click', function () {
+                selectedFrame = frame;
+                selectedWord = null;
+                framesList.querySelectorAll('button').forEach(function (b) { b.classList.remove('selected'); });
+                btn.classList.add('selected');
+                if (framesSlotLabel) framesSlotLabel.style.display = 'block';
+                renderFramesWords(frame.slotRole);
+                updateFramesPreview();
+                if (framesSpeakBtn) framesSpeakBtn.disabled = true;
+            });
+            framesList.appendChild(btn);
+        });
+    }
+
+    function renderFramesWords(slotRole) {
+        if (!framesWords) return;
+        framesWords.innerHTML = '';
+        var cats = getCategoriesBySlotRole(slotRole);
+        cats.forEach(function (cat) {
+            (cat.words || []).forEach(function (word) {
+                var label = getWordLabel(word.name, cat.name);
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'frame-word';
+                btn.setAttribute('aria-label', label);
+                btn.innerHTML = '<span class="word-icon" aria-hidden="true">' + (word.icon || '•') + '</span><span class="word-name">' + escapeHtml(label) + '</span>';
+                btn.addEventListener('click', function () {
+                    selectedWord = { name: word.name, category: cat.name, icon: word.icon };
+                    updateFramesPreview();
+                    if (framesSpeakBtn) framesSpeakBtn.disabled = false;
+                    framesWords.querySelectorAll('button').forEach(function (b) { b.classList.remove('selected'); });
+                    btn.classList.add('selected');
+                });
+                framesWords.appendChild(btn);
+            });
+        });
+    }
+
+    function updateFramesPreview() {
+        if (!framesPreview) return;
+        if (!selectedFrame) {
+            framesPreview.textContent = '';
+            return;
+        }
+        var template = getFrameTemplate(selectedFrame);
+        if (selectedWord) {
+            var label = getWordLabel(selectedWord.name, selectedWord.category);
+            framesPreview.textContent = template.replace('___', label);
+        } else {
+            framesPreview.textContent = template;
+        }
+    }
+
+    function openFramesModal() {
+        selectedFrame = null;
+        selectedWord = null;
+        if (framesSlotLabel) framesSlotLabel.style.display = 'none';
+        if (framesWords) framesWords.innerHTML = '';
+        if (framesPreview) framesPreview.textContent = '';
+        if (framesSpeakBtn) framesSpeakBtn.disabled = true;
+        renderFramesList();
+        if (framesOverlay) framesOverlay.classList.add('open');
+    }
+
+    function closeFramesModal() {
+        if (framesOverlay) framesOverlay.classList.remove('open');
+    }
+
+    function speakFrameAndClose() {
+        if (!selectedFrame || !selectedWord) return;
+        var template = getFrameTemplate(selectedFrame);
+        var label = getWordLabel(selectedWord.name, selectedWord.category);
+        var phrase = template.replace('___', label);
+        saveToHistory(phrase);
+        var lang = getSettings().lang;
+        var utterance = new SpeechSynthesisUtterance(phrase);
+        utterance.voice = getVoice(lang);
+        utterance.lang = lang === 'en' ? 'en' : 'pt-BR';
+        utterance.rate = getSettings().speechRate;
+        speechSynthesis.speak(utterance);
+        closeFramesModal();
+    }
+
     function initSplash() {
         var splash = document.getElementById('splashScreen');
         if (!splash) return;
@@ -616,6 +750,23 @@
     playButton.addEventListener('click', playIcons);
     clearButton.addEventListener('click', clearQuickIcons);
 
+    if (framesButton) {
+        framesButton.addEventListener('click', function () {
+            openFramesModal();
+        });
+    }
+    if (framesCloseBtn) {
+        framesCloseBtn.addEventListener('click', closeFramesModal);
+    }
+    if (framesSpeakBtn) {
+        framesSpeakBtn.addEventListener('click', speakFrameAndClose);
+    }
+    if (framesOverlay) {
+        framesOverlay.addEventListener('click', function (e) {
+            if (e.target === framesOverlay) closeFramesModal();
+        });
+    }
+
     settingsButton.addEventListener('click', function () {
         var s = getSettings();
         speechRateInput.value = s.speechRate;
@@ -628,6 +779,7 @@
         if (svomptSortBarCheck) svomptSortBarCheck.checked = s.svomptSortBar;
         if (colourfulSemanticsCheck) colourfulSemanticsCheck.checked = s.colourfulSemantics;
         if (shapeCodingCheck) shapeCodingCheck.checked = s.shapeCoding;
+        if (sentenceFramesCheck) sentenceFramesCheck.checked = s.sentenceFrames;
         renderHistory();
         showSettingsPanel('general');
         settingsOverlay.classList.add('open');
@@ -676,7 +828,7 @@
     });
 
     function showSettingsPanel(panelKey) {
-        var panels = ['general', 'svompt', 'legend', 'history'];
+        var panels = ['general', 'svompt', 'legend', 'history', 'frames'];
         panels.forEach(function (key) {
             var nav = document.getElementById('settingsNav' + key.charAt(0).toUpperCase() + key.slice(1));
             var panel = document.getElementById('settingsPanel' + key.charAt(0).toUpperCase() + key.slice(1));

@@ -25,6 +25,7 @@
     <div class="sidebar">
         <button id="playButton" class="control-button" title="Falar" aria-label="Falar frase">🔊</button>
         <button id="clearButton" class="control-button" title="Limpar" aria-label="Limpar barra">🗑️</button>
+        <button id="framesButton" class="control-button" title="Moldes" aria-label="Moldes de frase" style="display: none;">📝</button>
         <button id="settingsButton" class="control-button" title="Configurações" aria-label="Configurações">🔧</button>
         <button id="backButton" class="control-button" title="Início" aria-label="Voltar às categorias">🏠</button>
     </div>
@@ -44,6 +45,7 @@
                     <button type="button" class="settings-nav-item" data-panel="svompt" id="settingsNavSvompt">SVOMPT</button>
                     <button type="button" class="settings-nav-item" data-panel="legend" id="settingsNavLegend">Legenda</button>
                     <button type="button" class="settings-nav-item" data-panel="history" id="settingsNavHistory">Histórico</button>
+                    <button type="button" class="settings-nav-item" data-panel="frames" id="settingsNavFrames">Moldes</button>
                 </nav>
                 <div class="settings-content">
                     <section class="settings-panel active" id="settingsPanelGeneral" aria-labelledby="settingsNavGeneral">
@@ -107,6 +109,14 @@
                         <ul id="historyList" class="history-list" aria-label="Últimas frases faladas"></ul>
                         <button type="button" id="clearHistoryBtn" class="history-clear">Limpar histórico</button>
                     </section>
+                    <section class="settings-panel" id="settingsPanelFrames" aria-labelledby="settingsNavFrames" hidden>
+                        <strong id="framesSettingsTitle">Moldes de frase</strong>
+                        <p class="settings-hint" id="hintFrames"></p>
+                        <div class="settings-row">
+                            <label><input type="checkbox" id="sentenceFramesCheck"> <span id="sentenceFramesLabel">Ativar Moldes de frase</span></label>
+                            <p class="settings-hint" id="hintSentenceFrames"></p>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -114,7 +124,25 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+    <div class="frames-overlay" id="framesOverlay" role="dialog" aria-modal="true" aria-labelledby="framesModalTitle">
+        <div class="frames-modal">
+            <div class="frames-header">
+                <h2 id="framesModalTitle">Moldes de frase</h2>
+                <button type="button" id="framesCloseBtn" aria-label="Fechar">×</button>
+            </div>
+            <p class="frames-intro" id="framesIntro"></p>
+            <div class="frames-list" id="framesList" aria-label="Lista de moldes"></div>
+            <p class="frames-slot-label" id="framesSlotLabel"></p>
+            <div class="frames-words" id="framesWords"></div>
+            <div class="frames-preview" id="framesPreview"></div>
+            <div class="frames-actions">
+                <button type="button" id="framesSpeakBtn" class="primary" disabled>Falar frase</button>
+            </div>
+        </div>
+    </div>
+
     <script src="assets/js/vocabulary.js"></script>
+    <script src="assets/js/sentenceFrames.js"></script>
     <script src="assets/js/translations.js"></script>
     <script src="assets/js/index.js"></script>
 </body>
