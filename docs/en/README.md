@@ -16,6 +16,7 @@ Emotalk project (AAC app with emojis) documentation.
 | **[Frames (Frame Semantics / Fillmore)](FRAME_SEMANTICS.html)** | Semantic frames with multiple roles (Giving, Eating, Going, Wanting, etc.); enabling and use in Emotalk. |
 | **[Core icons (MINSPEAK)](MINSPEAK.html)** | Core icons mode (semantic compaction); 6 icons on first screen; 2-tap access. |
 | **[Dependency Grammar](DEPENDENCY_GRAMMAR.html)** | Tesnière; verb as head; how Emotalk (SVOMPT, Frames, roles) aligns with this perspective. |
+| **[Case Grammar (Fillmore)](CASE_GRAMMAR.html)** | Cases (Agent, Patient, etc.); roles and Frames in Emotalk as realisation of Case Grammar. |
 
 ## Overview
 
@@ -70,6 +71,7 @@ Contributions are welcome: fork the repo, create a branch, commit your changes, 
 - **[Frames (Frame Semantics / Fillmore)](FRAME_SEMANTICS.html)** — semantic frames with multiple roles; enabling and use.
 - **[Core icons (MINSPEAK)](MINSPEAK.html)** — core icons mode (semantic compaction); 6 icons on first screen.
 - **[Dependency Grammar](DEPENDENCY_GRAMMAR.html)** — Tesnière; verb as head; how Emotalk aligns with Dependency Grammar.
+- **[Case Grammar (Fillmore)](CASE_GRAMMAR.html)** — Cases (Agent, Patient, etc.); roles and Frames as realisation of Case Grammar.
 
 ### License
 

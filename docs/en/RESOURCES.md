@@ -147,6 +147,18 @@ This document describes all resources available in Emotalk and the justification
 
 ---
 
+## 17. Case Grammar (Fillmore)
+
+**What it is:** **Case Grammar** (Fillmore, 1968) proposes that the verb assigns **cases** (deep semantic roles) to its arguments: Agent (who does), Patient/Theme (what is affected), Dative/Recipient (to whom), Locative (where), Time (when), Manner (how). Emotalk **already implements** this perspective: the roles on the board — Who, What doing, What, Where, When, How — correspond to those cases; the **Frames** (Frame Semantics) feature is case frames per verb (Giving, Eating, Going, etc.); Colourful Semantics and Shape Coding make each case visible by colour and shape. There is no separate interface labelled “Case Grammar” — semantic roles and Frames are that interface.
+
+**Justification:** Case Grammar and Frame Semantics (Fillmore’s evolution) are used in linguistics and in AAC/speech therapy to structure sentence production by roles. Documenting the relation allows educators and therapists who work with cases (Agent, Patient, Dative, etc.) to recognise the same logic in Emotalk and use Frames and the SVOMPT bar in alignment with Case Grammar.
+
+**Reference:** Fillmore, C. J. — “The case for case” (1968); Case Grammar; Frame Semantics and FrameNet as evolution.
+
+**Dedicated document:** [Case Grammar (Fillmore)](CASE_GRAMMAR.html).
+
+---
+
 ## Summary
 
 | Resource | Where to configure / use | Main basis or benefit |
@@ -162,9 +174,11 @@ This document describes all resources available in Emotalk and the justification
 | **Sentence frames** | Frames button (📝); Settings → Frames | Phrases with slot; reduces load and practises structures |
 | **Core icons (MINSPEAK)** | Settings → Core icons | Semantic compaction; 2-tap access; fewer icons on screen |
 | **Frames (Frame Semantics)** | Frames button (🖼️); Settings → Fillmore frames | Fillmore; multi-role frames; full sentences |
+| **Dependency Grammar** | (concept; no dedicated UI) | Tesnière; verb as head; compatible with SVOMPT and Frames |
+| **Case Grammar (Fillmore)** | Roles + Frames (already implemented) | Cases (Agent, Patient, etc.); Frames = case frames |
 | PWA / offline | Install from browser | Use without internet |
 | Splash screen | On app open | Identity and smooth transition |
 | Emoji vocabulary | [Vocabulary](VOCABULARY.html) | Visual, categorised access |
 | Accessibility | Keyboard, ARIA, Larger font | Inclusion and usability |
 
-**Related documents:** [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Dependency Grammar](DEPENDENCY_GRAMMAR.html), [Vocabulary](VOCABULARY.html), [Index](README.html).
+**Related documents:** [Case Grammar](CASE_GRAMMAR.html), [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Dependency Grammar](DEPENDENCY_GRAMMAR.html), [Vocabulary](VOCABULARY.html), [Index](README.html).

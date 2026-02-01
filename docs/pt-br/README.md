@@ -16,6 +16,7 @@ Documentação do projeto Emotalk (aplicativo CAA com emojis).
 | **[Quadros (Frame Semantics / Fillmore)](FRAME_SEMANTICS.html)** | Quadros semânticos com vários papéis (Dar, Comer, Ir, Querer, etc.); ativação e uso no Emotalk. |
 | **[Ícones centrais (MINSPEAK)](MINSPEAK.html)** | Modo ícones centrais (compação semântica); 6 ícones no primeiro ecrã; acesso em 2 toques. |
 | **[Gramática de Dependências](DEPENDENCY_GRAMMAR.html)** | Tesnière; verbo como núcleo; compatibilidade do Emotalk (SVOMPT, Quadros, papéis) com esta perspetiva. |
+| **[Case Grammar (Fillmore)](CASE_GRAMMAR.html)** | Casos (Agent, Patient, etc.); papéis e Quadros no Emotalk como realização da Case Grammar. |
 
 ## Visão geral
 
@@ -67,6 +68,7 @@ Contribuições são bem-vindas: faça um fork do repositório, crie uma branch,
 - **[Quadros (Frame Semantics / Fillmore)](FRAME_SEMANTICS.html)** — quadros semânticos com vários papéis; ativação e uso.
 - **[Ícones centrais (MINSPEAK)](MINSPEAK.html)** — modo ícones centrais (compação semântica); 6 ícones no primeiro ecrã.
 - **[Gramática de Dependências](DEPENDENCY_GRAMMAR.html)** — Tesnière; verbo como núcleo; compatibilidade do Emotalk com Dependency Grammar.
+- **[Case Grammar (Fillmore)](CASE_GRAMMAR.html)** — Casos (Agent, Patient, etc.); papéis e Quadros como realização da Case Grammar.
 
 ### Licença
 

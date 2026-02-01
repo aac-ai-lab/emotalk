@@ -157,6 +157,18 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ---
 
+## 17. Case Grammar (Fillmore)
+
+**O que é:** A **Case Grammar** (Fillmore, 1968) propõe que o verbo atribui **casos** (papéis semânticos profundos) aos seus argumentos: Agent (quem faz), Patient/Theme (o quê é afetado), Dative/Recipient (a quem), Locative (onde), Time (quando), Manner (como). O Emotalk **já implementa** esta perspetiva: os papéis na prancha — Quem, O quê faz, O quê, Onde, Quando, Como — correspondem a esses casos; o recurso **Quadros** (Frame Semantics) são case frames por verbo (Dar, Comer, Ir, etc.); Colourful Semantics e Shape Coding tornam cada caso visível por cor e forma. Não existe uma interface separada com o nome «Case Grammar» — os papéis semânticos e os Quadros são a interface.
+
+**Justificativa:** A Case Grammar e a Frame Semantics (evolução de Fillmore) são usadas em linguística e em CAA/terapia da fala para estruturar a produção de frases por papéis. Documentar a relação permite que educadores e terapeutas que trabalham com casos (Agent, Patient, Dative, etc.) reconheçam no Emotalk a mesma lógica e usem os Quadros e a barra SVOMPT em alinhamento com Case Grammar.
+
+**Referência:** Fillmore, C. J. — «The case for case» (1968); Case Grammar; Frame Semantics e FrameNet como evolução.
+
+**Documento dedicado:** [Case Grammar (Fillmore)](CASE_GRAMMAR.html).
+
+---
+
 ## Resumo
 
 | Recurso | Onde configurar / usar | Base ou benefício principal |
@@ -173,9 +185,10 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 | **Ícones centrais (MINSPEAK)** | Configurações → Ícones centrais | Compação semântica; 2 toques; menos ícones no ecrã |
 | **Quadros (Frame Semantics)** | Botão Quadros (🖼️); Configurações → Quadros (Fillmore) | Fillmore; quadros com vários papéis; frases completas |
 | **Gramática de Dependências** | (conceito; sem UI dedicada) | Tesnière; verbo como núcleo; compatível com SVOMPT e Quadros |
+| **Case Grammar (Fillmore)** | Papéis + Quadros (já implementado) | Casos (Agent, Patient, etc.); Quadros = case frames |
 | PWA / offline | Instalação no browser | Uso sem internet |
 | Splash screen | Ao abrir a app | Identidade e transição suave |
 | Vocabulário emojis | [Vocabulário](VOCABULARY.html) | Acesso visual, categorizado |
 | Acessibilidade | Teclado, ARIA, Fonte maior | Inclusão e usabilidade |
 
-**Documentos relacionados:** [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Gramática de Dependências](DEPENDENCY_GRAMMAR.html), [Vocabulário](VOCABULARY.html), [Índice](README.html).
+**Documentos relacionados:** [Case Grammar](CASE_GRAMMAR.html), [Colourful Semantics](COLOURFUL_SEMANTICS.html), [Gramática de Dependências](DEPENDENCY_GRAMMAR.html), [Vocabulário](VOCABULARY.html), [Índice](README.html).
