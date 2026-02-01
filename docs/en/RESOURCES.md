@@ -71,7 +71,7 @@ This document describes all resources available in Emotalk and the justification
 
 ## 7. Settings (modal and vertical menu)
 
-**What it is:** A settings modal with a vertical menu (General, SVOMPT, Legend, History) groups all options: language, speech rate, larger font, SVOMPT options, enable/disable Colourful Semantics, enable/disable Shape Coding, and phrase history. Each section includes descriptions and usage suggestions.
+**What it is:** A settings modal with a vertical menu (General, SVOMPT, Legend, History, Frames) groups all options: language, speech rate, larger font, SVOMPT options, enable/disable Colourful Semantics, enable/disable Shape Coding, and phrase history. Each section includes descriptions and usage suggestions.
 
 **Justification:** Centralising options in one place reduces the apparent complexity of the main interface. The vertical menu and descriptions make settings easier to find and understand for therapists, educators, or families, and allow customising Emotalk without changing code.
 
@@ -85,7 +85,15 @@ This document describes all resources available in Emotalk and the justification
 
 ---
 
-## 9. PWA and offline use
+## 9. Sentence frames (Moldes de frase)
+
+**What it is:** Sentence frames are phrases with a fixed part and one blank slot to fill — for example «I want ___», «Where is ___?», or «I want to drink ___». The user taps the **Frames** button (📝) in the sidebar, chooses a frame from the list, then a word that fits the slot (objects, places, adjectives, etc., depending on the frame), and taps **Speak sentence** to hear the full sentence. The option can be enabled or disabled in Settings → Frames; when enabled, the Frames button is visible between Clear and Settings.
+
+**Justification:** Sentence frames are a technique used in AAC and speech therapy to reduce the load of building a sentence from scratch: the structure is given and the user only fills the slot. This facilitates production of complete sentences and practises common grammatical structures (requests, location, states, etc.). The app filters words by semantic role (What, Where, How/Describe) so that only options that fit the frame’s slot are shown.
+
+---
+
+## 10. PWA and offline use
 
 **What it is:** Emotalk can be installed as an app (PWA) from the browser and used offline. A service worker caches the required files.
 
@@ -93,7 +101,7 @@ This document describes all resources available in Emotalk and the justification
 
 ---
 
-## 10. Splash screen
+## 11. Splash screen
 
 **What it is:** When opening the app, a splash screen with the name “Emotalk” is shown briefly; it disappears after a few seconds or on tap.
 
@@ -101,7 +109,7 @@ This document describes all resources available in Emotalk and the justification
 
 ---
 
-## 11. Vocabulary with emojis (categories and words)
+## 12. Vocabulary with emojis (categories and words)
 
 **What it is:** The board includes multiple categories (drinks, people, activities, emotions, places, etc.) with words represented by emojis. The vocabulary is described in [Vocabulary](VOCABULARY.html).
 
@@ -109,7 +117,7 @@ This document describes all resources available in Emotalk and the justification
 
 ---
 
-## 12. Accessibility (keyboard, ARIA, larger font)
+## 13. Accessibility (keyboard, ARIA, larger font)
 
 **What it is:** Keyboard navigation (Enter and Space to activate buttons and items), ARIA attributes for screen readers, and a “Larger font” option in Settings → General to increase text and icon size.
 
@@ -129,6 +137,7 @@ This document describes all resources available in Emotalk and the justification
 | Speech synthesis | Speak button; rate in General | Auditory communication; adjustable rate |
 | Settings (modal) | Settings button | Customisation without changing code |
 | Phrase history | Settings → History | Review, repetition, recording |
+| **Sentence frames** | Frames button (📝); Settings → Frames | Phrases with slot; reduces load and practises structures |
 | PWA / offline | Install from browser | Use without internet |
 | Splash screen | On app open | Identity and smooth transition |
 | Emoji vocabulary | [Vocabulary](VOCABULARY.html) | Visual, categorised access |

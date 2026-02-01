@@ -71,7 +71,7 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ## 7. Configurações (modal e menu vertical)
 
-**O que é:** Um modal de configurações com menu vertical (Geral, SVOMPT, Legenda, Histórico) agrupa todas as opções: idioma, velocidade da fala, fonte maior, opções SVOMPT, ativar/desativar Colourful Semantics, ativar/desativar Shape Coding, e histórico de frases. Cada secção inclui descrições e sugestões de uso.
+**O que é:** Um modal de configurações com menu vertical (Geral, SVOMPT, Legenda, Histórico, Moldes) agrupa todas as opções: idioma, velocidade da fala, fonte maior, opções SVOMPT, ativar/desativar Colourful Semantics, ativar/desativar Shape Coding, e histórico de frases. Cada secção inclui descrições e sugestões de uso.
 
 **Justificativa:** Centralizar as opções num único sítio reduz a complexidade aparente da interface principal. O menu vertical e as descrições tornam as configurações mais fáceis de encontrar e de entender por terapeutas, educadores ou famílias, e permitem personalizar o Emotalk sem alterar código.
 
@@ -85,7 +85,15 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ---
 
-## 9. PWA e uso offline
+## 9. Moldes de frase (Sentence Frames)
+
+**O que é:** Moldes de frase são frases com uma parte fixa e um espaço em branco para preencher — por exemplo «Eu quero ___», «Onde está ___?» ou «Quero beber ___». O utilizador carrega no botão **Moldes** (📝) na barra lateral, escolhe um molde na lista, depois uma palavra que se encaixa no espaço (objetos, lugares, adjetivos, etc., conforme o molde), e carrega em **Falar frase** para ouvir a frase completa. A opção pode ser ativada ou desativada em Configurações → Moldes; quando ativada, o botão Moldes fica visível entre Limpar e Configurações.
+
+**Justificativa:** Os moldes de frase (Sentence Frames) são uma técnica usada em CAA e terapia da fala para reduzir a carga de construir a frase do zero: a estrutura já está dada e o utilizador só preenche o slot. Isso facilita a produção de frases completas e treina estruturas gramaticais comuns (pedidos, localização, estados, etc.). A aplicação filtra as palavras por papel semântico (O quê, Onde, Como/Descrever) para que só apareçam opções compatíveis com o espaço do molde.
+
+---
+
+## 10. PWA e uso offline
 
 **O que é:** O Emotalk pode ser instalado como aplicação (PWA) a partir do navegador e usado offline. Um service worker faz cache dos ficheiros necessários.
 
@@ -93,7 +101,7 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ---
 
-## 10. Splash screen
+## 11. Splash screen
 
 **O que é:** Ao abrir a aplicação, é mostrada brevemente uma tela de splash com o nome “Emotalk”; desaparece ao fim de alguns segundos ou com um toque.
 
@@ -101,7 +109,7 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ---
 
-## 11. Vocabulário com emojis (categorias e palavras)
+## 12. Vocabulário com emojis (categorias e palavras)
 
 **O que é:** A prancha inclui múltiplas categorias (bebidas, pessoas, atividades, emoções, lugares, etc.) com palavras representadas por emojis. O vocabulário está descrito em [Vocabulário](VOCABULARY.html).
 
@@ -109,7 +117,7 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ---
 
-## 12. Acessibilidade (teclado, ARIA, fonte maior)
+## 13. Acessibilidade (teclado, ARIA, fonte maior)
 
 **O que é:** Navegação por teclado (Enter e Espaço para ativar botões e itens), atributos ARIA para leitores de ecrã, e opção “Fonte maior” em Configurações → Geral para aumentar o tamanho dos textos e ícones.
 
@@ -129,6 +137,7 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 | Síntese de fala | Botão Falar; velocidade em Geral | Comunicação auditiva; velocidade ajustável |
 | Configurações (modal) | Botão Configurações | Personalização sem alterar código |
 | Histórico de frases | Configurações → Histórico | Revisão, repetição, registo |
+| **Moldes de frase** | Botão Moldes (📝); Configurações → Moldes | Frases com slot; reduz carga e treina estruturas |
 | PWA / offline | Instalação no browser | Uso sem internet |
 | Splash screen | Ao abrir a app | Identidade e transição suave |
 | Vocabulário emojis | [Vocabulário](VOCABULARY.html) | Acesso visual, categorizado |

@@ -421,8 +421,10 @@ body.font-large .word-icon { font-size: 1.75rem; }
     font-size: 0.9rem;
     color: #555;
     line-height: 1.4;
-    margin: 0 0 20px;
-    padding-bottom: 16px;
+}
+.settings-frames-whatis {
+    margin: 0 0 16px;
+    padding-bottom: 12px;
     border-bottom: 1px solid #eee;
 }
 .settings-row { margin-bottom: 18px; }

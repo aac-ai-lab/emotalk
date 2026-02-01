@@ -69,13 +69,14 @@
             btnFrames: 'Moldes',
             btnFramesAria: 'Abrir moldes de frase',
             framesTitle: 'Moldes de frase',
-            framesIntro: 'Escolha um molde e depois uma palavra para completar a frase.',
+            framesWhatIs: 'Moldes de frase (Sentence Frames) são frases com uma parte fixa e um espaço em branco para preencher — por exemplo «Eu quero ___» ou «Onde está ___?». O utilizador escolhe primeiro o molde e depois uma palavra que se encaixa no espaço (objetos, lugares, etc.), e a aplicação fala a frase completa. Esta técnica é usada em CAA e terapia da fala para reduzir a carga de construir a frase do zero e para treinar estruturas gramaticais comuns.',
+            framesIntro: 'Moldes de frase são frases com um espaço em branco (ex.: «Eu quero ___»). Passo a passo: (1) escolha um molde abaixo; (2) escolha uma palavra para o espaço; (3) carregue em «Falar frase» para ouvir a frase completa.',
             framesSlotLabel: 'Escolha uma palavra para o espaço:',
             framesSpeak: 'Falar frase',
             framesChooseWord: 'Escolha uma palavra',
-            hintFrames: 'Moldes de frase (Sentence Frames) ajudam a construir frases com uma estrutura fixa e um espaço a preencher (ex.: «Eu quero ___»). Ative para mostrar o botão Moldes na barra lateral.',
+            hintFrames: 'Ative para mostrar o botão Moldes (📝) na barra lateral, entre Limpar e Configurações. Quando desativado, o botão fica oculto.',
             sentenceFramesLabel: 'Ativar Moldes de frase',
-            sentenceFramesHint: 'Quando ativado, o botão Moldes permite escolher um molde (ex.: «Eu quero ___»), depois uma palavra compatível com o espaço, e falar a frase completa.'
+            sentenceFramesHint: 'Quando ativado, o botão Moldes abre uma janela onde se escolhe um molde (ex.: «Eu quero ___»), depois uma palavra compatível com o espaço, e «Falar frase» para vocalizar a frase completa.'
         },
         'en': {
             appTitle: 'Emotalk - Augmentative and Alternative Communication',
@@ -144,13 +145,14 @@
             btnFrames: 'Frames',
             btnFramesAria: 'Open sentence frames',
             framesTitle: 'Sentence frames',
-            framesIntro: 'Choose a frame, then a word to complete the sentence.',
+            framesWhatIs: 'Sentence frames are phrases with a fixed part and one blank slot to fill — for example «I want ___» or «Where is ___?». The user first chooses the frame, then a word that fits the slot (objects, places, etc.), and the app speaks the full sentence. This technique is used in AAC and speech therapy to reduce the load of building a sentence from scratch and to practise common grammatical structures.',
+            framesIntro: 'Sentence frames are phrases with a blank slot (e.g. «I want ___»). Step by step: (1) choose a frame below; (2) choose a word for the slot; (3) tap «Speak sentence» to hear the full sentence.',
             framesSlotLabel: 'Choose a word for the slot:',
             framesSpeak: 'Speak sentence',
             framesChooseWord: 'Choose a word',
-            hintFrames: 'Sentence frames help build sentences with a fixed structure and one slot to fill (e.g. «I want ___»). Enable to show the Frames button in the sidebar.',
+            hintFrames: 'Enable to show the Frames button (📝) in the sidebar, between Clear and Settings. When disabled, the button is hidden.',
             sentenceFramesLabel: 'Enable Sentence frames',
-            sentenceFramesHint: 'When on, the Frames button lets you choose a frame (e.g. «I want ___»), then a word that fits the slot, and speak the full sentence.'
+            sentenceFramesHint: 'When on, the Frames button opens a window where you choose a frame (e.g. «I want ___»), then a word that fits the slot, and «Speak sentence» to vocalise the full sentence.'
         }
     };
 

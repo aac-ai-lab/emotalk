@@ -95,10 +95,10 @@
                 svomptSortBar: !!s.svomptSortBar,
                 colourfulSemantics: s.colourfulSemantics !== false,
                 shapeCoding: !!s.shapeCoding,
-                sentenceFrames: !!s.sentenceFrames
+                sentenceFrames: s.sentenceFrames !== false
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: false };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: true };
         }
     }
 
@@ -203,6 +203,8 @@
         if (framesSpeakBtn) framesSpeakBtn.textContent = getUI('framesSpeak');
         var framesSettingsTitle = document.getElementById('framesSettingsTitle');
         if (framesSettingsTitle) framesSettingsTitle.textContent = getUI('framesTitle');
+        var framesWhatIsEl = document.getElementById('framesWhatIs');
+        if (framesWhatIsEl) framesWhatIsEl.textContent = getUI('framesWhatIs');
         var sentenceFramesLabelEl = document.getElementById('sentenceFramesLabel');
         if (sentenceFramesLabelEl) sentenceFramesLabelEl.textContent = getUI('sentenceFramesLabel');
         if (framesCloseBtn) framesCloseBtn.setAttribute('aria-label', getUI('close'));
