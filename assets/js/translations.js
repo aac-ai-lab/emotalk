@@ -56,7 +56,13 @@
             hintSvomptGuided: 'Após adicionar uma palavra, aparece uma sugestão do próximo slot (ex.: «Próximo: Verbo»). Útil para treinar a ordem da frase.',
             hintSvomptSortBar: 'Cada nova palavra faz a barra ser reordenada automaticamente por S-V-O-M-P-T. Só tem efeito quando «Barra com slots» está desativada.',
             hintLegend: 'As cores indicam o papel de cada palavra na frase (Quem, O quê faz, O quê, Onde, Quando, Como). Apoia a construção de frases.',
-            hintHistory: 'Mostra as últimas frases faladas. Útil para rever, repetir ou partilhar com o terapeuta ou educador.'
+            colourfulSemanticsLabel: 'Ativar Legenda (Colourful Semantics)',
+            colourfulSemanticsHint: 'Quando ativado, categorias e palavras mostram cores por papel na frase (Quem, O quê faz, etc.). Quando desativado, todos os itens usam estilo neutro.',
+            hintHistory: 'Mostra as últimas frases faladas. Útil para rever, repetir ou partilhar com o terapeuta ou educador.',
+            menuGeneral: 'Geral',
+            menuSvompt: 'SVOMPT',
+            menuLegend: 'Legenda',
+            menuHistory: 'Histórico'
         },
         'en': {
             appTitle: 'Emotalk - Augmentative and Alternative Communication',
@@ -112,7 +118,11 @@
             hintSvomptGuided: 'After adding a word, a suggestion for the next slot appears (e.g. «Next: Verb»). Useful for practising sentence order.',
             hintSvomptSortBar: 'Each new word causes the bar to be reordered automatically by S-V-O-M-P-T. Only applies when «Bar with slots» is off.',
             hintLegend: 'Colours show each word’s role in the sentence (Who, What doing, What, Where, When, How). Supports sentence building.',
-            hintHistory: 'Shows the last spoken phrases. Useful for reviewing, repeating, or sharing with a therapist or educator.'
+            hintHistory: 'Shows the last spoken phrases. Useful for reviewing, repeating, or sharing with a therapist or educator.',
+            menuGeneral: 'General',
+            menuSvompt: 'SVOMPT',
+            menuLegend: 'Legend',
+            menuHistory: 'History'
         }
     };
 

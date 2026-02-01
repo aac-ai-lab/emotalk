@@ -31,57 +31,75 @@
 
     <div class="settings-overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
         <div class="settings-modal">
-            <h2 id="settingsTitle">Configurações</h2>
-            <p class="settings-intro" id="settingsIntro">Ajuste a interface e as opções de fala conforme a necessidade do utilizador.</p>
-            <div class="settings-row">
-                <label for="langSelect" id="langLabel">Idioma</label>
-                <select id="langSelect" aria-label="Idioma">
-                    <option value="pt-BR">Português (Brasil)</option>
-                    <option value="en">English</option>
-                </select>
-                <p class="settings-hint" id="hintLang"></p>
+            <div class="settings-header">
+                <h2 id="settingsTitle">Configurações</h2>
+                <div class="settings-actions settings-actions-top">
+                    <button type="button" id="settingsClose">Fechar</button>
+                    <button type="button" id="settingsSave" class="primary">Salvar</button>
+                </div>
             </div>
-            <div class="settings-row">
-                <label for="speechRate">Velocidade da fala</label>
-                <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1">
-                <output id="speechRateValue">1</output>
-                <p class="settings-hint" id="hintSpeechRate"></p>
-            </div>
-            <div class="settings-row">
-                <label><input type="checkbox" id="fontLarge"> Fonte maior</label>
-                <p class="settings-hint" id="hintFontLarge"></p>
-            </div>
-            <div class="settings-row settings-svompt">
-                <strong id="svomptTitle">SVOMPT (ordem da frase)</strong>
-                <p class="settings-hint" id="hintSvomptIntro"></p>
-                <label><input type="checkbox" id="svomptSpeakOrder"> Ordenar frase ao falar (S-V-O-M-P-T)</label>
-                <p class="settings-hint settings-hint-indent" id="hintSvomptSpeakOrder"></p>
-                <label><input type="checkbox" id="svomptSlots"> Barra com slots S-V-O-M-P-T</label>
-                <p class="settings-hint settings-hint-indent" id="hintSvomptSlots"></p>
-                <label><input type="checkbox" id="svomptGuided"> Modo guiado (sugerir próximo slot)</label>
-                <p class="settings-hint settings-hint-indent" id="hintSvomptGuided"></p>
-                <label><input type="checkbox" id="svomptSortBar"> Ordenar barra por SVOMPT</label>
-                <p class="settings-hint settings-hint-indent" id="hintSvomptSortBar"></p>
-            </div>
-            <div class="settings-row settings-legend">
-                <strong>Legenda (Colourful Semantics)</strong>
-                <p class="settings-hint" id="hintLegend"></p>
-                <span style="background:#e67e22"></span> Quem
-                <span style="background:#f1c40f"></span> O quê faz
-                <span style="background:#27ae60"></span> O quê
-                <span style="background:#3498db"></span> Onde
-                <span style="background:#8b6914"></span> Quando
-                <span style="background:#9b59b6"></span> Como/Descrever
-            </div>
-            <div class="settings-row settings-history">
-                <strong>Histórico de frases</strong>
-                <p class="settings-hint" id="hintHistory"></p>
-                <ul id="historyList" class="history-list" aria-label="Últimas frases faladas"></ul>
-                <button type="button" id="clearHistoryBtn" class="history-clear">Limpar histórico</button>
-            </div>
-            <div class="settings-actions">
-                <button type="button" id="settingsClose">Fechar</button>
-                <button type="button" id="settingsSave" class="primary">Salvar</button>
+            <div class="settings-body">
+                <nav class="settings-nav" aria-label="Secções de configurações">
+                    <button type="button" class="settings-nav-item active" data-panel="general" id="settingsNavGeneral">Geral</button>
+                    <button type="button" class="settings-nav-item" data-panel="svompt" id="settingsNavSvompt">SVOMPT</button>
+                    <button type="button" class="settings-nav-item" data-panel="legend" id="settingsNavLegend">Legenda</button>
+                    <button type="button" class="settings-nav-item" data-panel="history" id="settingsNavHistory">Histórico</button>
+                </nav>
+                <div class="settings-content">
+                    <section class="settings-panel active" id="settingsPanelGeneral" aria-labelledby="settingsNavGeneral">
+                        <p class="settings-intro" id="settingsIntro">Ajuste a interface e as opções de fala conforme a necessidade do utilizador.</p>
+                        <div class="settings-row">
+                            <label for="langSelect" id="langLabel">Idioma</label>
+                            <select id="langSelect" aria-label="Idioma">
+                                <option value="pt-BR">Português (Brasil)</option>
+                                <option value="en">English</option>
+                            </select>
+                            <p class="settings-hint" id="hintLang"></p>
+                        </div>
+                        <div class="settings-row">
+                            <label for="speechRate">Velocidade da fala</label>
+                            <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1">
+                            <output id="speechRateValue">1</output>
+                            <p class="settings-hint" id="hintSpeechRate"></p>
+                        </div>
+                        <div class="settings-row">
+                            <label><input type="checkbox" id="fontLarge"> Fonte maior</label>
+                            <p class="settings-hint" id="hintFontLarge"></p>
+                        </div>
+                    </section>
+                    <section class="settings-panel" id="settingsPanelSvompt" aria-labelledby="settingsNavSvompt" hidden>
+                        <strong id="svomptTitle">SVOMPT (ordem da frase)</strong>
+                        <p class="settings-hint" id="hintSvomptIntro"></p>
+                        <div class="settings-row settings-svompt-inner">
+                            <label><input type="checkbox" id="svomptSpeakOrder"> Ordenar frase ao falar (S-V-O-M-P-T)</label>
+                            <p class="settings-hint settings-hint-indent" id="hintSvomptSpeakOrder"></p>
+                            <label><input type="checkbox" id="svomptSlots"> Barra com slots S-V-O-M-P-T</label>
+                            <p class="settings-hint settings-hint-indent" id="hintSvomptSlots"></p>
+                            <label><input type="checkbox" id="svomptGuided"> Modo guiado (sugerir próximo slot)</label>
+                            <p class="settings-hint settings-hint-indent" id="hintSvomptGuided"></p>
+                            <label><input type="checkbox" id="svomptSortBar"> Ordenar barra por SVOMPT</label>
+                            <p class="settings-hint settings-hint-indent" id="hintSvomptSortBar"></p>
+                        </div>
+                    </section>
+                    <section class="settings-panel" id="settingsPanelLegend" aria-labelledby="settingsNavLegend" hidden>
+                        <strong>Legenda (Colourful Semantics)</strong>
+                        <p class="settings-hint" id="hintLegend"></p>
+                        <div class="settings-legend-inner">
+                            <span style="background:#e67e22"></span> Quem
+                            <span style="background:#f1c40f"></span> O quê faz
+                            <span style="background:#27ae60"></span> O quê
+                            <span style="background:#3498db"></span> Onde
+                            <span style="background:#8b6914"></span> Quando
+                            <span style="background:#9b59b6"></span> Como/Descrever
+                        </div>
+                    </section>
+                    <section class="settings-panel" id="settingsPanelHistory" aria-labelledby="settingsNavHistory" hidden>
+                        <strong>Histórico de frases</strong>
+                        <p class="settings-hint" id="hintHistory"></p>
+                        <ul id="historyList" class="history-list" aria-label="Últimas frases faladas"></ul>
+                        <button type="button" id="clearHistoryBtn" class="history-clear">Limpar histórico</button>
+                    </section>
+                </div>
             </div>
         </div>
     </div>

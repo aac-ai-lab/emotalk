@@ -138,9 +138,9 @@
         var fontLargeLabel = document.querySelector('label[for="fontLarge"]');
         if (fontLargeLabel) fontLargeLabel.textContent = getUI('fontLargeLabel');
         if (langLabel) langLabel.textContent = getUI('langLabel');
-        var legendTitle = settingsOverlay ? settingsOverlay.querySelector('.settings-legend strong') : null;
+        var legendTitle = document.getElementById('settingsPanelLegend') ? document.querySelector('#settingsPanelLegend strong') : null;
         if (legendTitle) legendTitle.textContent = getUI('legendTitle');
-        var legendSpans = settingsOverlay ? settingsOverlay.querySelectorAll('.settings-legend span') : [];
+        var legendSpans = settingsOverlay ? settingsOverlay.querySelectorAll('.settings-legend-inner span') : [];
         if (legendSpans.length >= 6) {
             legendSpans[0].nextSibling.textContent = ' ' + getUI('who');
             legendSpans[1].nextSibling.textContent = ' ' + getUI('whatDoing');
@@ -149,14 +149,20 @@
             legendSpans[4].nextSibling.textContent = ' ' + getUI('when');
             legendSpans[5].nextSibling.textContent = ' ' + getUI('howDescribe');
         }
-        var historyTitleEl = settingsOverlay ? settingsOverlay.querySelector('.settings-history strong') : null;
+        var historyTitleEl = document.getElementById('settingsPanelHistory') ? document.querySelector('#settingsPanelHistory strong') : null;
         if (historyTitleEl) historyTitleEl.textContent = getUI('historyTitle');
+        var navIds = ['settingsNavGeneral', 'settingsNavSvompt', 'settingsNavLegend', 'settingsNavHistory'];
+        var navKeys = ['menuGeneral', 'menuSvompt', 'menuLegend', 'menuHistory'];
+        navIds.forEach(function (id, i) {
+            var el = document.getElementById(id);
+            if (el && navKeys[i]) el.textContent = getUI(navKeys[i]);
+        });
         if (historyList) historyList.setAttribute('aria-label', getUI('historyAria'));
         if (clearHistoryBtn) clearHistoryBtn.textContent = getUI('clearHistory');
         if (settingsCloseBtn) settingsCloseBtn.textContent = getUI('close');
         if (settingsSave) settingsSave.textContent = getUI('save');
         if (svomptTitleEl) svomptTitleEl.textContent = getUI('svomptTitle');
-        var svomptLabels = settingsOverlay ? settingsOverlay.querySelectorAll('.settings-svompt label') : [];
+        var svomptLabels = settingsOverlay ? settingsOverlay.querySelectorAll('.settings-svompt-inner label') : [];
         if (svomptLabels.length >= 4) {
             svomptLabels[0].childNodes[1].textContent = ' ' + getUI('svomptSpeakOrder');
             svomptLabels[1].childNodes[1].textContent = ' ' + getUI('svomptSlots');
@@ -607,6 +613,7 @@
         if (svomptGuidedCheck) svomptGuidedCheck.checked = s.svomptGuided;
         if (svomptSortBarCheck) svomptSortBarCheck.checked = s.svomptSortBar;
         renderHistory();
+        showSettingsPanel('general');
         settingsOverlay.classList.add('open');
         speechRateInput.focus();
     });
@@ -648,6 +655,26 @@
         if (e.target === settingsOverlay) {
             settingsOverlay.classList.remove('open');
         }
+    });
+
+    function showSettingsPanel(panelKey) {
+        var panels = ['general', 'svompt', 'legend', 'history'];
+        panels.forEach(function (key) {
+            var nav = document.getElementById('settingsNav' + key.charAt(0).toUpperCase() + key.slice(1));
+            var panel = document.getElementById('settingsPanel' + key.charAt(0).toUpperCase() + key.slice(1));
+            if (nav) nav.classList.toggle('active', key === panelKey);
+            if (panel) {
+                panel.classList.toggle('active', key === panelKey);
+                panel.hidden = key !== panelKey;
+            }
+        });
+    }
+    var navItems = settingsOverlay ? settingsOverlay.querySelectorAll('.settings-nav-item') : [];
+    navItems.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var panel = btn.getAttribute('data-panel');
+            if (panel) showSettingsPanel(panel);
+        });
     });
 
     if (document.readyState === 'loading') {
