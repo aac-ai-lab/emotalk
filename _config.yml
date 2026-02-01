@@ -4,7 +4,7 @@ description: Augmentative and alternative communication (AAC) app using emojis
 baseurl: "/emotalk"
 
 include: ["docs", "docs/**"]
-exclude: [".git", ".github", "node_modules", "vendor", "index.html", "vocabulary.js", ".gitignore"]
+exclude: [".git", ".github", "node_modules", "vendor", "index.html", ".gitignore"]
 
 show_downloads: true
 theme: jekyll-theme-cayman

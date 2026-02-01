@@ -4,6 +4,8 @@
     var categories = window.categories || [];
     var STORAGE_QUICK = 'emotalk_quick';
     var STORAGE_SETTINGS = 'emotalk_settings';
+    var STORAGE_HISTORY = 'emotalk_history';
+    var MAX_HISTORY = 200;
 
     var SEMANTIC_MAP = {
         pessoas: { key: 'who', label: 'Quem' },
@@ -35,6 +37,8 @@
     var fontLargeCheck = document.getElementById('fontLarge');
     var settingsCloseBtn = document.getElementById('settingsClose');
     var settingsSave = document.getElementById('settingsSave');
+    var historyList = document.getElementById('historyList');
+    var clearHistoryBtn = document.getElementById('clearHistoryBtn');
     var toastEl = document.getElementById('toast');
 
     function getSettings() {
@@ -60,6 +64,55 @@
         setTimeout(function () {
             toastEl.classList.remove('show');
         }, 2500);
+    }
+
+    function getHistory() {
+        try {
+            var raw = localStorage.getItem(STORAGE_HISTORY);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function saveToHistory(phrase) {
+        if (!phrase || !phrase.trim()) return;
+        var list = getHistory();
+        list.push({ phrase: phrase.trim(), date: new Date().toISOString() });
+        if (list.length > MAX_HISTORY) list = list.slice(-MAX_HISTORY);
+        try {
+            localStorage.setItem(STORAGE_HISTORY, JSON.stringify(list));
+        } catch (e) {}
+    }
+
+    function clearHistory() {
+        try {
+            localStorage.removeItem(STORAGE_HISTORY);
+        } catch (e) {}
+    }
+
+    function renderHistory() {
+        if (!historyList) return;
+        var list = getHistory();
+        historyList.innerHTML = '';
+        var show = list.slice(-20).reverse();
+        if (show.length === 0) {
+            historyList.innerHTML = '<li class="history-empty">Nenhuma frase ainda.</li>';
+            return;
+        }
+        show.forEach(function (entry) {
+            var li = document.createElement('li');
+            var d = new Date(entry.date);
+            var dateStr = d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+            li.innerHTML = '<span class="history-phrase">' + escapeHtml(entry.phrase) + '</span> <span class="history-date">' + dateStr + '</span>';
+            historyList.appendChild(li);
+        });
+    }
+
+    function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 
     function saveQuickBar() {
@@ -237,6 +290,7 @@
         var message = Array.from(children).map(function (el) {
             return el.textContent;
         }).join(' ');
+        saveToHistory(message);
         var utterance = new SpeechSynthesisUtterance(message);
         utterance.voice = getVoice('pt-BR');
         utterance.rate = getSettings().speechRate;
@@ -302,9 +356,18 @@
         speechRateInput.value = s.speechRate;
         speechRateValue.textContent = s.speechRate;
         fontLargeCheck.checked = s.fontLarge;
+        renderHistory();
         settingsOverlay.classList.add('open');
         speechRateInput.focus();
     });
+
+    if (clearHistoryBtn) {
+        clearHistoryBtn.addEventListener('click', function () {
+            clearHistory();
+            renderHistory();
+            showToast('Histórico limpo.');
+        });
+    }
 
     speechRateInput.addEventListener('input', function () {
         speechRateValue.textContent = speechRateInput.value;
