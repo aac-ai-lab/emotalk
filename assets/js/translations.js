@@ -76,7 +76,13 @@
             framesChooseWord: 'Escolha uma palavra',
             hintFrames: 'Ative para mostrar o botão Moldes (📝) na barra lateral, entre Limpar e Configurações. Quando desativado, o botão fica oculto.',
             sentenceFramesLabel: 'Ativar Moldes de frase',
-            sentenceFramesHint: 'Quando ativado, o botão Moldes abre uma janela onde se escolhe um molde (ex.: «Eu quero ___»), depois uma palavra compatível com o espaço, e «Falar frase» para vocalizar a frase completa.'
+            sentenceFramesHint: 'Quando ativado, o botão Moldes abre uma janela onde se escolhe um molde (ex.: «Eu quero ___»), depois uma palavra compatível com o espaço, e «Falar frase» para vocalizar a frase completa.',
+            menuMinspeak: 'Ícones centrais',
+            minspeakTitle: 'MINSPEAK / Compação semântica',
+            minspeakWhatIs: 'Em modo «ícones centrais», o primeiro ecrã mostra poucos ícones (Pessoas, Ações, Comida e bebida, Coisas, Lugares, Descrever/Sentir). Cada ícone agrupa várias categorias. Ao tocar num ícone, aparecem as palavras desse grupo — acesso em 2 toques em vez de procurar em muitas categorias. Inspirado no MINSPEAK (Bruce Baker) e na compação semântica: menos ícones no ecrã, mais palavras acessíveis por sequência.',
+            minspeakLabel: 'Usar ícones centrais (MINSPEAK / Compação semântica)',
+            minspeakHint: 'Quando ativado, o ecrã principal mostra 6 ícones centrais em vez de todas as categorias. Toque num ícone para ver as palavras desse grupo. Quando desativado, mantém-se o modo por categorias (lista completa de categorias).',
+            btnHomeAriaMinspeak: 'Voltar aos ícones centrais'
         },
         'en': {
             appTitle: 'Emotalk - Augmentative and Alternative Communication',
@@ -152,7 +158,13 @@
             framesChooseWord: 'Choose a word',
             hintFrames: 'Enable to show the Frames button (📝) in the sidebar, between Clear and Settings. When disabled, the button is hidden.',
             sentenceFramesLabel: 'Enable Sentence frames',
-            sentenceFramesHint: 'When on, the Frames button opens a window where you choose a frame (e.g. «I want ___»), then a word that fits the slot, and «Speak sentence» to vocalise the full sentence.'
+            sentenceFramesHint: 'When on, the Frames button opens a window where you choose a frame (e.g. «I want ___»), then a word that fits the slot, and «Speak sentence» to vocalise the full sentence.',
+            menuMinspeak: 'Core icons',
+            minspeakTitle: 'MINSPEAK / Semantic compaction',
+            minspeakWhatIs: 'In «core icons» mode, the first screen shows a small set of icons (People, Actions, Food & drink, Things, Places, Describe/Feel). Each icon groups several categories. Tapping an icon shows the words in that group — 2-tap access instead of browsing many categories. Inspired by MINSPEAK (Bruce Baker) and semantic compaction: fewer icons on screen, more words accessible by sequence.',
+            minspeakLabel: 'Use core icons (MINSPEAK / Semantic compaction)',
+            minspeakHint: 'When on, the main screen shows 6 core icons instead of all categories. Tap an icon to see words in that group. When off, category mode is used (full category list).',
+            btnHomeAriaMinspeak: 'Back to core icons'
         }
     };
 

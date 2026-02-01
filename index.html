@@ -46,6 +46,7 @@
                     <button type="button" class="settings-nav-item" data-panel="legend" id="settingsNavLegend">Legenda</button>
                     <button type="button" class="settings-nav-item" data-panel="history" id="settingsNavHistory">Histórico</button>
                     <button type="button" class="settings-nav-item" data-panel="frames" id="settingsNavFrames">Moldes</button>
+                    <button type="button" class="settings-nav-item" data-panel="minspeak" id="settingsNavMinspeak">Ícones centrais</button>
                 </nav>
                 <div class="settings-content">
                     <section class="settings-panel active" id="settingsPanelGeneral" aria-labelledby="settingsNavGeneral">
@@ -118,6 +119,15 @@
                             <p class="settings-hint" id="hintSentenceFrames"></p>
                         </div>
                     </section>
+                    <section class="settings-panel" id="settingsPanelMinspeak" aria-labelledby="settingsNavMinspeak" hidden>
+                        <strong id="minspeakSettingsTitle">MINSPEAK / Compação semântica</strong>
+                        <p class="settings-intro settings-frames-whatis" id="minspeakWhatIs"></p>
+                        <p class="settings-hint" id="hintMinspeak"></p>
+                        <div class="settings-row">
+                            <label><input type="checkbox" id="minspeakCheck"> <span id="minspeakLabel">Usar ícones centrais</span></label>
+                            <p class="settings-hint" id="hintMinspeakCheck"></p>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -144,6 +154,7 @@
 
     <script src="assets/js/vocabulary.js"></script>
     <script src="assets/js/sentenceFrames.js"></script>
+    <script src="assets/js/minspeak.js"></script>
     <script src="assets/js/translations.js"></script>
     <script src="assets/js/index.js"></script>
 </body>

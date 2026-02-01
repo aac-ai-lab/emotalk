@@ -71,7 +71,7 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ## 7. Configurações (modal e menu vertical)
 
-**O que é:** Um modal de configurações com menu vertical (Geral, SVOMPT, Legenda, Histórico, Moldes) agrupa todas as opções: idioma, velocidade da fala, fonte maior, opções SVOMPT, ativar/desativar Colourful Semantics, ativar/desativar Shape Coding, e histórico de frases. Cada secção inclui descrições e sugestões de uso.
+**O que é:** Um modal de configurações com menu vertical (Geral, SVOMPT, Legenda, Histórico, Moldes, Ícones centrais) agrupa todas as opções: idioma, velocidade da fala, fonte maior, opções SVOMPT, ativar/desativar Colourful Semantics, ativar/desativar Shape Coding, e histórico de frases. Cada secção inclui descrições e sugestões de uso.
 
 **Justificativa:** Centralizar as opções num único sítio reduz a complexidade aparente da interface principal. O menu vertical e as descrições tornam as configurações mais fáceis de encontrar e de entender por terapeutas, educadores ou famílias, e permitem personalizar o Emotalk sem alterar código.
 
@@ -125,6 +125,16 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 
 ---
 
+## 14. MINSPEAK / Ícones centrais (Compação semântica)
+
+**O que é:** Em Configurações → Ícones centrais pode ativar o modo «ícones centrais» (inspirado em MINSPEAK / Semantic Compaction). O primeiro ecrã passa a mostrar apenas 6 ícones multissemânticos: Pessoas, Ações, Comida e bebida, Coisas, Lugares, Descrever/Sentir. Cada ícone agrupa várias categorias do vocabulário. Ao tocar num ícone, aparecem todas as palavras desse grupo — acesso em 2 toques em vez de navegar por muitas categorias. Quando desativado, mantém-se o modo por categorias (lista completa de categorias).
+
+**Justificativa:** A compação semântica (MINSPEAK, Bruce Baker) usa ícones com múltiplos significados e sequências curtas (2–3 toques) para aceder a muito vocabulário com poucos ícones no ecrã, reduzindo a necessidade de trocar de ecrã e favorecendo a automatização de planos motores. O Emotalk implementa uma versão inspirada: ícones centrais que agrupam categorias existentes, mantendo o mesmo vocabulário e a mesma barra de frase, mas com um primeiro ecrã mais reduzido e acesso em 2 toques. Útil para utilizadores que beneficiam de menos opções no ecrã inicial ou de uma estrutura tipo «núcleo» (core) antes do vocabulário alargado.
+
+**Referência:** MINSPEAK / Semantic Compaction (Bruce Baker); compação semântica em CAA; Unity, LAMP.
+
+---
+
 ## Resumo
 
 | Recurso | Onde configurar / usar | Base ou benefício principal |
@@ -138,6 +148,7 @@ Este documento descreve todos os recursos disponíveis no Emotalk e a justificat
 | Configurações (modal) | Botão Configurações | Personalização sem alterar código |
 | Histórico de frases | Configurações → Histórico | Revisão, repetição, registo |
 | **Moldes de frase** | Botão Moldes (📝); Configurações → Moldes | Frases com slot; reduz carga e treina estruturas |
+| **Ícones centrais (MINSPEAK)** | Configurações → Ícones centrais | Compação semântica; 2 toques; menos ícones no ecrã |
 | PWA / offline | Instalação no browser | Uso sem internet |
 | Splash screen | Ao abrir a app | Identidade e transição suave |
 | Vocabulário emojis | [Vocabulário](VOCABULARY.html) | Acesso visual, categorizado |

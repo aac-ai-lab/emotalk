@@ -71,7 +71,7 @@ This document describes all resources available in Emotalk and the justification
 
 ## 7. Settings (modal and vertical menu)
 
-**What it is:** A settings modal with a vertical menu (General, SVOMPT, Legend, History, Frames) groups all options: language, speech rate, larger font, SVOMPT options, enable/disable Colourful Semantics, enable/disable Shape Coding, and phrase history. Each section includes descriptions and usage suggestions.
+**What it is:** A settings modal with a vertical menu (General, SVOMPT, Legend, History, Frames, Core icons) groups all options: language, speech rate, larger font, SVOMPT options, enable/disable Colourful Semantics, enable/disable Shape Coding, and phrase history. Each section includes descriptions and usage suggestions.
 
 **Justification:** Centralising options in one place reduces the apparent complexity of the main interface. The vertical menu and descriptions make settings easier to find and understand for therapists, educators, or families, and allow customising Emotalk without changing code.
 
@@ -138,6 +138,7 @@ This document describes all resources available in Emotalk and the justification
 | Settings (modal) | Settings button | Customisation without changing code |
 | Phrase history | Settings → History | Review, repetition, recording |
 | **Sentence frames** | Frames button (📝); Settings → Frames | Phrases with slot; reduces load and practises structures |
+| **Core icons (MINSPEAK)** | Settings → Core icons | Semantic compaction; 2-tap access; fewer icons on screen |
 | PWA / offline | Install from browser | Use without internet |
 | Splash screen | On app open | Identity and smooth transition |
 | Emoji vocabulary | [Vocabulary](VOCABULARY.html) | Visual, categorised access |

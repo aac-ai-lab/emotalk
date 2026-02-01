@@ -1,5 +1,5 @@
 const CACHE = 'emotalk-v1';
-const ASSETS = ['index.html', 'assets/js/vocabulary.js', 'assets/js/sentenceFrames.js', 'assets/js/translations.js', 'assets/css/index.css', 'assets/js/index.js', 'icon.svg', 'manifest.json'];
+const ASSETS = ['index.html', 'assets/js/vocabulary.js', 'assets/js/sentenceFrames.js', 'assets/js/minspeak.js', 'assets/js/translations.js', 'assets/css/index.css', 'assets/js/index.js', 'icon.svg', 'manifest.json'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(

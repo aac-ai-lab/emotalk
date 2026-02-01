@@ -7,6 +7,7 @@
     var STORAGE_HISTORY = 'emotalk_history';
     var MAX_HISTORY = 200;
     var currentCategory = null;
+    var currentCoreIcon = null;
     var Translations = window.Translations || {};
 
     var SEMANTIC_MAP = {
@@ -80,6 +81,7 @@
     var framesCloseBtn = document.getElementById('framesCloseBtn');
     var framesIntro = document.getElementById('framesIntro');
     var framesSlotLabel = document.getElementById('framesSlotLabel');
+    var minspeakCheck = document.getElementById('minspeakCheck');
 
     function getSettings() {
         try {
@@ -95,11 +97,17 @@
                 svomptSortBar: !!s.svomptSortBar,
                 colourfulSemantics: s.colourfulSemantics !== false,
                 shapeCoding: !!s.shapeCoding,
-                sentenceFrames: s.sentenceFrames !== false
+                sentenceFrames: s.sentenceFrames !== false,
+                minspeakMode: !!s.minspeakMode
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: true };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: true, minspeakMode: false };
         }
+    }
+
+    function getCoreIconLabel(core) {
+        if (!core) return '';
+        return getSettings().lang === 'en' ? (core.labelEn || core.labelPt) : (core.labelPt || core.labelEn);
     }
 
     function getUI(key) {
@@ -136,14 +144,14 @@
         }
         if (backButton) {
             backButton.setAttribute('title', getUI('btnHome'));
-            backButton.setAttribute('aria-label', getUI('btnHomeAria'));
+            backButton.setAttribute('aria-label', getSettings().minspeakMode ? getUI('btnHomeAriaMinspeak') : getUI('btnHomeAria'));
         }
         var settingsTitle = document.getElementById('settingsTitle');
         if (settingsTitle) settingsTitle.textContent = getUI('settingsTitle');
         var settingsIntroEl = document.getElementById('settingsIntro');
         if (settingsIntroEl) settingsIntroEl.textContent = getUI('settingsIntro');
-        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintShapeCoding', 'hintHistory'];
-        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'shapeCodingHint', 'hintHistory'];
+        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintShapeCoding', 'hintHistory', 'hintFrames', 'hintSentenceFrames', 'hintMinspeak', 'hintMinspeakCheck'];
+        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'shapeCodingHint', 'hintHistory', 'hintFrames', 'sentenceFramesHint', 'minspeakHint', 'minspeakHint'];
         hintIds.forEach(function (id, i) {
             var el = document.getElementById(id);
             if (el && hintKeys[i]) el.textContent = getUI(hintKeys[i]);
@@ -166,8 +174,8 @@
         }
         var historyTitleEl = document.getElementById('settingsPanelHistory') ? document.querySelector('#settingsPanelHistory strong') : null;
         if (historyTitleEl) historyTitleEl.textContent = getUI('historyTitle');
-        var navIds = ['settingsNavGeneral', 'settingsNavSvompt', 'settingsNavLegend', 'settingsNavHistory', 'settingsNavFrames'];
-        var navKeys = ['menuGeneral', 'menuSvompt', 'menuLegend', 'menuHistory', 'menuFrames'];
+        var navIds = ['settingsNavGeneral', 'settingsNavSvompt', 'settingsNavLegend', 'settingsNavHistory', 'settingsNavFrames', 'settingsNavMinspeak'];
+        var navKeys = ['menuGeneral', 'menuSvompt', 'menuLegend', 'menuHistory', 'menuFrames', 'menuMinspeak'];
         navIds.forEach(function (id, i) {
             var el = document.getElementById(id);
             if (el && navKeys[i]) el.textContent = getUI(navKeys[i]);
@@ -208,10 +216,19 @@
         var sentenceFramesLabelEl = document.getElementById('sentenceFramesLabel');
         if (sentenceFramesLabelEl) sentenceFramesLabelEl.textContent = getUI('sentenceFramesLabel');
         if (framesCloseBtn) framesCloseBtn.setAttribute('aria-label', getUI('close'));
+        var minspeakSettingsTitle = document.getElementById('minspeakSettingsTitle');
+        if (minspeakSettingsTitle) minspeakSettingsTitle.textContent = getUI('minspeakTitle');
+        var minspeakWhatIsEl = document.getElementById('minspeakWhatIs');
+        if (minspeakWhatIsEl) minspeakWhatIsEl.textContent = getUI('minspeakWhatIs');
+        var minspeakLabelEl = document.getElementById('minspeakLabel');
+        if (minspeakLabelEl) minspeakLabelEl.textContent = getUI('minspeakLabel');
 
         categoriesDiv.innerHTML = '';
         showCategories();
-        if (currentCategory) {
+        if (currentCoreIcon) {
+            wordsDiv.innerHTML = '';
+            showWordsForCore(currentCoreIcon);
+        } else if (currentCategory) {
             wordsDiv.innerHTML = '';
             showWords(currentCategory);
         }
@@ -490,7 +507,70 @@
         } catch (e) {}
     }
 
+    function showCoreIcons() {
+        if (!window.MINSPEAK || !window.MINSPEAK.CORE_ICONS) return;
+        categoriesDiv.style.display = 'grid';
+        wordsDiv.style.display = 'none';
+        backButton.style.display = 'none';
+        categoriesDiv.innerHTML = '';
+        currentCoreIcon = null;
+        window.MINSPEAK.CORE_ICONS.forEach(function (core) {
+            var label = getCoreIconLabel(core);
+            var div = document.createElement('div');
+            div.classList.add('category', 'core-icon', getSemanticClass(core.categoryIds && core.categoryIds[0] ? core.categoryIds[0] : ''));
+            div.setAttribute('role', 'button');
+            div.setAttribute('tabindex', '0');
+            div.setAttribute('aria-label', getUI('categoryAria') + ' ' + label);
+            div.setAttribute('data-core-id', core.id);
+            div.innerHTML = '<div class="category-icon" aria-hidden="true">' + (core.icon || '•') + '</div><div class="category-name">' + label + '</div>';
+            div.addEventListener('click', function () {
+                showWordsForCore(core);
+            });
+            div.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    div.click();
+                }
+            });
+            categoriesDiv.appendChild(div);
+        });
+    }
+
+    function showWordsForCore(coreIcon) {
+        currentCoreIcon = coreIcon;
+        currentCategory = null;
+        categoriesDiv.style.display = 'none';
+        wordsDiv.style.display = 'grid';
+        wordsDiv.innerHTML = '';
+        backButton.style.display = 'inline-block';
+        var words = window.MINSPEAK && window.MINSPEAK.getWordsForCoreIcon ? window.MINSPEAK.getWordsForCoreIcon(coreIcon, categories) : [];
+        words.forEach(function (word) {
+            var label = getWordLabel(word.name, word.category);
+            var semanticClass = getSemanticClass(word.category);
+            var wordDiv = document.createElement('div');
+            wordDiv.classList.add('word', semanticClass);
+            wordDiv.setAttribute('role', 'button');
+            wordDiv.setAttribute('tabindex', '0');
+            wordDiv.setAttribute('aria-label', getUI('wordAria') + ' ' + label);
+            wordDiv.innerHTML = '<div class="word-icon" aria-hidden="true">' + (word.icon || '•') + '</div><div class="word-name">' + label + '</div>';
+            wordDiv.addEventListener('click', function () {
+                addToQuickIcons(word, word.category);
+            });
+            wordDiv.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    wordDiv.click();
+                }
+            });
+            wordsDiv.appendChild(wordDiv);
+        });
+    }
+
     function showCategories() {
+        if (getSettings().minspeakMode && window.MINSPEAK && window.MINSPEAK.CORE_ICONS && window.MINSPEAK.CORE_ICONS.length) {
+            showCoreIcons();
+            return;
+        }
         categories.forEach(function (category) {
             var label = getCategoryLabel(category.name);
             var categoryDiv = document.createElement('div');
@@ -744,9 +824,17 @@
     }
 
     backButton.addEventListener('click', function () {
-        categoriesDiv.style.display = 'grid';
-        wordsDiv.style.display = 'none';
-        backButton.style.display = 'none';
+        if (getSettings().minspeakMode && currentCoreIcon) {
+            currentCoreIcon = null;
+            categoriesDiv.style.display = 'grid';
+            wordsDiv.style.display = 'none';
+            backButton.style.display = 'none';
+            showCoreIcons();
+        } else {
+            categoriesDiv.style.display = 'grid';
+            wordsDiv.style.display = 'none';
+            backButton.style.display = 'none';
+        }
     });
 
     playButton.addEventListener('click', playIcons);
@@ -782,6 +870,7 @@
         if (colourfulSemanticsCheck) colourfulSemanticsCheck.checked = s.colourfulSemantics;
         if (shapeCodingCheck) shapeCodingCheck.checked = s.shapeCoding;
         if (sentenceFramesCheck) sentenceFramesCheck.checked = s.sentenceFrames;
+        if (minspeakCheck) minspeakCheck.checked = s.minspeakMode;
         renderHistory();
         showSettingsPanel('general');
         settingsOverlay.classList.add('open');
@@ -814,7 +903,9 @@
             svomptGuided: !!(svomptGuidedCheck && svomptGuidedCheck.checked),
             svomptSortBar: !!(svomptSortBarCheck && svomptSortBarCheck.checked),
             colourfulSemantics: !!(colourfulSemanticsCheck && colourfulSemanticsCheck.checked),
-            shapeCoding: !!(shapeCodingCheck && shapeCodingCheck.checked)
+            shapeCoding: !!(shapeCodingCheck && shapeCodingCheck.checked),
+            sentenceFrames: !!(sentenceFramesCheck && sentenceFramesCheck.checked),
+            minspeakMode: !!(minspeakCheck && minspeakCheck.checked)
         };
         try {
             localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(s));
@@ -830,7 +921,7 @@
     });
 
     function showSettingsPanel(panelKey) {
-        var panels = ['general', 'svompt', 'legend', 'history', 'frames'];
+        var panels = ['general', 'svompt', 'legend', 'history', 'frames', 'minspeak'];
         panels.forEach(function (key) {
             var nav = document.getElementById('settingsNav' + key.charAt(0).toUpperCase() + key.slice(1));
             var panel = document.getElementById('settingsPanel' + key.charAt(0).toUpperCase() + key.slice(1));
