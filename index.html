@@ -71,6 +71,10 @@
                             <label><input type="checkbox" id="fontLarge"> Fonte maior</label>
                             <p class="settings-hint" id="hintFontLarge"></p>
                         </div>
+                        <div class="settings-row">
+                            <label><input type="checkbox" id="conjugacaoVerbalCheck"> <span id="conjugacaoVerbalLabel">Conjugação verbal (ConjugAI)</span></label>
+                            <p class="settings-hint" id="hintConjugacaoVerbal"></p>
+                        </div>
                     </section>
                     <section class="settings-panel" id="settingsPanelSvompt" aria-labelledby="settingsNavSvompt" hidden>
                         <strong id="svomptTitle">SVOMPT (ordem da frase)</strong>
@@ -180,6 +184,7 @@
         </div>
     </div>
 
+    <script src="assets/js/conjugai-core.js"></script>
     <script src="assets/js/vocabulary.js"></script>
     <script src="assets/js/sentenceFrames.js"></script>
     <script src="assets/js/frameSemantics.js"></script>

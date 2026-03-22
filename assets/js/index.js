@@ -57,6 +57,7 @@
     var speechRateInput = document.getElementById('speechRate');
     var speechRateValue = document.getElementById('speechRateValue');
     var fontLargeCheck = document.getElementById('fontLarge');
+    var conjugacaoVerbalCheck = document.getElementById('conjugacaoVerbalCheck');
     var settingsCloseBtn = document.getElementById('settingsClose');
     var settingsSave = document.getElementById('settingsSave');
     var historyList = document.getElementById('historyList');
@@ -109,11 +110,22 @@
                 shapeCoding: !!s.shapeCoding,
                 sentenceFrames: s.sentenceFrames !== false,
                 minspeakMode: !!s.minspeakMode,
-                fillmoreEnabled: !!s.fillmoreEnabled
+                fillmoreEnabled: !!s.fillmoreEnabled,
+                conjugacaoVerbal: !!s.conjugacaoVerbal
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: true, minspeakMode: false, fillmoreEnabled: false };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: true, minspeakMode: false, fillmoreEnabled: false, conjugacaoVerbal: false };
         }
+    }
+
+    function aplicarConjugacaoFrase(frase) {
+        var s = getSettings();
+        if (!s.conjugacaoVerbal || s.lang !== 'pt-BR') return frase;
+        var core = typeof ConjugaiCore !== 'undefined' ? ConjugaiCore : null;
+        if (!core || typeof core.analisarFrase !== 'function') return frase;
+        var r = core.analisarFrase(frase);
+        if (r && r.correcao && String(r.correcao).trim()) return String(r.correcao).trim();
+        return frase;
     }
 
     function getCoreIconLabel(core) {
@@ -161,8 +173,8 @@
         if (settingsTitle) settingsTitle.textContent = getUI('settingsTitle');
         var settingsIntroEl = document.getElementById('settingsIntro');
         if (settingsIntroEl) settingsIntroEl.textContent = getUI('settingsIntro');
-        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintShapeCoding', 'hintHistory', 'hintFrames', 'hintSentenceFrames', 'hintMinspeak', 'hintMinspeakCheck', 'hintFillmore', 'hintFillmoreCheck'];
-        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'shapeCodingHint', 'hintHistory', 'hintFrames', 'sentenceFramesHint', 'minspeakHint', 'minspeakHint', 'hintFillmore', 'fillmoreHint'];
+        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintConjugacaoVerbal', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintShapeCoding', 'hintHistory', 'hintFrames', 'hintSentenceFrames', 'hintMinspeak', 'hintMinspeakCheck', 'hintFillmore', 'hintFillmoreCheck'];
+        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'conjugacaoVerbalHint', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'shapeCodingHint', 'hintHistory', 'hintFrames', 'sentenceFramesHint', 'minspeakHint', 'minspeakHint', 'hintFillmore', 'fillmoreHint'];
         hintIds.forEach(function (id, i) {
             var el = document.getElementById(id);
             if (el && hintKeys[i]) el.textContent = getUI(hintKeys[i]);
@@ -226,6 +238,8 @@
         if (framesWhatIsEl) framesWhatIsEl.textContent = getUI('framesWhatIs');
         var sentenceFramesLabelEl = document.getElementById('sentenceFramesLabel');
         if (sentenceFramesLabelEl) sentenceFramesLabelEl.textContent = getUI('sentenceFramesLabel');
+        var conjugacaoVerbalLabelEl = document.getElementById('conjugacaoVerbalLabel');
+        if (conjugacaoVerbalLabelEl) conjugacaoVerbalLabelEl.textContent = getUI('conjugacaoVerbalLabel');
         if (framesCloseBtn) framesCloseBtn.setAttribute('aria-label', getUI('close'));
         var minspeakSettingsTitle = document.getElementById('minspeakSettingsTitle');
         if (minspeakSettingsTitle) minspeakSettingsTitle.textContent = getUI('minspeakTitle');
@@ -683,9 +697,10 @@
         });
         if (getSettings().svomptSpeakOrder) list.sort(function (a, b) { return getSvomptOrderIndex(a.category) - getSvomptOrderIndex(b.category); });
         var message = list.map(function (x) { return x.text; }).join(' ');
-        saveToHistory(message);
+        var falada = aplicarConjugacaoFrase(message);
+        saveToHistory(falada);
         var lang = getSettings().lang;
-        var utterance = new SpeechSynthesisUtterance(message);
+        var utterance = new SpeechSynthesisUtterance(falada);
         utterance.voice = getVoice(lang);
         utterance.lang = lang === 'en' ? 'en' : 'pt-BR';
         utterance.rate = getSettings().speechRate;
@@ -818,9 +833,10 @@
         var template = getFrameTemplate(selectedFrame);
         var label = getWordLabel(selectedWord.name, selectedWord.category);
         var phrase = template.replace('___', label);
-        saveToHistory(phrase);
+        var falada = aplicarConjugacaoFrase(phrase);
+        saveToHistory(falada);
         var lang = getSettings().lang;
-        var utterance = new SpeechSynthesisUtterance(phrase);
+        var utterance = new SpeechSynthesisUtterance(falada);
         utterance.voice = getVoice(lang);
         utterance.lang = lang === 'en' ? 'en' : 'pt-BR';
         utterance.rate = getSettings().speechRate;
@@ -951,9 +967,10 @@
             var label = getWordLabel(slot.name, slot.category);
             template = template.replace('___' + j + '___', label);
         }
-        saveToHistory(template);
+        var falada = aplicarConjugacaoFrase(template);
+        saveToHistory(falada);
         var lang = getSettings().lang;
-        var utterance = new SpeechSynthesisUtterance(template);
+        var utterance = new SpeechSynthesisUtterance(falada);
         utterance.voice = getVoice(lang);
         utterance.lang = lang === 'en' ? 'en' : 'pt-BR';
         utterance.rate = getSettings().speechRate;
@@ -1047,6 +1064,7 @@
         if (sentenceFramesCheck) sentenceFramesCheck.checked = s.sentenceFrames;
         if (minspeakCheck) minspeakCheck.checked = s.minspeakMode;
         if (fillmoreCheck) fillmoreCheck.checked = s.fillmoreEnabled;
+        if (conjugacaoVerbalCheck) conjugacaoVerbalCheck.checked = s.conjugacaoVerbal;
         renderHistory();
         showSettingsPanel('general');
         settingsOverlay.classList.add('open');
@@ -1082,7 +1100,8 @@
             shapeCoding: !!(shapeCodingCheck && shapeCodingCheck.checked),
             sentenceFrames: !!(sentenceFramesCheck && sentenceFramesCheck.checked),
             minspeakMode: !!(minspeakCheck && minspeakCheck.checked),
-            fillmoreEnabled: !!(fillmoreCheck && fillmoreCheck.checked)
+            fillmoreEnabled: !!(fillmoreCheck && fillmoreCheck.checked),
+            conjugacaoVerbal: !!(conjugacaoVerbalCheck && conjugacaoVerbalCheck.checked)
         };
         try {
             localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(s));
