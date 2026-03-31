@@ -71,6 +71,7 @@
     var svomptSortBarCheck = document.getElementById('svomptSortBar');
     var svomptTitleEl = document.getElementById('svomptTitle');
     var colourfulSemanticsCheck = document.getElementById('colourfulSemanticsCheck');
+    var fitzgeraldKeyCheck = document.getElementById('fitzgeraldKeyCheck');
     var shapeCodingCheck = document.getElementById('shapeCodingCheck');
     var sentenceFramesCheck = document.getElementById('sentenceFramesCheck');
     var framesButton = document.getElementById('framesButton');
@@ -107,6 +108,7 @@
                 svomptGuided: !!s.svomptGuided,
                 svomptSortBar: !!s.svomptSortBar,
                 colourfulSemantics: s.colourfulSemantics !== false,
+                fitzgeraldKey: !!s.fitzgeraldKey,
                 shapeCoding: !!s.shapeCoding,
                 sentenceFrames: s.sentenceFrames !== false,
                 minspeakMode: !!s.minspeakMode,
@@ -114,7 +116,7 @@
                 conjugacaoVerbal: !!s.conjugacaoVerbal
             };
         } catch (e) {
-            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, shapeCoding: false, sentenceFrames: true, minspeakMode: false, fillmoreEnabled: false, conjugacaoVerbal: false };
+            return { speechRate: 1, fontLarge: false, lang: 'pt-BR', svomptSpeakOrder: false, svomptSlots: false, svomptGuided: false, svomptSortBar: false, colourfulSemantics: true, fitzgeraldKey: false, shapeCoding: false, sentenceFrames: true, minspeakMode: false, fillmoreEnabled: false, conjugacaoVerbal: false };
         }
     }
 
@@ -173,8 +175,8 @@
         if (settingsTitle) settingsTitle.textContent = getUI('settingsTitle');
         var settingsIntroEl = document.getElementById('settingsIntro');
         if (settingsIntroEl) settingsIntroEl.textContent = getUI('settingsIntro');
-        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintConjugacaoVerbal', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'hintShapeCoding', 'hintHistory', 'hintFrames', 'hintSentenceFrames', 'hintMinspeak', 'hintMinspeakCheck', 'hintFillmore', 'hintFillmoreCheck'];
-        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'conjugacaoVerbalHint', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'shapeCodingHint', 'hintHistory', 'hintFrames', 'sentenceFramesHint', 'minspeakHint', 'minspeakHint', 'hintFillmore', 'fillmoreHint'];
+        var hintIds = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'hintConjugacaoVerbal', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'hintColourfulSemantics', 'fitzgeraldKeyHint', 'hintShapeCoding', 'hintHistory', 'hintFrames', 'hintSentenceFrames', 'hintMinspeak', 'hintMinspeakCheck', 'hintFillmore', 'hintFillmoreCheck'];
+        var hintKeys = ['hintLang', 'hintSpeechRate', 'hintFontLarge', 'conjugacaoVerbalHint', 'hintSvomptIntro', 'hintSvomptSpeakOrder', 'hintSvomptSlots', 'hintSvomptGuided', 'hintSvomptSortBar', 'hintLegend', 'colourfulSemanticsHint', 'fitzgeraldKeyHint', 'shapeCodingHint', 'hintHistory', 'hintFrames', 'sentenceFramesHint', 'minspeakHint', 'minspeakHint', 'hintFillmore', 'fillmoreHint'];
         hintIds.forEach(function (id, i) {
             var el = document.getElementById(id);
             if (el && hintKeys[i]) el.textContent = getUI(hintKeys[i]);
@@ -205,8 +207,45 @@
         });
         if (colourfulSemanticsCheck) {
             var csLabel = colourfulSemanticsCheck.closest('label');
-            if (csLabel && csLabel.childNodes[1]) csLabel.childNodes[1].textContent = ' ' + getUI('colourfulSemanticsLabel');
+            if (csLabel && csLabel.querySelector('span')) csLabel.querySelector('span').textContent = getUI('colourfulSemanticsLabel');
         }
+        if (fitzgeraldKeyCheck) {
+            var fkLabel = fitzgeraldKeyCheck.closest('label');
+            if (fkLabel && fkLabel.querySelector('span')) fkLabel.querySelector('span').textContent = getUI('fitzgeraldKeyLabel');
+        }
+        var legendSettingsTitle = document.getElementById('legendSettingsTitle');
+        if (legendSettingsTitle) legendSettingsTitle.textContent = getUI('menuLegend');
+
+        var legendCS = document.getElementById('legendCS');
+        var legendFitz = document.getElementById('legendFitz');
+        var s = getSettings();
+        if (legendCS) legendCS.style.display = s.colourfulSemantics ? 'block' : 'none';
+        if (legendFitz) legendFitz.style.display = s.fitzgeraldKey ? 'block' : 'none';
+
+        if (legendCS) {
+            var spans = legendCS.querySelectorAll('span');
+            if (spans.length >= 6) {
+                spans[0].nextSibling.textContent = ' ' + getUI('who');
+                spans[1].nextSibling.textContent = ' ' + getUI('whatDoing');
+                spans[2].nextSibling.textContent = ' ' + getUI('what');
+                spans[3].nextSibling.textContent = ' ' + getUI('where');
+                spans[4].nextSibling.textContent = ' ' + getUI('when');
+                spans[5].nextSibling.textContent = ' ' + getUI('howDescribe');
+            }
+        }
+        if (legendFitz) {
+            var spansF = legendFitz.querySelectorAll('span');
+            if (spansF.length >= 7) {
+                spansF[0].nextSibling.textContent = ' ' + getUI('who') + ' (Yellow)';
+                spansF[1].nextSibling.textContent = ' ' + getUI('whatDoing') + ' (Green)';
+                spansF[2].nextSibling.textContent = ' ' + getUI('what') + ' (Orange)';
+                spansF[3].nextSibling.textContent = ' ' + getUI('howDescribe') + ' (Blue)';
+                spansF[4].nextSibling.textContent = ' ' + getUI('where') + ' (White)';
+                spansF[5].nextSibling.textContent = ' ' + getUI('when') + ' (Brown)';
+                spansF[6].nextSibling.textContent = ' ' + getUI('social') + ' (Pink)';
+            }
+        }
+
         if (shapeCodingCheck) {
             var scLabel = shapeCodingCheck.closest('label');
             if (scLabel && scLabel.childNodes[1]) scLabel.childNodes[1].textContent = ' ' + getUI('shapeCodingLabel');
@@ -279,7 +318,8 @@
     function applySettings() {
         var s = getSettings();
         document.body.classList.toggle('font-large', s.fontLarge);
-        document.body.classList.toggle('colourful-semantics-off', !s.colourfulSemantics);
+        document.body.classList.toggle('colourful-semantics-on', s.colourfulSemantics);
+        document.body.classList.toggle('fitzgerald-key-on', s.fitzgeraldKey);
         document.body.classList.toggle('shape-coding-on', !!s.shapeCoding);
         if (framesButton) framesButton.style.display = s.sentenceFrames ? 'inline-block' : 'none';
         if (fillmoreButton) fillmoreButton.style.display = s.fillmoreEnabled ? 'inline-block' : 'none';
@@ -1060,6 +1100,7 @@
         if (svomptGuidedCheck) svomptGuidedCheck.checked = s.svomptGuided;
         if (svomptSortBarCheck) svomptSortBarCheck.checked = s.svomptSortBar;
         if (colourfulSemanticsCheck) colourfulSemanticsCheck.checked = s.colourfulSemantics;
+        if (fitzgeraldKeyCheck) fitzgeraldKeyCheck.checked = s.fitzgeraldKey;
         if (shapeCodingCheck) shapeCodingCheck.checked = s.shapeCoding;
         if (sentenceFramesCheck) sentenceFramesCheck.checked = s.sentenceFrames;
         if (minspeakCheck) minspeakCheck.checked = s.minspeakMode;
@@ -1083,6 +1124,15 @@
         speechRateValue.textContent = speechRateInput.value;
     });
 
+    if (colourfulSemanticsCheck && fitzgeraldKeyCheck) {
+        colourfulSemanticsCheck.addEventListener('change', function() {
+            if (this.checked) fitzgeraldKeyCheck.checked = false;
+        });
+        fitzgeraldKeyCheck.addEventListener('change', function() {
+            if (this.checked) colourfulSemanticsCheck.checked = false;
+        });
+    }
+
     settingsCloseBtn.addEventListener('click', function () {
         settingsOverlay.classList.remove('open');
     });
@@ -1097,6 +1147,7 @@
             svomptGuided: !!(svomptGuidedCheck && svomptGuidedCheck.checked),
             svomptSortBar: !!(svomptSortBarCheck && svomptSortBarCheck.checked),
             colourfulSemantics: !!(colourfulSemanticsCheck && colourfulSemanticsCheck.checked),
+            fitzgeraldKey: !!(fitzgeraldKeyCheck && fitzgeraldKeyCheck.checked),
             shapeCoding: !!(shapeCodingCheck && shapeCodingCheck.checked),
             sentenceFrames: !!(sentenceFramesCheck && sentenceFramesCheck.checked),
             minspeakMode: !!(minspeakCheck && minspeakCheck.checked),

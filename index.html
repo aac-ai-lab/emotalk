@@ -91,23 +91,38 @@
                         </div>
                     </section>
                     <section class="settings-panel" id="settingsPanelLegend" aria-labelledby="settingsNavLegend" hidden>
-                        <strong>Legenda (Colourful Semantics)</strong>
+                        <strong id="legendSettingsTitle">Legenda e Cores</strong>
                         <p class="settings-hint" id="hintLegend"></p>
                         <div class="settings-row">
-                            <label><input type="checkbox" id="colourfulSemanticsCheck" checked> Ativar Legenda (Colourful Semantics)</label>
+                            <label><input type="checkbox" id="colourfulSemanticsCheck"> <span id="colourfulSemanticsLabel">Ativar Legenda (Colourful Semantics)</span></label>
                             <p class="settings-hint" id="hintColourfulSemantics"></p>
+                        </div>
+                        <div class="settings-row">
+                            <label><input type="checkbox" id="fitzgeraldKeyCheck"> <span id="fitzgeraldKeyLabel">Ativar Chave de Fitzgerald</span></label>
+                            <p class="settings-hint" id="fitzgeraldKeyHint"></p>
                         </div>
                         <div class="settings-row">
                             <label><input type="checkbox" id="shapeCodingCheck"> Ativar Shape Coding (formas por papel)</label>
                             <p class="settings-hint" id="hintShapeCoding"></p>
                         </div>
-                        <div class="settings-legend-inner">
+                        
+                        <div id="legendCS" class="settings-legend-inner">
                             <span style="background:#e67e22"></span> Quem
                             <span style="background:#f1c40f"></span> O quê faz
                             <span style="background:#27ae60"></span> O quê
                             <span style="background:#3498db"></span> Onde
                             <span style="background:#8b6914"></span> Quando
                             <span style="background:#9b59b6"></span> Como/Descrever
+                        </div>
+
+                        <div id="legendFitz" class="settings-legend-inner" style="display: none;">
+                            <span style="background:#f1c40f"></span> Pessoas (Amarelo)
+                            <span style="background:#27ae60"></span> Verbos (Verde)
+                            <span style="background:#e67e22"></span> Objetos (Laranja)
+                            <span style="background:#3498db"></span> Adjetivos (Azul)
+                            <span style="background:#ffffff; border: 1px solid #ccc;"></span> Lugares (Branco)
+                            <span style="background:#8b6914"></span> Tempo (Marrom)
+                            <span style="background:#e91e63"></span> Social (Rosa)
                         </div>
                     </section>
                     <section class="settings-panel" id="settingsPanelHistory" aria-labelledby="settingsNavHistory" hidden>

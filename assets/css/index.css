@@ -111,56 +111,37 @@ body {
 .word-name { font-size: 0.75rem; color: #555; }
 
 /* Colourful Semantics - cores por papel na frase */
-.semantic-who { border-left: 4px solid #e67e22; }
-.semantic-what-doing { border-left: 4px solid #f1c40f; }
-.semantic-what { border-left: 4px solid #27ae60; }
-.semantic-where { border-left: 4px solid #3498db; }
-.semantic-when { border-left: 4px solid #8b6914; }
-.semantic-describing { border-left: 4px solid #9b59b6; }
-.category.semantic-who, .word.semantic-who { background: #fef5ee; }
-.category.semantic-what-doing, .word.semantic-what-doing { background: #fefce8; }
-.category.semantic-what, .word.semantic-what { background: #f0f9f4; }
-.category.semantic-where, .word.semantic-where { background: #eef6fc; }
-.category.semantic-when, .word.semantic-when { background: #f5f0e6; }
-.category.semantic-describing, .word.semantic-describing { background: #f8f0fc; }
-.quick-icon.semantic-who { border-left: 4px solid #e67e22; background: #fef5ee; }
-.quick-icon.semantic-what-doing { border-left: 4px solid #f1c40f; background: #fefce8; }
-.quick-icon.semantic-what { border-left: 4px solid #27ae60; background: #f0f9f4; }
-.quick-icon.semantic-where { border-left: 4px solid #3498db; background: #eef6fc; }
-.quick-icon.semantic-when { border-left: 4px solid #8b6914; background: #f5f0e6; }
-.quick-icon.semantic-describing { border-left: 4px solid #9b59b6; background: #f8f0fc; }
+body.colourful-semantics-on .semantic-who { border-left: 4px solid #e67e22; }
+body.colourful-semantics-on .semantic-what-doing { border-left: 4px solid #f1c40f; }
+body.colourful-semantics-on .semantic-what { border-left: 4px solid #27ae60; }
+body.colourful-semantics-on .semantic-where { border-left: 4px solid #3498db; }
+body.colourful-semantics-on .semantic-when { border-left: 4px solid #8b6914; }
+body.colourful-semantics-on .semantic-describing { border-left: 4px solid #9b59b6; }
 
-/* Legenda desativada: estilo neutro para todos os itens */
-body.colourful-semantics-off .category.semantic-who,
-body.colourful-semantics-off .category.semantic-what-doing,
-body.colourful-semantics-off .category.semantic-what,
-body.colourful-semantics-off .category.semantic-where,
-body.colourful-semantics-off .category.semantic-when,
-body.colourful-semantics-off .category.semantic-describing,
-body.colourful-semantics-off .word.semantic-who,
-body.colourful-semantics-off .word.semantic-what-doing,
-body.colourful-semantics-off .word.semantic-what,
-body.colourful-semantics-off .word.semantic-where,
-body.colourful-semantics-off .word.semantic-when,
-body.colourful-semantics-off .word.semantic-describing {
-    border-left-color: #ddd;
+body.colourful-semantics-on .category.semantic-who, body.colourful-semantics-on .word.semantic-who, body.colourful-semantics-on .quick-icon.semantic-who { background: #fef5ee; border-left: 4px solid #e67e22; }
+body.colourful-semantics-on .category.semantic-what-doing, body.colourful-semantics-on .word.semantic-what-doing, body.colourful-semantics-on .quick-icon.semantic-what-doing { background: #fefce8; border-left: 4px solid #f1c40f; }
+body.colourful-semantics-on .category.semantic-what, body.colourful-semantics-on .word.semantic-what, body.colourful-semantics-on .quick-icon.semantic-what { background: #f0f9f4; border-left: 4px solid #27ae60; }
+body.colourful-semantics-on .category.semantic-where, body.colourful-semantics-on .word.semantic-where, body.colourful-semantics-on .quick-icon.semantic-where { background: #eef6fc; border-left: 4px solid #3498db; }
+body.colourful-semantics-on .category.semantic-when, body.colourful-semantics-on .word.semantic-when, body.colourful-semantics-on .quick-icon.semantic-when { background: #f5f0e6; border-left: 4px solid #8b6914; }
+body.colourful-semantics-on .category.semantic-describing, body.colourful-semantics-on .word.semantic-describing, body.colourful-semantics-on .quick-icon.semantic-describing { background: #f8f0fc; border-left: 4px solid #9b59b6; }
+
+/* Chave de Fitzgerald - cores por classe gramatical */
+body.fitzgerald-key-on .category.semantic-who, body.fitzgerald-key-on .word.semantic-who, body.fitzgerald-key-on .quick-icon.semantic-who { border-left: 4px solid #f1c40f; background: #fefce8; } /* Amarelo: Pessoas */
+body.fitzgerald-key-on .category.semantic-what-doing, body.fitzgerald-key-on .word.semantic-what-doing, body.fitzgerald-key-on .quick-icon.semantic-what-doing { border-left: 4px solid #27ae60; background: #f0f9f4; } /* Verde: Verbos */
+body.fitzgerald-key-on .category.semantic-what, body.fitzgerald-key-on .word.semantic-what, body.fitzgerald-key-on .quick-icon.semantic-what { border-left: 4px solid #e67e22; background: #fef5ee; } /* Laranja: Substantivos */
+body.fitzgerald-key-on .category.semantic-describing, body.fitzgerald-key-on .word.semantic-describing, body.fitzgerald-key-on .quick-icon.semantic-describing { border-left: 4px solid #3498db; background: #eef6fc; } /* Azul: Adjetivos */
+body.fitzgerald-key-on .category.semantic-where, body.fitzgerald-key-on .word.semantic-where, body.fitzgerald-key-on .quick-icon.semantic-where { border-left: 4px solid #ddd; background: #fff; } /* Branco: Lugares */
+body.fitzgerald-key-on .category.semantic-when, body.fitzgerald-key-on .word.semantic-when, body.fitzgerald-key-on .quick-icon.semantic-when { border-left: 4px solid #8b6914; background: #f5f0e6; } /* Marrom: Tempo */
+
+/* Estilo neutro (padrão quando nenhum está ativo) */
+body:not(.colourful-semantics-on):not(.fitzgerald-key-on) .category,
+body:not(.colourful-semantics-on):not(.fitzgerald-key-on) .word,
+body:not(.colourful-semantics-on):not(.fitzgerald-key-on) .quick-icon {
+    border-left-color: #eee;
     background: #fff;
 }
-body.colourful-semantics-off .quick-icon.semantic-who,
-body.colourful-semantics-off .quick-icon.semantic-what-doing,
-body.colourful-semantics-off .quick-icon.semantic-what,
-body.colourful-semantics-off .quick-icon.semantic-where,
-body.colourful-semantics-off .quick-icon.semantic-when,
-body.colourful-semantics-off .quick-icon.semantic-describing {
-    border-left-color: #ddd;
-    background: #fff;
-}
-body.colourful-semantics-off .quick-slot[data-slot="S"],
-body.colourful-semantics-off .quick-slot[data-slot="V"],
-body.colourful-semantics-off .quick-slot[data-slot="O"],
-body.colourful-semantics-off .quick-slot[data-slot="M"],
-body.colourful-semantics-off .quick-slot[data-slot="P"],
-body.colourful-semantics-off .quick-slot[data-slot="T"] {
+
+body:not(.colourful-semantics-on):not(.fitzgerald-key-on) .quick-slot {
     border-color: #ddd;
     background: #fafafa;
 }

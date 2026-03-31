@@ -11,6 +11,7 @@
 - **Colourful Semantics:** Categorias e palavras com cores por papel na frase (Quem, O quê faz, O quê, Onde, Quando, Como/Descrever); ativar/desativar em Configurações → Legenda.
 - **Shape Coding:** Formas distintas por papel gramatical; ativar em Configurações → Legenda.
 - **SVOMPT:** Ordenar frase ao falar, barra com slots S-V-O-M-P-T, modo guiado, ordenar barra; Configurações → SVOMPT.
+- **Conjugação verbal (ConjugAI):** Correção e conjugação verbal automática ao falar frases, com integração da versão mais recente do `conjugai-core.js`; ativar em Configurações → Geral.
 - **Moldes de frase (Sentence Frames):** Frases com um espaço (ex.: «Eu quero ___»); botão Moldes (📝); Configurações → Moldes.
 - **Quadros (Frame Semantics / Fillmore):** Quadros com vários papéis (ex.: Dar = quem dá, o quê, a quem); botão Quadros (🖼️); Configurações → Quadros (Fillmore).
 - **Ícones centrais (MINSPEAK):** Primeiro ecrã com 6 ícones; acesso em 2 toques; Configurações → Ícones centrais.
@@ -24,6 +25,7 @@
 ## Tecnologias
 
 - **PWA:** manifest.json, service worker (sw.js).
+- **ConjugAI Core:** Biblioteca local em `assets/js/conjugai-core.js` para análise de frase, detecção de sujeito/tempo e conjugação verbal.
 - **Front-end:** HTML, CSS em `assets/css/index.css`, JavaScript em `assets/js/index.js`, vocabulário em `assets/js/vocabulary.js`, moldes em `assets/js/sentenceFrames.js`, quadros Fillmore em `assets/js/frameSemantics.js`, ícones centrais em `assets/js/minspeak.js`, traduções em `assets/js/translations.js`.
 - **Speech Synthesis API:** Vocalização em pt-BR ou inglês conforme o idioma.
 
