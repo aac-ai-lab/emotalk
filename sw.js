@@ -1,4 +1,4 @@
-const CACHE = 'emotalk-v2';
+const CACHE = 'emotalk-v3';
 const ASSETS = ['index.html', 'assets/js/conjugai-core.js', 'assets/js/vocabulary.js', 'assets/js/sentenceFrames.js', 'assets/js/frameSemantics.js', 'assets/js/minspeak.js', 'assets/js/translations.js', 'assets/css/index.css', 'assets/js/index.js', 'icon.svg', 'manifest.json'];
 
 self.addEventListener('install', (e) => {
