@@ -1,5 +1,8 @@
 # Emotalk
 
+**Usar o app:** [https://aac-ai-lab.github.io/emotalk/](https://aac-ai-lab.github.io/emotalk/)
+
+
 **Emotalk** é um aplicativo de comunicação aumentativa e alternativa (CAA) que usa emojis para expressar ideias e sentimentos. Inclui **Colourful Semantics** (cores por papel na frase), **Shape Coding** (formas por papel), **SVOMPT** (ordem da frase), **Moldes de frase** (sentence frames), **Quadros** (Frame Semantics / Fillmore), **Ícones centrais** (MINSPEAK / compação semântica), uso offline (PWA), barra de frase com persistência, reordenar por arrastar e soltar, configurações (velocidade da fala, fonte maior, idioma pt-BR/EN), **histórico das frases faladas** e acessibilidade.
 
 ![Tela principal do Emotalk](docs/screen-01.png)
